@@ -244,34 +244,10 @@ service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
     oneshot
     keycodes 115 114
 
-#BCM
-#service hciattach /system/bin/brcm_patchram_plus --enable_hci \
-#    --baudrate 3000000 --patchram /etc/firmware/bcm4329.hcd /dev/ttyHS2
-#    user bluetooth
-#    group bluetooth net_bt_admin
-#    disabled
-
-#### Start GPS daemon
-###  on boot
-###  write /sys/class/gpio/export 36
-###  write /sys/class/gpio/gpio36/value 0
-###  write /sys/class/gpio/gpio36/direction out
-###  write /sys/class/gpio/export 37
-###  write /sys/class/gpio/gpio37/direction out
-###  write /sys/class/gpio/gpio37/value 1
-###  #service gps-daemon /system/bin/glgps_nvidiaTegra2android -c /system/etc/gps/gpsconfig.xml
-###  #user root
-###  #group root
-
-# Start FIL daemon
-#service fil-daemon /system/bin/fild -p /dev/ttyHS0 -s /dev/ttyACM0 -f /dev/ttyACM0 --with-bt3
-#    user radio
-
 service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
     class core
     user radio
     group radio cache inet misc
-#    oneshot
     disabled
 
 service nvm-server /system/bin/nvm_server
@@ -294,7 +270,6 @@ service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
     user root
     group root
     oneshot
-#    start gsm0710mux
     disabled
 
 service uim /system/bin/uim-sysfs
@@ -321,28 +296,10 @@ service cplc_main /system/bin/cplc_main
     disabled
     oneshot
 
-# Recovery daemon: configure MSC partition (misc)
-#service recoveryd /system/bin/recoveryd /dev/block/mmcblk0p17
-#    disabled
-#    class main
-#    user root
-#    group root
-#    oneshot
-
-#calibration DATA for modem
-#    on boot
-#    mkdir /data/modem 0777 system system
-#    mount ext4 /dev/block/mmcblk0p15 /data/modem
-
-
-#on property:sys.shutdown.requested=1recovery
-#    start recoveryd
-
 service htcbatt /system/bin/htcbatt
      class core
      oneshot
 
-# HTC_WIFI_START
 service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -iwlan0 
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
