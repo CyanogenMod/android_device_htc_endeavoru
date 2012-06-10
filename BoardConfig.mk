@@ -19,6 +19,7 @@ USE_CAMERA_STUB := false
 TARGET_PROVIDES_LIBLIGHTS := true
 
 # Target arch settings
+BOARD_HAS_LOCKED_BOOTLOADER := true
 TARGET_NO_BOOTLOADER := true
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -47,6 +48,9 @@ BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 WIFI_DRIVER_MODULE_NAME     :=  "wl12xx_sdio"
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/wl12xx_sdio.ko"
+
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_wl12xx
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
