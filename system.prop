@@ -1,0 +1,101 @@
+ro.opengles.version = 131072
+#
+# system.prop for endeavoru
+#
+#
+
+# Common display settings
+ro.sf.lcd_density=320
+debug.sf.hw=1
+persist.sys.ui.hw = 1
+windowsmgr.max_events_per_sec = 240
+
+# RIL
+rild.libpath=/system/lib/libhtc_ril.so
+rild.libargs=-e wwan0
+ro.telephony.ril.v3=signalstrength,skipbrokendatacall
+ro.ril.disable.power.collapse=1
+ro.ril.ecc.VODA-Africa-South=112,911,999
+ro.ril.ecc.HTC-GCC=999,112,997
+ro.ril.ecc.HTC-WWE=999
+ro.ril.ecc.HTC-Dutch=112
+ro.ril.ecc.HTC-SPA=112, 911
+ro.ril.ecc.HTC-FRA=112,911
+ro.ril.ecc.HTC-ITA=112,911
+ro.ril.ecc.HTC-EastEurope=112
+ro.ril.enable.a52.HTC-ITA=1
+ro.ril.enable.a53.HTC-ITA=1
+ro.ril.enable.a52=0
+ro.ril.enable.a53=1
+ro.ril.enable.dtm=0
+ro.ril.hsdpa.category=14
+ro.ril.hsupa.category=6
+ro.ril.hsxpa=4
+ro.ril.fast.dormancy.rule=1
+ro.ril.disable.fd.plmn.prefix=23402,23410,23411,23420,27202
+ro.ril.enable.managed.roaming=1
+ro.ril.enable.sdr=1
+ro.ril.enable.amr.wideband=0
+ro.ril.enable.r8fd=0
+ro.ril.disable.cpc=1
+ro.ril.fd.pre_r8_tout.scr_off=2
+ro.ril.fd.pre_r8_tout.scr_on=3
+ro.ril.fd.r8_tout.scr_off=0
+ro.ril.fd.r8_tout.scr_on=0
+ro.ril.imc.fdn=0
+ro.ril.imc.dtmclass=0
+ro.ril.imc.band=900,1800,1900,850
+ro.ril.imc.uband="UMTS_BAND_I","UMTS_BAND_II","UMTS_BAND_V","UMTS_BAND_VIII"
+ro.ril.imc.darp=1
+ro.ril.imc.enhanced.fdpch=1
+ro.ril.imc.fdpch=1
+ro.ril.imc.edpdch.pw.interpo=1
+ro.ril.imc.hspa.dtx.drx=1
+ro.ril.imc.uea2=0
+ro.ril.imc.uia2=0
+ro.ril.edpcch.pwr.boost=1
+ro.ril.hspa.mac.ehs=1
+ro.ril.enable.imc.feature=1
+ro.ril.projectname=endeavoru
+ro.ril.stkprof.param=FFFFFFFF7F0000DF9703021F2200000000000000000040100000000000000000
+ro.ril.devicename=/dev/ttyACM1
+
+# Wi-Fi
+wifi.interface=wlan0
+wifi.softap.interface=wlan1
+wifi.softapconcurrent.interface=wlan1
+wifi.supplicant_scan_interval=60
+
+# Audio
+# -----------------------------
+# speaker volume is from 20 to 31
+# this corresponds to -2dB to +8dB
+# -----------------------------
+audio.speaker.voice.0=20
+audio.speaker.voice.1=21
+audio.speaker.voice.2=24
+audio.speaker.voice.3=26
+audio.speaker.voice.4=28
+audio.speaker.voice.5=31
+# -----------------------------
+# earpiece volume is from 20 to 31
+# this corresponds to -2dB to +8dB
+# -----------------------------
+audio.earpiece.voice.0=20
+audio.earpiece.voice.1=21
+audio.earpiece.voice.2=24
+audio.earpiece.voice.3=26
+audio.earpiece.voice.4=28
+audio.earpiece.voice.5=31
+# -----------------------------------
+# headset volume is from 9 to 14
+# this corresponds to -34dB to -19dB
+# ----------------------------------
+audio.headset.voice.0=16
+audio.headset.voice.1=19
+audio.headset.voice.2=22
+audio.headset.voice.3=25
+audio.headset.voice.4=28
+audio.headset.voice.5=31
+persist.htc.audio.pcm.samplerate=48000
+persist.htc.audio.pcm.channels=2

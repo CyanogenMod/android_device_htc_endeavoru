@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*
+** Copyright 2011, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<device name="Android">
+    <item name="none">0</item>
+    <item name="screen.on">100</item>
+    <item name="bluetooth.active">142</item>
+    <item name="bluetooth.on">0.3</item>
+    <item name="bluetooth.at">35690</item>
+    <item name="screen.full">160</item>
+    <item name="wifi.on">4</item>
+    <item name="wifi.active">120</item>
+    <item name="wifi.scan">220</item>
+    <item name="dsp.audio">88</item>
+    <item name="dsp.video">88</item>
+    <item name="radio.active">300</item>
+    <item name="gps.on">170</item>
+    <item name="battery.capacity">1800</item>
+    <item name="radio.scanning">70</item>
+    <array name="radio.on">
+        <value>3</value>
+        <value>3</value>
+    </array>
+    <array name="cpu.speeds">
+        <value>102000</value>
+        <value>204000</value>
+        <value>340000</value>
+        <value>475000</value>
+        <value>640000</value>
+        <value>760000</value>
+        <value>880000</value>
+        <value>1000000</value>
+        <value>1100000</value>
+        <value>1200000</value>
+        <value>1300000</value>
+        <value>1400000</value>
+        <value>1500000</value>
+    </array>
+    <item name="cpu.idle">2.8</item>
+    <array name="cpu.active">
+        <value>66.6</value>
+        <value>84</value>
+        <value>90.8</value>
+        <value>96</value>
+        <value>105</value>
+        <value>111.5</value>
+        <value>117.3</value>
+        <value>123.6</value>
+        <value>134.5</value>
+        <value>141.8</value>
+        <value>148.5</value>
+        <value>168.4</value>
+    </array>
+</device>
