@@ -102,9 +102,7 @@ PRODUCT_PACKAGES += \
 
 # Missed apps
 PRODUCT_PACKAGES += \
-	Torch \
-        Stk \
-        Gallery2
+	Torch
 
 # Misc
 PRODUCT_PACKAGES += \
