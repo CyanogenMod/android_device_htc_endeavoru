@@ -30,8 +30,7 @@ PRODUCT_COPY_FILES := \
 	device/htc/endeavoru/ramdisk/init.endeavoru.common.rc:root/init.endeavoru.common.rc \
 	device/htc/endeavoru/ramdisk/init.usb.rc:root/init.usb.rc \
 	device/htc/endeavoru/ramdisk/ueventd.rc:root/ueventd.rc \
-	device/htc/endeavoru/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc \
-	device/htc/endeavoru/ramdisk/default.prop:root/default.prop
+	device/htc/endeavoru/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc
 
 
 # Prebuilt Audio/GPS/Camera/Wi-Fi configs
