@@ -1,1 +1,6 @@
 CM9 device tree for HTC One X (endeavoru)
+
+Bugs:
+1) Wi-Fi Direct
+2) Lost signal after disable Airplane mode
+3) Facedetect in camera app broken
