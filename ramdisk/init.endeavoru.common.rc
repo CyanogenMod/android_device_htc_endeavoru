@@ -300,7 +300,7 @@ service htcbatt /system/bin/htcbatt
      class core
      oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -iwlan0 
+service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -puse_p2p_group_interface=1 -e/data/misc/wifi/entropy.bin
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
@@ -325,7 +325,8 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-service hostapd_bin /system/bin/hostapd -d /system/etc/wifi/hostapd.conf
+service hostapd_bin /system/bin/logwrapper /system/bin/hostapd -dd /data/misc/wifi/hostapd.conf
+    class main
     socket wpa_wlan1 dgram 660 wifi wifi
     disabled
     oneshot
