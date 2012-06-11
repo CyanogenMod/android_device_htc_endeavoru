@@ -22,7 +22,6 @@ TARGET_PROVIDES_LIBLIGHTS := true
 BOARD_HAVE_HTC_FFC := true
 
 # Target arch settings
-BOARD_HAS_LOCKED_BOOTLOADER := true
 TARGET_NO_BOOTLOADER := true
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
