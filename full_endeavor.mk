@@ -43,7 +43,9 @@ PRODUCT_COPY_FILES += \
         device/htc/endeavoru/configs/media_profiles.xml:system/etc/media_profiles.xml \
 	device/htc/endeavoru/configs/gps.conf:system/etc/gps.conf \
 	device/htc/endeavoru/configs/SuplRootCert:system/etc/SuplRootCert \
-	device/htc/endeavoru/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+	device/htc/endeavoru/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+	device/htc/endeavoru/configs/hostapd.conf:system/etc/wifi/hostapd.conf \
+	device/htc/endeavoru/configs/TQS_D_1.7.ini:system/etc/wifi/TQS_D_1.7.ini
 
 # Vold.fstab
 PRODUCT_COPY_FILES += \
@@ -85,6 +87,12 @@ PRODUCT_COPY_FILES += \
         device/htc/endeavoru/modules/ti_hci_drv.ko:system/lib/modules/ti_hci_drv.ko \
         device/htc/endeavoru/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
         device/htc/endeavoru/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
+
+# Hostapd
+PRODUCT_PACKAGES += \
+         hostapd_cli \
+         calibrator \
+         hostapd
 
 # Lights and a2dp
 PRODUCT_PACKAGES += \
@@ -164,6 +172,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_LOCALES += en_US xhdpi
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product-if-exists, vendor/htc/endeavoru/endeavoru-vendor.mk)

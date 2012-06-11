@@ -26,7 +26,7 @@ on emmc-fs
     start poweron_modem
 
 loglevel 3
-
+h
 on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
@@ -325,7 +325,7 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-service hostapd_bin /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
+service hostapd_bin /system/bin/hostapd -d /system/etc/wifi/hostapd.conf
     socket wpa_wlan1 dgram 660 wifi wifi
     disabled
     oneshot
