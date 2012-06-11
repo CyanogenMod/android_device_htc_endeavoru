@@ -81,15 +81,15 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>1</item>
-        <item>11</item>
-        <item>23</item>
-        <item>35</item>
-        <item>48</item>
-        <item>55</item>
-        <item>80</item>
-        <item>150</item>
-        <item>200</item>
+        <item>45</item>
+        <item>50</item>
+        <item>63</item>
+        <item>96</item>
+        <item>130</item>
+        <item>143</item>
+        <item>171</item>
+        <item>199</item>
+        <item>227</item>
         <item>255</item>
     </integer-array>
 
@@ -102,7 +102,7 @@
         <item>60</item>
         <item>60</item>
         <item>60</item>
-        <item>0</item>
+        <item>-1</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
@@ -171,7 +171,7 @@
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
-        <item>"wlan\\d"</item>
+        <item>"wlan1"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
