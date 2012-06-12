@@ -2,5 +2,4 @@ CM9 device tree for HTC One X (endeavoru)
 
 Bugs:
 1) Wi-Fi Direct
-2) Facedetect in camera app broken
-3) Wi-Fi hotspot only with static IP
+2) Wi-Fi hotspot only with static IP
