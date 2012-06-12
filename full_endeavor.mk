@@ -46,7 +46,8 @@ PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/configs/SuplRootCert:system/etc/SuplRootCert \
 	device/htc/endeavoru/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	device/htc/endeavoru/configs/hostapd.conf:system/etc/wifi/hostapd.conf \
-	device/htc/endeavoru/configs/TQS_D_1.7.ini:system/etc/wifi/TQS_D_1.7.ini
+	device/htc/endeavoru/configs/TQS_D_1.7.ini:system/etc/wifi/TQS_D_1.7.ini \
+	device/htc/endeavoru/configs/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
 
 # Vold.fstab
 PRODUCT_COPY_FILES += \
