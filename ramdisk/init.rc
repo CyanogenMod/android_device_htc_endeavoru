@@ -222,7 +222,11 @@ on boot
 
     # Tweak background writeout
     write /proc/sys/vm/dirty_expire_centisecs 200
-    write /proc/sys/vm/dirty_background_ratio  5
+    write /proc/sys/vm/dirty_background_ratio  30
+	write /proc/sys/vm/dirty_bytes 20480000
+
+    #set touch permissions
+    chown system system /sys/android_touch/unlock
 
     # Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
@@ -243,7 +247,14 @@ on boot
     chown system system /sys/class/leds/jogball-backlight/brightness
     chown system system /sys/class/leds/red/brightness
     chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/amber/brightness
     chown system system /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/amber/blink
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/button-backlight/blink
+    chown system system /sys/class/leds/amber/off_timer
+    chown system system /sys/class/leds/green/off_timer
+    chown system system /sys/class/leds/button-backlight/off_timeroff_timer
     chown system system /sys/class/leds/red/device/grpfreq
     chown system system /sys/class/leds/red/device/grppwm
     chown system system /sys/class/leds/red/device/blink
@@ -253,6 +264,7 @@ on boot
     chown system system /sys/class/leds/red/device/grpfreq
     chown system system /sys/class/leds/red/device/grppwm
     chown system system /sys/class/leds/red/device/blink
+    chown system system /sys/class/leds/flashlight/brightness
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/module/sco/parameters/disable_esco
     chown system system /sys/kernel/ipv4/tcp_wmem_min
@@ -262,6 +274,19 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown root radio /proc/cmdline
+    chown media system /dev/mux9
+#HTC SSD Camera
+# For Flashlight Restriction
+    chown radio system /sys/camera_led_status/led_ril_status
+    chown system system /sys/camera_led_status/led_wimax_status
+    chown system system /sys/camera_led_status/led_hotspot_status
+#HTC CPU poke
+    chown media system /sys/htc/media_boost_freq
+    chown media system /sys/htc/cpu_temp
+
+# Define DATA USAGE CTRL file permission
+	chown system system /proc/net/xt_qtaguid/ctrl
+    chmod 0664 /proc/net/xt_qtaguid/ctrl
 
     # allow system to modify cpufreq control files
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -274,12 +299,14 @@ on boot
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.wifi    524288,1048576,2097152,262144,524288,1048576
-    setprop net.tcp.buffersize.lte     524288,1048576,2097152,262144,524288,1048576
-    setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.hspa    4094,87380,262144,4096,16384,262144
-    setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
-    setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
+    setprop net.tcp.buffersize.wifi    4095,87380,110208,4096,16384,110208
+    setprop net.tcp.buffersize.hsdpa   4094,87380,393216,4096,16384,110208
+    setprop net.tcp.buffersize.umts    4094,87380,393216,4096,16384,110208
+    setprop net.tcp.buffersize.edge    4093,26280,393216,4096,16384,35040
+    setprop net.tcp.buffersize.gprs    4092,8760,393216,4096,8760,11680
+    setprop net.tcp.buffersize.lte     4096,221184,3461120,4096,221184,3461120
+    setprop net.tcp.buffersize.evdo_b  4094,87380,262144,4096,16384,262144
+    setprop net.tcp.buffersize.wimax   4096,221184,524288,4096,16384,110208
 
 # allow system to modify ksm control files
     chown root system /sys/kernel/mm/ksm/pages_to_scan
@@ -294,8 +321,8 @@ on boot
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
 
-# Run sysinit
-    exec /system/bin/sysinit
+# Set error receiver
+    setprop ro.error.receiver.htc.apps com.htc.feedback
 
     class_start core
     class_start main
@@ -429,12 +456,39 @@ service netd /system/bin/netd
 service debuggerd /system/bin/debuggerd
     class main
 
+service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
+    class core
+    user radio
+    group radio cache inet misc
+#    oneshot
+    disabled
+
+service nvm-server /system/bin/nvm_server
+    class core
+    socket nvm-ctl stream 660 radio radio
+    user root
+    group root
+    oneshot
+
+service init-acmx0 /system/bin/mknod /dev/ttyACMX0 c 66 0
+    class core
+    oneshot
+
+service init-acmx2 /system/bin/chmod 777 /dev/ttyACMX0
+    class core
+    oneshot
+
+service modem-daemon /system/bin/modemd
+
 service ril-daemon /system/bin/rild
-    class main
+    class core
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
+    socket rild-audio-gsm stream 660 radio system
+    socket rild-htc-coredump stream 660 radio system
+    socket rild-agps stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
+    group radio cache inet misc audio sdcard_rw
 
 service surfaceflinger /system/bin/surfaceflinger
     class main
@@ -442,9 +496,16 @@ service surfaceflinger /system/bin/surfaceflinger
     group graphics
     onrestart restart zygote
 
+service hdmid /system/bin/hdmid
+    socket displayd stream 0660 root system graphics
+    disabled
+
+on property:ro.hdmi.enable=true
+    start hdmid
+
 service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server
     class main
-    socket zygote stream 660 root system
+    socket zygote stream 666
     onrestart write /sys/android_power/request_state wake
     onrestart write /sys/power/state on
     onrestart restart media
@@ -458,13 +519,20 @@ service drm /system/bin/drmserver
 service media /system/bin/mediaserver
     class main
     user media
-    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc
+    group system audio camera inet net_bt net_bt_admin net_bw_acct drmrpc oma_drm_group cw_access
     ioprio rt 4
+
+#service fusermount /system/bin/fusermount -u /data/htcfs
+#    disabled
+#    oneshot
+
+#service htcfs /system/bin/htcfs /data/htcfs -f -o allow_other
+#    onrestart restart fusermount
 
 service bootanim /system/bin/bootanimation
     class main
     user graphics
-    group graphics
+    group system audio graphics cw_access
     disabled
     oneshot
 
@@ -474,7 +542,7 @@ service dbus /system/bin/dbus-daemon --system --nofork
     user bluetooth
     group bluetooth net_bt_admin
 
-service bluetoothd /system/bin/bluetoothd -n
+service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n -d
     class main
     socket bluetooth stream 660 bluetooth bluetooth
     socket dbus_bluetooth stream 660 bluetooth bluetooth
@@ -482,6 +550,16 @@ service bluetoothd /system/bin/bluetoothd -n
     # let bluetoothd drop uid to bluetooth with the right linux capabilities
     group bluetooth net_bt_admin misc
     disabled
+
+service bluetoothd_one /system/bin/bluetoothd -n
+    class main
+    socket bluetooth stream 660 bluetooth bluetooth
+    socket dbus_bluetooth stream 660 bluetooth bluetooth
+    # init.rc does not yet support applying capabilities, so run as root and
+    # let bluetoothd drop uid to bluetooth with the right linux capabilities
+    group bluetooth net_bt_admin misc
+    disabled
+    oneshot
 
 service installd /system/bin/installd
     class main
@@ -515,6 +593,29 @@ service dumpstate /system/bin/dumpstate -s
     disabled
     oneshot
 
+service shutdown /system/bin/shutdown
+    user root
+    group root
+    disabled
+    oneshot
+
+service charging /system/bin/charging
+    user root
+    group root
+    disabled
+    oneshot
+
+service netHDencode /system/bin/netHDencode wlan0 3655
+    user root
+    group root
+    disabled
+    oneshot
+
+service memlock /system/bin/memlock
+   class main
+   user root
+   group root
+
 # adb over network
 on property:service.adb.tcp.port=5555
     stop adbd
@@ -524,4 +625,3 @@ on property:service.adb.tcp.port=-1
     start adbd
 
     setprop service.adb.root 1
-

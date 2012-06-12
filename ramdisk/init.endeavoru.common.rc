@@ -34,9 +34,12 @@ on post-fs-data
 
 on boot
     # Setup paths used for socket communication with the dhcp daemon(dhcpd)
-    mkdir /data/misc/dhcp 0777 dhcp dhcp
-    mkdir /data/nvcam 0777 system system
-    chown dhcp dhcp /data/misc/dhcp
+    	mkdir /data/nvcam 0770 system system
+	mkdir /data/misc/wifi 0770 wifi wifi
+	mkdir /data/misc/wifi/sockets 0770 wifi wifi
+        mkdir /data/misc/wifi/hostapd 0770 wifi wifi
+   	mkdir /data/misc/dhcp 0770 dhcp dhcp
+    	chown dhcp dhcp /data/misc/dhcp
 
     # bluetooth power up/down interface
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -83,19 +86,12 @@ on boot
 	chown system system /proc/net/xt_qtaguid/ctrl
     chmod 0664 /proc/net/xt_qtaguid/ctrl
 
-# Wi-Fi
-	mkdir /data/misc/wifi 0770 wifi wifi
-	mkdir /data/misc/wifi/sockets 0770 wifi wifi
-        mkdir /data/misc/wifi/hostapd 0770 wifi wifi
-	mkdir /data/misc/dhcp 0770 dhcp dhcp
-        chown dhcp dhcp /data/misc/dhcp
+# Load modules while booting
 	insmod /system/lib/modules/compat.ko
 	insmod /system/lib/modules/cfg80211.ko
 	insmod /system/lib/modules/mac80211.ko
         insmod /system/lib/modules/wl12xx.ko debug_level=0x63c00
-
-# Load kineto_gan.ko while booting
-insmod /system/lib/modules/kineto_gan.ko
+	insmod /system/lib/modules/kineto_gan.ko
 
 # bluetooth
     # UART device
@@ -127,6 +123,7 @@ insmod /system/lib/modules/kineto_gan.ko
     chmod 777 /system/bin/RXN_IntApp
 
 #NFC
+    setprop ro.nfc.port "I2C"
     chmod 0660 /dev/pn544
     chown nfc nfc /dev/pn544
 
@@ -275,12 +272,6 @@ service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
     oneshot
     disabled
 
-service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
-    class core
-    user radio
-    group radio cache inet misc
-    disabled
-
 service uim /system/bin/uim-sysfs
     class core
     user root
@@ -294,11 +285,6 @@ service nav /system/bin/navl_server --android_log NAVD-p3 -nav\"-c/system/bin/pa
 
 service rxn_intapp /system/bin/RXN_IntApp /system/etc/gps/RXN/MSLConfig.txt
     class main
-
-service rilPos-daemon /system/bin/rilposd -l /system/lib/librilpos.so -- -c agps_v_channel
-    class main
-    disabled
-    oneshot
 
 service cplc_main /system/bin/cplc_main
     class main
@@ -335,6 +321,7 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     oneshot
 
 service hostapd_bin /system/bin/logwrapper /system/bin/hostapd -dd /data/misc/wifi/hostapd.conf
+    class main
     socket wpa_wlan1 dgram 660 wifi wifi
     disabled
     oneshot
