@@ -334,8 +334,7 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-service hostapd_bin /system/bin/logwrapper /system/bin/hostapd -dd /data/misc/wifi/hostapd.conf
-    class main
+service hostapd_bin /system/bin/logwrapper /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
     socket wpa_wlan1 dgram 660 wifi wifi
     disabled
     oneshot
