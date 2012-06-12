@@ -1,5 +1,4 @@
 CM9 device tree for HTC One X (endeavoru)
 
 Bugs:
-1) Wi-Fi Direct
-2) Wi-Fi hotspot only with static IP
+1) Wi-Fi Direct (P2P)
