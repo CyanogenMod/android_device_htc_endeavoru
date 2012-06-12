@@ -122,7 +122,7 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
         <EncoderProfile quality="720p" fileFormat="mp4" duration="30">
@@ -134,7 +134,7 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
         <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
@@ -146,7 +146,7 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
@@ -185,7 +185,7 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="30">
@@ -198,7 +198,7 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
@@ -211,13 +211,13 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
-        <ImageEncoding quality="99" />
         <ImageEncoding quality="90" />
         <ImageEncoding quality="80" />
-        <ImageDecoding memCap="25000000" />
+        <ImageEncoding quality="70" />
+        <ImageDecoding memCap="20000000" />
 
     </CamcorderProfiles>
 
@@ -256,7 +256,7 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
         <EncoderProfile quality="720p" fileFormat="mp4" duration="30">
@@ -268,7 +268,7 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
@@ -307,7 +307,7 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="30">
@@ -320,13 +320,13 @@
             <Audio codec="aac"
                    bitRate="128000"
                    sampleRate="48000"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
-        <ImageEncoding quality="99" />
         <ImageEncoding quality="90" />
         <ImageEncoding quality="80" />
-        <ImageDecoding memCap="25000000" />
+        <ImageEncoding quality="70" />
+        <ImageDecoding memCap="20000000" />
 
     </CamcorderProfiles>
 
@@ -359,7 +359,7 @@
     <AudioEncoderCap name="aac" enabled="true"
         minBitRate="8000" maxBitRate="128000"
         minSampleRate="8000" maxSampleRate="48000"
-        minChannels="1" maxChannels="2" />
+        minChannels="1" maxChannels="1" />
 
     <AudioEncoderCap name="amrwb" enabled="true"
         minBitRate="6600" maxBitRate="23050"
