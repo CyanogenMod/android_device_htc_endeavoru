@@ -60,7 +60,7 @@ WIFI_DRIVER_MODULE_NAME	:=  "wl12xx_sdio"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wl12xx_sdio.ko"
 
 # RIL
-BOARD_USE_NEW_LIBRIL_HTC := true
+BOARD_PROVIDES_LIBRIL := true
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
