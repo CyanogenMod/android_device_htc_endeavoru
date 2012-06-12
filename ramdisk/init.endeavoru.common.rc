@@ -180,6 +180,11 @@ on boot
 # GPIO BB access for user radio
     chown radio system /sys/class/gpio/gpio32/value
 
+    # allow interfaces to get v6 address when tethering is enabled
+    write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
+
 # Power management settings
     write /sys/module/cpu_tegra3/parameters/no_lp 0
     #write /sys/module/tegra3_emc/parameters/emc_enable 0
