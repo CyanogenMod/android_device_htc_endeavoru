@@ -31,14 +31,21 @@ TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
+# Flags
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+
 # Board nameing
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOOTLOADER_BOARD_NAME := 
 TARGET_BOARD_PLATFORM := tegra
 
 # EGL settings
-BOARD_EGL_CFG := device/htc/endeavoru/configs/egl.cfg
+TARGET_USES_OVERLAY := true
 USE_OPENGL_RENDERER := true
+BOARD_USE_SKIA_LCDTEXT := true
+BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
+BOARD_EGL_CFG := device/htc/endeavoru/configs/egl.cfg
 
 # Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -48,11 +55,18 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_SOFTAP_DEVICE_TI := NL80211
+BOARD_P2P_DEVICE_TI := NL80211
 WIFI_DRIVER_MODULE_NAME	:=  "wl12xx_sdio"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wl12xx_sdio.ko"
 
+# RIL
+BOARD_USE_NEW_LIBRIL_HTC := true
+
 # BT
 BOARD_HAVE_BLUETOOTH := true
+
+# FM
+# BOARD_HAVE_FM_RADIO_TI := true
 
 # Vold / USB
 BOARD_VOLD_MAX_PARTITIONS := 20

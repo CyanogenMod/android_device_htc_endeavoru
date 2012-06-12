@@ -30,7 +30,8 @@ PRODUCT_COPY_FILES := \
 	device/htc/endeavoru/ramdisk/init.endeavoru.common.rc:root/init.endeavoru.common.rc \
 	device/htc/endeavoru/ramdisk/init.usb.rc:root/init.usb.rc \
 	device/htc/endeavoru/ramdisk/ueventd.rc:root/ueventd.rc \
-	device/htc/endeavoru/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc
+	device/htc/endeavoru/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc \
+	device/htc/endeavoru/ramdisk/init:root/init
 
 
 # Prebuilt Audio/GPS/Camera/Wi-Fi configs
@@ -88,7 +89,7 @@ PRODUCT_COPY_FILES += \
         device/htc/endeavoru/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
         device/htc/endeavoru/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
-# Hostapd
+# Hostapd / TI fm
 PRODUCT_PACKAGES += \
          hostapd_cli \
          calibrator \
