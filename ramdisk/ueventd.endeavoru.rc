@@ -52,6 +52,9 @@
 /dev/cm3602               0666   system     system
 /dev/akm8976_pffd         0666   system     system
 
+/dev/block/mmcblk0p2      0660   media      camera
+
+
 # wifi
 /dev/rfkill               0660   root       wifi
 

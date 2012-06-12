@@ -22,7 +22,6 @@ on emmc-fs
     chmod 0660 /rfs
 	mkdir /devlog 0700 root root
 	mount ext4 /dev/block/mmcblk0p19 /devlog nosuid nodev
-    chown media /dev/block/mmcblk0p2
     start poweron_modem
 
 loglevel 3
@@ -180,11 +179,6 @@ on boot
 
 # GPIO BB access for user radio
     chown radio system /sys/class/gpio/gpio32/value
-
-    # allow interfaces to get v6 address when tethering is enabled
-    write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
 
 # Power management settings
     write /sys/module/cpu_tegra3/parameters/no_lp 0
