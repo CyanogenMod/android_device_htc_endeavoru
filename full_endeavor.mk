@@ -168,7 +168,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Tegra 3 spacific overrides
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.tegra.nvmmlite=1
+	persist.tegra.nvmmlite=1 \
+        ro.vendor.extension_library=/system/lib/libhtc-opt2.so \
         tf.enable=y
 
 # We have enough storage space to hold precise GC data
