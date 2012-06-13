@@ -57,7 +57,7 @@ ro.ril.edpcch.pwr.boost=1
 ro.ril.hspa.mac.ehs=1
 ro.ril.enable.imc.feature=1
 ro.ril.projectname=endeavoru
-ro.ril.stkprof.param=FFFFFFFF7F0000DF9703021F2200000000000000000040100000000000000000
+ro.ril.stkprof.param=FFFFFFFF7F1C00DF9703021F2200000083000000000040100000000000000000
 ro.ril.devicename=/dev/ttyACM1
 
 # Wi-Fi
@@ -97,5 +97,27 @@ audio.headset.voice.2=22
 audio.headset.voice.3=25
 audio.headset.voice.4=28
 audio.headset.voice.5=31
+
+htc.audio.global.state=0
+htc.audio.global.profile=0
 persist.htc.audio.pcm.samplerate=48000
 persist.htc.audio.pcm.channels=2
+persist.audio.SupportHTCHWAEC=1
+persist.audio.AutoSwitchMic=1
+
+#NFC
+debug.nfc.fw_download=true
+debug.nfc.se=true
+
+#Internal Storage
+ro.phone_fat=1
+
+#Fat Rsvd Sectors
+ro.fat_rsvd=66
+
+#Relase Bluetooth HW/SW information
+ro.bt.chipset = TI 1283
+ro.bt.stack = TI BlueZ
+ro.bt.stack.version = 1.1.0.3
+
+tf.enable=y

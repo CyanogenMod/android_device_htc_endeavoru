@@ -39,14 +39,17 @@ PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/dsp/asound.conf:system/etc/asound.conf \
 	device/htc/endeavoru/dsp/AIC3008_REG_DualMic_XC.csv:system/etc/AIC3008_REG_DualMic_XC.csv \
 	device/htc/endeavoru/dsp/AIC3008_REG_DualMic.csv:system/etc/AIC3008_REG_DualMic.csv \
+	device/htc/endeavoru/dsp/DSP_number.txt:system/etc/DSP_number.txt \
 	device/htc/endeavoru/dsp/alsa.conf:system/usr/share/alsa/alsa.conf \
 	device/htc/endeavoru/configs/nvcamera.conf:system/etc/nvcamera.conf \
         device/htc/endeavoru/configs/media_profiles.xml:system/etc/media_profiles.xml \
 	device/htc/endeavoru/configs/gps.conf:system/etc/gps.conf \
+	device/htc/endeavoru/configs/htcfs.conf:system/etc/htcfs.conf \
 	device/htc/endeavoru/configs/SuplRootCert:system/etc/SuplRootCert \
 	device/htc/endeavoru/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	device/htc/endeavoru/configs/hostapd.conf:system/etc/wifi/hostapd.conf \
 	device/htc/endeavoru/configs/TQS_D_1.7.ini:system/etc/wifi/TQS_D_1.7.ini \
+	device/htc/endeavoru/configs/htc_1281fw.bin:system/etc/wifi/htc_1281fw.bin \
 	device/htc/endeavoru/configs/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
 
 # Vold.fstab
@@ -56,6 +59,7 @@ PRODUCT_COPY_FILES += \
 # Input device configeration files
 PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+	device/htc/endeavoru/usr/keylayout/tegra-kbc.kl:system/usr/keylayout/tegra-kbc.kl \
 	device/htc/endeavoru/usr/idc/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \
 	device/htc/endeavoru/usr/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
 	device/htc/endeavoru/usr/idc/tv-touchscreen.idc:system/usr/idc/tv-touchscreen.idc
