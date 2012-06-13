@@ -119,5 +119,3 @@ ro.fat_rsvd=66
 ro.bt.chipset = TI 1283
 ro.bt.stack = TI BlueZ
 ro.bt.stack.version = 1.1.0.3
-
-tf.enable=y

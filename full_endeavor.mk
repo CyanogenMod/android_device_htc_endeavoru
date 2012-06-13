@@ -100,10 +100,9 @@ PRODUCT_PACKAGES += \
          calibrator \
          hostapd
 
-# Lights and a2dp
+# a2dp
 PRODUCT_PACKAGES += \
-	lights.tegra \
-        audio.a2dp.default \
+	audio.a2dp.default \
         libaudioutils
 
 # NFC
@@ -170,6 +169,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Tegra 3 spacific overrides
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.tegra.nvmmlite=1
+        tf.enable=y
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
