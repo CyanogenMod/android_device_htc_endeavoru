@@ -16,12 +16,12 @@
 # Skip droiddoc build to save build time
 BOARD_SKIP_ANDROID_DOC_BUILD := true
 
+# Audio
 BOARD_USES_GENERIC_AUDIO := false
-USE_CAMERA_STUB := false
-TARGET_PROVIDES_LIBLIGHTS := true
 
 #Camera
 BOARD_HAVE_HTC_FFC := true
+USE_CAMERA_STUB := false
 
 # Target arch settings
 BOARD_HAS_LOCKED_BOOTLOADER := true
