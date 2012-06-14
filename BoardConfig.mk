@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# Skip droiddoc build to save build time
+BOARD_SKIP_ANDROID_DOC_BUILD := true
 
 BOARD_USES_GENERIC_AUDIO := false
 USE_CAMERA_STUB := false
@@ -69,6 +71,9 @@ BOARD_PROVIDES_LIBRIL := true
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
+
+# GPS	
+BOARD_HAVE_GPS_BCM := true
 
 # FM
 # BOARD_HAVE_FM_RADIO_TI := true
