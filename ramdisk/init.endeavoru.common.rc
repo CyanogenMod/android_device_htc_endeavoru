@@ -146,16 +146,6 @@ on boot
     chown system system /sys/class/graphics/fb0/device/smartdimmer/aggressiveness
 
 # Sensor
-    mkdir /data/sensors 0751 system system
-    mkdir /data/lightsensor 0751 system system
-    chmod 666 /dev/nvhost-ctrl
-    chmod 666 /dev/nvhost-display
-    chmod 666 /dev/nvhost-dsi
-    chmod 666 /dev/nvhost-gr2d
-    chmod 666 /dev/nvhost-gr3d
-    chmod 666 /dev/nvhost-isp
-    chmod 666 /dev/nvhost-mpe
-    chmod 666 /dev/nvhost-vi
     chown system system /sys/bus/iio/devices/device0/als_ir_mode
     chown system system /sys/bus/iio/devices/device0/proximity_enable
 
@@ -245,8 +235,14 @@ service akmd /system/bin/akmd
 # gyro daemon
 service ewtzmud /system/bin/ewtzmud
     class main
-    user system
+    user compass
     group system misc input
+
+# htc bkops daemon
+service htcbkopsd /system/bin/htcbkopsd
+	class main
+	user root
+	group root
 
 # bugreport is triggered by the VOLUME-DOWN and VOLUME-UP keys/
 service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport

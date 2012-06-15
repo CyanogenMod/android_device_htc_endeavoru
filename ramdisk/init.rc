@@ -254,7 +254,7 @@ on boot
     chown system system /sys/class/leds/button-backlight/blink
     chown system system /sys/class/leds/amber/off_timer
     chown system system /sys/class/leds/green/off_timer
-    chown system system /sys/class/leds/button-backlight/off_timeroff_timer
+    chown system system /sys/class/leds/button-backlight/off_timer
     chown system system /sys/class/leds/red/device/grpfreq
     chown system system /sys/class/leds/red/device/grppwm
     chown system system /sys/class/leds/red/device/blink

@@ -1,5 +1,5 @@
 # ril
-lib/librilpos.so
+lib/libril.so
 lib/libhtc_ril.so
 
 # nfc
@@ -10,7 +10,6 @@ lib/libpn544_fw.so
 usr/keylayout/tegra-kbc.kl
 
 # agps
-bin/rilposd
 bin/RXN_IntApp
 etc/gps/agps.truststore
 etc/gps/agps.truststore_lab

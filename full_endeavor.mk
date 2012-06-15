@@ -40,7 +40,6 @@ PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/dsp/AIC3008_REG_DualMic_XC.csv:system/etc/AIC3008_REG_DualMic_XC.csv \
 	device/htc/endeavoru/dsp/AIC3008_REG_DualMic.csv:system/etc/AIC3008_REG_DualMic.csv \
 	device/htc/endeavoru/dsp/DSP_number.txt:system/etc/DSP_number.txt \
-	device/htc/endeavoru/dsp/alsa.conf:system/usr/share/alsa/alsa.conf \
 	device/htc/endeavoru/configs/nvcamera.conf:system/etc/nvcamera.conf \
         device/htc/endeavoru/configs/media_profiles.xml:system/etc/media_profiles.xml \
 	device/htc/endeavoru/configs/gps.conf:system/etc/gps.conf \
@@ -50,7 +49,31 @@ PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/configs/hostapd.conf:system/etc/wifi/hostapd.conf \
 	device/htc/endeavoru/configs/TQS_D_1.7.ini:system/etc/wifi/TQS_D_1.7.ini \
 	device/htc/endeavoru/configs/htc_1281fw.bin:system/etc/wifi/htc_1281fw.bin \
-	device/htc/endeavoru/configs/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
+	device/htc/endeavoru/configs/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+
+# BT config
+PRODUCT_COPY_FILES += \
+  system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
+
+# Prebuilt Alsa configs
+PRODUCT_COPY_FILES += \
+	device/htc/endeavoru/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf \
+	device/htc/endeavoru/usr/share/alsa/cards/aliases.conf:system/usr/share/alsa/cards/aliases.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/center_lfe.conf:system/usr/share/alsa/pcm/center_lfe.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/default.conf:system/usr/share/alsa/pcm/default.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/dmix.conf:system/usr/share/alsa/pcm/dmix.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/dpl.conf:system/usr/share/alsa/pcm/dpl.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/front.conf:system/usr/share/alsa/pcm/front.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/iec958.conf:system/usr/share/alsa/pcm/iec958.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/modem.conf:system/usr/share/alsa/pcm/modem.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/rear.conf:system/usr/share/alsa/pcm/rear.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/side.conf:system/usr/share/alsa/pcm/side.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/surround40.conf:system/usr/share/alsa/pcm/surround40.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/surround41.conf:system/usr/share/alsa/pcm/surround41.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/surround50.conf:system/usr/share/alsa/pcm/surround50.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
+	device/htc/endeavoru/usr/share/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf
 
 # Vold.fstab
 PRODUCT_COPY_FILES += \
@@ -94,7 +117,7 @@ PRODUCT_COPY_FILES += \
         device/htc/endeavoru/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
         device/htc/endeavoru/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
-# Hostapd / TI fm
+# Hostapd
 PRODUCT_PACKAGES += \
          hostapd_cli \
          calibrator \
@@ -103,15 +126,17 @@ PRODUCT_PACKAGES += \
 # a2dp
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
-        libaudioutils
+        libaudioutils \
+        libtinyalsa
 
-# NFC
+#NFC
 PRODUCT_PACKAGES += \
-	libnfc \
-	libnfc_jni \
-	Nfc \
-	Tag \
-	nfc-extras
+    libnfc \
+    libnfc_ndef \
+    libnfc_jni \
+    Nfc \
+    Tag \
+    com.android.nfc_extras
 
 # Missed apps
 PRODUCT_PACKAGES += \
