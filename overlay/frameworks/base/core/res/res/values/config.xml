@@ -23,7 +23,7 @@
 
     <!-- Boolean indicating if current platform supports quick switch-on/off of
          Bluetooth Module -->
-    <bool name="config_bluetooth_adapter_quick_switch">false</bool>
+    <bool name="config_bluetooth_adapter_quick_switch">true</bool>
 
     <!-- Default color for notification LED is green. -->
     <color name="config_defaultNotificationColor">#ff00ff00</color>
@@ -84,11 +84,11 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>45</item>
-        <item>50</item>
-        <item>63</item>
-        <item>96</item>
-        <item>130</item>
+        <item>30</item>
+        <item>47</item>
+        <item>60</item>
+        <item>88</item>
+        <item>125</item>
         <item>143</item>
         <item>171</item>
         <item>199</item>
