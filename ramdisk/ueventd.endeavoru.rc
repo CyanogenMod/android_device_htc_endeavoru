@@ -18,6 +18,9 @@
 /dev/tegra_rpc	0660	media	media
 /dev/tegra_sema	0660	media	media
 /dev/tegra_mediaserver	0660 	media 	media
+
+# Camera
+/dev/block/mmcblk0p2      0660   media      camera
 /dev/s5k3h2y	0660	media	camera
 /dev/s5k6a1gx03	0660	media	camera
 /dev/aat1271	0600	media	camera
@@ -27,8 +30,6 @@
 /dev/spi_rawchip	0660	media	camera
 /dev/tegra_camera 0660	media	camera
 /dev/camera*	0660	media	camera
-/dev/focuser*	0660	media	camera
-/dev/torch*	0660	media	camera
 /dev/spdif*	0660	system	audio
 /dev/tegra_dc*	0666	system	system
 /dev/ttyACM*	0660	radio	system
@@ -39,24 +40,19 @@
 /dev/video1     0660    media   camera
 /dev/tf_driver	0666	system	system
 /dev/codec_aic3008     0660    system   audio
-/dev/ewtzmu2daemon        0666   system     system
-/dev/ewtzmu2hal		  0666   system     system
-/dev/ewtzmu2		  0666   system     system
-/dev/akm8975_aot          0666   system	    system
-/dev/akm8975_daemon	  0666   system	    system
-/dev/akm8976_daemon       0666   system     system
-/dev/akm8976_aot          0666   system     system
-/dev/akm8973_daemon       0666   system     system
-/dev/akm8973_aot          0666   system     system
-/dev/bma150               0666   system     system
-/dev/cm3602               0666   system     system
-/dev/akm8976_pffd         0666   system     system
 
-/dev/block/mmcblk0p2      0660   media      camera
-
+# Sensors
+/dev/ewtzmu2daemon      0666    system      system
+/dev/ewtzmu2hal		0666    system      system
+/dev/ewtzmu2		0666    system      system
+/dev/akm8975_daemon     0640    compass     system
+/dev/akm8975_aot        0640    compass     system
+/dev/cm3602             0640    compass     system
+/dev/lightsensor        0640    system      system
 
 # wifi
 /dev/rfkill               0660   root       wifi
+/dev/block/mmcblk0p1      0660   root       wifi
 
 # for modem link
 /sys/module/serial/parameters/modem_enabled    0600    system  system

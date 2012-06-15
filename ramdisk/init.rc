@@ -254,7 +254,7 @@ on boot
     chown system system /sys/class/leds/button-backlight/blink
     chown system system /sys/class/leds/amber/off_timer
     chown system system /sys/class/leds/green/off_timer
-    chown system system /sys/class/leds/button-backlight/off_timeroff_timer
+    chown system system /sys/class/leds/button-backlight/off_timer
     chown system system /sys/class/leds/red/device/grpfreq
     chown system system /sys/class/leds/red/device/grppwm
     chown system system /sys/class/leds/red/device/blink
@@ -606,6 +606,12 @@ service charging /system/bin/charging
     oneshot
 
 service netHDencode /system/bin/netHDencode wlan0 3655
+    user root
+    group root
+    disabled
+    oneshot
+
+service L2PE /system/bin/l2_profile_exchange handset wlan1
     user root
     group root
     disabled

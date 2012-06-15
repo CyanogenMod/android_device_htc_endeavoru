@@ -1,4 +1,4 @@
-## Vold 2.0 fstab for enterprise
+## Vold 2.0 fstab for endeavor
 
 #######################
 ## Regular device mount
@@ -11,4 +11,5 @@
 ######################
 
 # Mounts the first usable partition of the specified device
+#dev_mount sdcard /mnt/sdcard auto /devices/platform/sdhci-tegra.2/mmc_host/mmc1
 dev_mount sdcard /mnt/sdcard 14 /devices/platform/sdhci-tegra.3/mmc_host/mmc0

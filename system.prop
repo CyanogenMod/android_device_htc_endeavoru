@@ -15,6 +15,9 @@ rild.libpath=/system/lib/libhtc_ril.so
 rild.libargs=-e wwan0
 ro.telephony.ril.v3=signalstrength,skipbrokendatacall
 ro.ril.disable.power.collapse=1
+modem.power.device=/sys/class/gpio/gpio32/value,0,1
+ro.ril.devicename=/dev/ttyACM1
+modem.powercontrol=disabled
 ro.ril.ecc.VODA-Africa-South=112,911,999
 ro.ril.ecc.HTC-GCC=999,112,997
 ro.ril.ecc.HTC-WWE=999
@@ -57,7 +60,7 @@ ro.ril.edpcch.pwr.boost=1
 ro.ril.hspa.mac.ehs=1
 ro.ril.enable.imc.feature=1
 ro.ril.projectname=endeavoru
-ro.ril.stkprof.param=FFFFFFFF7F0000DF9703021F2200000000000000000040100000000000000000
+ro.ril.stkprof.param=FFFFFFFF7F1C00DF9703021F2200000083000000000040100000000000000000
 ro.ril.devicename=/dev/ttyACM1
 
 # Wi-Fi
@@ -65,6 +68,27 @@ wifi.interface=wlan0
 wifi.softap.interface=wlan1
 wifi.softapconcurrent.interface=wlan1
 wifi.supplicant_scan_interval=60
+
+init.svc.wpa_supplicant=
+init.svc.dhcpcd_wlan0=
+dhcp.wlan0.autoip=
+dhcp.wlan0.dns1=
+dhcp.wlan0.dns2=
+dhcp.wlan0.dns3=
+dhcp.wlan0.dns4=
+dhcp.wlan0.gateway=
+dhcp.wlan0.ipaddress=
+dhcp.wlan0.leasetime=
+dhcp.wlan0.mask=
+dhcp.wlan0.ooxx=
+dhcp.wlan0.pid=
+dhcp.wlan0.reason=
+dhcp.wlan0.result=
+dhcp.wlan0.server=
+net.wlan0.dns1=
+net.wlan0.dns2=
+wifi.wpa_supp_ready=
+wlan.driver.status=
 
 # Audio
 # -----------------------------
@@ -97,5 +121,33 @@ audio.headset.voice.2=22
 audio.headset.voice.3=25
 audio.headset.voice.4=28
 audio.headset.voice.5=31
+
+htc.audio.global.state=0
+htc.audio.global.profile=0
 persist.htc.audio.pcm.samplerate=48000
 persist.htc.audio.pcm.channels=2
+persist.audio.SupportHTCHWAEC=1
+persist.audio.AutoSwitchMic=1
+
+#NFC
+debug.nfc.fw_download=true
+debug.nfc.se=true
+
+#hdmi
+ro.hdmi.enable=true
+
+#Internal Storage
+ro.phone_fat=1
+
+#Fat Rsvd Sectors
+ro.fat_rsvd=66
+
+# Support HW reset dialog
+ro.product.hwreset = 1
+ro.product.hwreset.timer1 = 5
+ro.product.hwreset.timer2 = 8
+
+#Relase Bluetooth HW/SW information
+ro.bt.chipset = TI 1283
+ro.bt.stack = TI BlueZ
+ro.bt.stack.version = 1.1.0.3

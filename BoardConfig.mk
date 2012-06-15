@@ -13,13 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# Skip droiddoc build to save build time
+BOARD_SKIP_ANDROID_DOC_BUILD := true
 
+# Audio
 BOARD_USES_GENERIC_AUDIO := false
-USE_CAMERA_STUB := false
-TARGET_PROVIDES_LIBLIGHTS := true
+TARGET_PROVIDES_LIBAUDIO := true
 
 #Camera
 BOARD_HAVE_HTC_FFC := true
+USE_CAMERA_STUB := false
 
 # Target arch settings
 BOARD_HAS_LOCKED_BOOTLOADER := true
@@ -39,6 +42,12 @@ TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOOTLOADER_BOARD_NAME := 
 TARGET_BOARD_PLATFORM := tegra
+TARGET_TEGRA_VERSION := t30
+
+# mediaplayer
+BOARD_USES_HW_MEDIAPLUGINS := false
+BOARD_USES_HW_MEDIASCANNER := false
+BOARD_USES_HW_MEDIARECORDER := false
 
 # EGL settings
 TARGET_USES_OVERLAY := true
@@ -55,10 +64,6 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_SOFTAP_DEVICE_TI := NL80211
-BOARD_P2P_DEVICE_TI := NL80211
-WIFI_DRIVER_FW_PATH_STA := "sta"
-WIFI_DRIVER_FW_PATH_AP := "ap"
-WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_MODULE_NAME	:=  "wl12xx_sdio"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wl12xx_sdio.ko"
 
@@ -68,8 +73,14 @@ BOARD_PROVIDES_LIBRIL := true
 # BT
 BOARD_HAVE_BLUETOOTH := true
 
+# GPS	
+BOARD_HAVE_GPS_BCM := true
+
 # FM
 # BOARD_HAVE_FM_RADIO_TI := true
+
+BOARD_HDMI_MIRROR_MODE := Scale
+BOARD_HAS_DIDIM := true
 
 # Vold / USB
 BOARD_VOLD_MAX_PARTITIONS := 20
