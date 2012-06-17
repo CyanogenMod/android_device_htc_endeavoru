@@ -123,6 +123,10 @@ PRODUCT_PACKAGES += \
          calibrator \
          hostapd
 
+# lights
+PRODUCT_PACKAGES += \
+        lights.tegra
+
 # a2dp
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
