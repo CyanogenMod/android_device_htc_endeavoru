@@ -65,6 +65,9 @@
 /dev/ttyHSUSB3	0660    autobot_access	autobot_access  #Autobot car pc
 /dev/ttyHSUSB1	0600    system	system  #Autobot car gps
 
+# simlock
+/dev/simlock              0660  radio        radio
+
 # sysfs properties
 /sys/devices/virtual/input/input*   enable      0660  root   input
 /sys/devices/virtual/input/input*   poll_delay  0660  root   input
