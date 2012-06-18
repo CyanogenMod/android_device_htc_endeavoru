@@ -131,7 +131,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
         libaudioutils \
-        libtinyalsa
+        libtinyalsa \
+        eventd
 
 #NFC
 PRODUCT_PACKAGES += \

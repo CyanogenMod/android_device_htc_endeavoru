@@ -225,6 +225,7 @@ on boot
     mkdir /data/audio
     chmod 755 /data/audio
     chown media audio /data/audio
+    start call_vol
 
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
@@ -420,6 +421,10 @@ service post_boot /system/bin/sh /system/etc/post_boot.sh
 	user root
 	disabled
 	oneshot
+
+service call_vol /system/bin/eventd
+	class main
+	user root
 
 on property:init.svc.bootanim=stopped
     write /sys/kernel/debug/tegra_hotplug/max_cpus 4

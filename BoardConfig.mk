@@ -74,9 +74,6 @@ BOARD_PROVIDES_LIBRIL := true
 # BT
 BOARD_HAVE_BLUETOOTH := true
 
-# GPS	
-BOARD_HAVE_GPS_BCM := true
-
 # FM
 # BOARD_HAVE_FM_RADIO_TI := true
 
