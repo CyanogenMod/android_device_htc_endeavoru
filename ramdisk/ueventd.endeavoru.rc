@@ -42,9 +42,9 @@
 /dev/codec_aic3008     0660    system   audio
 
 # Sensors
-/dev/ewtzmu2daemon      0666    system      system
-/dev/ewtzmu2hal		0666    system      system
-/dev/ewtzmu2		0666    system      system
+/dev/ewtzmu2daemon      0640    system      system
+/dev/ewtzmu2hal		0640    system      system
+/dev/ewtzmu2		0640    system      system
 /dev/akm8975_daemon     0640    compass     system
 /dev/akm8975_aot        0640    compass     system
 /dev/cm3602             0640    compass     system
