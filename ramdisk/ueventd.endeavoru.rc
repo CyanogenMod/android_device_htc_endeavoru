@@ -30,6 +30,8 @@
 /dev/spi_rawchip	0660	media	camera
 /dev/tegra_camera 0660	media	camera
 /dev/camera*	0660	media	camera
+/dev/focuser*	0660	media	camera
+/dev/torch*	0660	media	camera
 /dev/spdif*	0660	system	audio
 /dev/tegra_dc*	0666	system	system
 /dev/ttyACM*	0660	radio	system
@@ -42,12 +44,18 @@
 /dev/codec_aic3008     0660    system   audio
 
 # Sensors
-/dev/ewtzmu2daemon      0640    system      system
-/dev/ewtzmu2hal		0640    system      system
-/dev/ewtzmu2		0640    system      system
-/dev/akm8975_daemon     0640    compass     system
-/dev/akm8975_aot        0640    compass     system
-/dev/cm3602             0640    compass     system
+/dev/ewtzmu2daemon        0666   system     system
+/dev/ewtzmu2hal		  0666   system     system
+/dev/ewtzmu2		  0666   system     system
+/dev/akm8975_aot          0666   system	    system
+/dev/akm8975_daemon	  0666   system	    system
+/dev/akm8976_daemon       0666   system     system
+/dev/akm8976_aot          0666   system     system
+/dev/akm8973_daemon       0666   system     system
+/dev/akm8973_aot          0666   system     system
+/dev/bma150               0666   system     system
+/dev/cm3602               0666   system     system
+/dev/akm8976_pffd         0666   system     system
 /dev/lightsensor        0640    system      system
 
 # wifi
