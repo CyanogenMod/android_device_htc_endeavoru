@@ -91,7 +91,7 @@ loglevel 3
 
 # Allow everybody to read the xt_qtaguid resource tracking misc dev.
 # This is needed by any process that uses socket tagging.
-    chmod 0644 /dev/xt_qtaguid
+    chmod 0666 /dev/xt_qtaguid
 
 on fs
 # mount mtd partitions
@@ -285,8 +285,8 @@ on boot
     chown media system /sys/htc/cpu_temp
 
 # Define DATA USAGE CTRL file permission
-	chown system system /proc/net/xt_qtaguid/ctrl
-    chmod 0664 /proc/net/xt_qtaguid/ctrl
+    chown system system /proc/net/xt_qtaguid/ctrl
+    chmod 0666 /proc/net/xt_qtaguid/ctrl
 
     # allow system to modify cpufreq control files
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor

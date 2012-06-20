@@ -25,6 +25,32 @@
  *	change overall sys volume and saves it to a file s t3_calld can read it, when new call and no vol key is yet pressed.
  */
 
+int isInCall()
+{
+	static const char call_state_filename[] = "/data/misc/call_state";
+	system("echo `alsa_amixer -c 1 -i contents|grep :|head -n2|tail -n1` > /data/misc/call_state");
+	int r;
+	r = 0;
+	FILE *file = fopen ( call_state_filename, "r" );
+	if ( file != NULL )
+	{
+		char line [ 128 ]; 
+		while ( fgets ( line, sizeof line, file ) != NULL ) /* read a line */
+		{
+			fputs ( line, stdout ); /* write the line to stdout */
+			if ( strcmp(line,": values=1\n") == 0) // call / bt call
+			{
+				r = 1;
+			}
+			break;
+		}
+	}
+	fclose ( file );
+	return r;
+
+}
+
+
 int main()
 {
 	printf("endeavoru - in call volume adjustment - eventd starting.\n");
@@ -44,70 +70,40 @@ int main()
 	char buffer [50];
 
 	static const char vol_filename[] = "/data/misc/in_call_vol";
-	static const char filename[] = "/proc/asound/card1/pcm0p/sub0/status";
+	//static const char filename[] = "/proc/asound/card1/pcm0p/sub0/status";
 
 	while(1) {
 		int ret = read(keyfd, &event, sizeof(struct input_event));
 		if (ret == sizeof(struct input_event))
 		{
 			printf("type:%d code:%d value:%d\n", event.type, event.code, event.value);
-			if (event.type!= 5 && event.type!=1)
+			if (event.type!= 1)
 			{
 			    continue;
 			}			
 			if (event.type == 1 && event.code == 115 && event.value == 0)
 			{
-			    printf("VOL UP\n");
-
-
-				FILE *file = fopen ( filename, "r" );
-				if ( file != NULL )
+				printf("VOL UP\n");
+				if (isInCall())
 				{
-					char line [ 128 ]; 
-					while ( fgets ( line, sizeof line, file ) != NULL ) /* read a line */
-					{
-						fputs ( line, stdout ); /* write the line to stdout */
-						if ( strcmp(line,"state: XRUN\n") == 0 || strcmp(line,"state: PREPARED\n") == 0) // call / bt call
-						{
-
-							if (cVol>=15) cVol = 15; else cVol+=2;
-							sprintf(buffer, "echo \"%d\" > /data/misc/in_call_vol", cVol);
-							system(buffer);
-							sprintf(buffer, "/system/bin/snd3008 -v %d", cVol);
-							system(buffer);
-						}
-						break;
-					}
-					fclose ( file );
+					if (cVol>=15) cVol = 15; else cVol+=2;
+					sprintf(buffer, "echo \"%d\" > /data/misc/in_call_vol", cVol);
+					system(buffer);
+					sprintf(buffer, "/system/bin/snd3008 -v %d", cVol);
+					system(buffer);
 				}
-
-			
-			    
-			    
 			}
 			if (event.type == 1 && event.code == 114 && event.value == 0)
 			{
 			    printf("VOL DOWN\n");
-				FILE *file = fopen ( filename, "r" );
-				if ( file != NULL )
+				if (isInCall())
 				{
-					char line [ 128 ]; 
-					while ( fgets ( line, sizeof line, file ) != NULL ) /* read a line */
-					{
-						fputs ( line, stdout ); /* write the line */
-						if ( strcmp(line,"state: XRUN\n") == 0 || strcmp(line,"state: PREPARED\n") == 0) // call / bt call
-						{
-							if (cVol<=7) cVol = 7; else cVol-=2;
-							sprintf(buffer, "echo \"%d\" > /data/misc/in_call_vol", cVol);
-							system(buffer);
-							sprintf(buffer, "/system/bin/snd3008 -v %d", cVol);
-							system(buffer);
-						}
-						break;
-					}
-					fclose ( file );
+					if (cVol<=7) cVol = 7; else cVol-=2;
+					sprintf(buffer, "echo \"%d\" > /data/misc/in_call_vol", cVol);
+					system(buffer);
+					sprintf(buffer, "/system/bin/snd3008 -v %d", cVol);
+					system(buffer);
 				}
-			    
 			}
 		}
 		else {
