@@ -151,3 +151,6 @@ ro.product.hwreset.timer2 = 8
 ro.bt.chipset = TI 1283
 ro.bt.stack = TI BlueZ
 ro.bt.stack.version = 1.1.0.3
+
+# temporary fix for HDMI output, for videos it works now in correct landscape with this set
+persist.demo.hdmirotation=portrait
