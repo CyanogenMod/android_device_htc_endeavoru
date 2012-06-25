@@ -194,7 +194,7 @@
     </integer-array>
 
     <!-- W-Fi Direct support. -->
-    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
+    <bool translatable="false" name="config_wifi_p2p_support">false</bool>
 
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
@@ -203,9 +203,8 @@
     <bool translatable="false" name="config_wifi_background_scan_support">false</bool>
 
     <!-- Our amoled doesn't animate well. -->
-    <bool name="config_animateScreenLights">false</bool>
+    <bool name="config_animateScreenLights">true</bool>
 
-   <integer name="config_lidOpenRotation">-1</integer>
 
     <!-- CRT animations. -->
     <bool name="config_screenOffAnimation">true</bool>
