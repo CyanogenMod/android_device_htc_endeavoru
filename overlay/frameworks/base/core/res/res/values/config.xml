@@ -23,7 +23,8 @@
 
     <!-- Boolean indicating if current platform supports quick switch-on/off of
          Bluetooth Module -->
-    <bool name="config_bluetooth_adapter_quick_switch">true</bool>
+<!--    <bool name="config_bluetooth_adapter_quick_switch">true</bool>
+-->
 
     <!-- Default color for notification LED is green. -->
     <color name="config_defaultNotificationColor">#ff00ff00</color>
@@ -152,7 +153,7 @@
         <item>"mobile_supl,3,0,2,60000,true"</item>
         <item>"mobile_dun,4,0,4,60000,true"</item>
         <item>"mobile_hipri,5,0,3,60000,true"</item>
-        <item>"mobile_bluetooth,7,7,3,-1,true"</item>
+        <item>"mobile_bluetooth,7,7,1,-1,true"</item>
         <item>"wifi_p2p,13,1,0,-1,true"</item>
     </string-array>
 
@@ -191,6 +192,7 @@
         <item>0</item>
         <item>1</item>
         <item>5</item>
+        <item>7</item>
     </integer-array>
 
     <!-- W-Fi Direct support. -->
