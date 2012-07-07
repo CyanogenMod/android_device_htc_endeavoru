@@ -207,7 +207,6 @@
     <!-- Our amoled doesn't animate well. -->
     <bool name="config_animateScreenLights">true</bool>
 
-
     <!-- CRT animations. -->
     <bool name="config_screenOffAnimation">true</bool>
 
