@@ -24,4 +24,6 @@
   <bool name="noFaceDetectOnFrontCamera">true</bool>
   <!-- Use ZSL mode -->
   <bool name="enableZSL">true</bool>
+  <!-- Enable HTCCamMode -->
+  <bool name="needsHTCCamMode">true</bool>
 </resources>
