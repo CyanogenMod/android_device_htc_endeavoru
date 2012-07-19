@@ -21,7 +21,8 @@ DEVICE_PACKAGE_OVERLAYS := device/htc/endeavoru/overlay
 
 # Camera
 PRODUCT_PACKAGES := \
-    Camera
+    Camera \
+    camera.tegra
 
 # Files needed for boot image
 PRODUCT_COPY_FILES := \
@@ -143,6 +144,16 @@ PRODUCT_PACKAGES += \
     Nfc \
     Tag \
     com.android.nfc_extras
+
+# fmradio
+
+#PRODUCT_PACKAGES += \
+#    Fmapplication \
+#    FmRxService \
+#    libfm_stack \
+#    fmreceiverif \
+#    com.ti.fm.fmreceiverif.xml \
+#    libfmrx
 
 # Missed apps
 PRODUCT_PACKAGES += \
