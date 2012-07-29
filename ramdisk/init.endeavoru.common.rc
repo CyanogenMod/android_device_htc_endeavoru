@@ -222,7 +222,6 @@ on boot
     chmod 755 /data/audio
     chown media audio /data/audio
     start call_vol1
-    start call_vol2
 
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
@@ -419,14 +418,10 @@ service post_boot /system/bin/sh /system/etc/post_boot.sh
 	disabled
 	oneshot
 
-service call_vol1 /system/bin/eventd
+service call_vol1 /system/bin/pollyd
 	class main
 	user root
 	
-service call_vol2 /system/bin/t3_calld
-	class main
-	user root
-
 on property:init.svc.bootanim=stopped
     write /sys/kernel/debug/tegra_hotplug/max_cpus 4
     write /sys/module/cpu_tegra3/parameters/auto_hotplug 1

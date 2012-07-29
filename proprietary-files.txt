@@ -52,7 +52,7 @@ bin/ewtzmud
 
 # icera
 lib/libril-icera.so
-bin/fild
+bin/rild
 
 # radio nvm
 bin/nvm_server

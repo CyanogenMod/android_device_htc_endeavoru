@@ -132,9 +132,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
         libaudioutils \
-        libtinyalsa \
-        eventd \
-        t3_calld
+        libtinyalsa
+
+# call volume and echo fix
+PRODUCT_PACKAGES += \
+        Polly \
+        pollyd
 
 #NFC
 PRODUCT_PACKAGES += \

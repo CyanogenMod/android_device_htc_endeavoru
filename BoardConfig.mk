@@ -68,8 +68,8 @@ BOARD_SOFTAP_DEVICE_TI := NL80211
 WIFI_DRIVER_MODULE_NAME	:=  "wl12xx_sdio"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wl12xx_sdio.ko"
 
-# RIL
-BOARD_PROVIDES_LIBRIL := true
+# HTC ril compatability
+TARGET_PROVIDES_LIBRIL := vendor/htc/endeavoru/proprietary/lib/libhtc-ril.so
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
