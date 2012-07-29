@@ -1,5 +1,4 @@
 # ril
-lib/libril.so
 lib/libhtc_ril.so
 
 # nfc
