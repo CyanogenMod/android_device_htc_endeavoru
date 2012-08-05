@@ -37,13 +37,13 @@
 int main() {
 	int afd, pfd, cfd;
 	char rbuff[GBUFFSIZE];
-	size_t bytes_read;
+	size_t buff_len;
 	int atlen  = strlen(AT_PREFIX);
 	gid_t jgid;
 	
 	/* make socket unreadable */
 	umask( 0777 );
-	
+
 	/* get unix domain socket and pts */
 	afd = get_audio_socket();
 	pfd = get_pts_socket();
@@ -74,13 +74,19 @@ int main() {
 		  and overwrite the rest afterwards
 		*/
 		memset(&rbuff, 0, GBUFFSIZE);
-		bytes_read = read(cfd, &rbuff[3], GBUFFSIZE-3-2); /* -3 = offset, -2 = \r\0 */
+		buff_len = 3+read(cfd, &rbuff[3], GBUFFSIZE-3-2); /* -3 = offset, -2 = \r\0 */
 		memcpy(&rbuff, AT_PREFIX, atlen);                 /* add AT+XDRV=           */
-		memcpy(&rbuff[bytes_read+3], "\r\0", 2);          /* terminate string       */
+		memcpy(&rbuff[buff_len], "\r\0", 2);              /* terminate string       */
 		
 		/* send command to modem if it looks ok */
-		if(bytes_read >= CALLVOLUME_CMDLEN &&
-		       at_args_sane(&rbuff[atlen], bytes_read+3-atlen) == 1) {
+		if(buff_len == TERM_LEN &&
+                       memcmp(&rbuff, TERM_MAGIC, TERM_LEN) == 0) {
+			DMSG("Poison cracker received, commiting suicide in %d seconds", TERM_DELAY);
+			sleep(TERM_DELAY);
+			xdie("terminating");
+		}
+		else if(buff_len >= CALLVOLUME_CMDLEN &&
+		       at_args_sane(&rbuff[atlen], buff_len-atlen) == 1) {
 			
 			alarm(AT_TIMEOUT);
 			send_xdrv_command(rbuff, pfd);
@@ -88,7 +94,7 @@ int main() {
 			
 		}
 		else {
-			DMSG("silently dropping invalid command with %d bytes len", bytes_read);
+			DMSG("silently dropping invalid command with %d bytes len", buff_len);
 		}
 		
 		close(cfd);
@@ -164,7 +170,8 @@ void send_xdrv_command(const char *cmd, int fd) {
 	
 	DMSG(">>> %s", cmd);
 	
-	write(fd, cmd, strlen(cmd));
+	if( write(fd, cmd, strlen(cmd)) == -1 )
+		xdie("mux error: write failed");
 	
 	nanosleep(&tx, NULL);
 	

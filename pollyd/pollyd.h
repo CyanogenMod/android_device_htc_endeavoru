@@ -32,8 +32,13 @@
 
 #define SEC_SLEEP   3                               /* how long we wait before terminating       */
 #define AT_TIMEOUT  3                               /* terminate if a command took longer this   */
-#define MUX_PTS_FIRST 0
-#define MUX_PTS_LAST  7
+#define MUX_PTS_FIRST 1                             /* lowest PTS to consider                    */
+#define MUX_PTS_LAST  7                             /* last PTS to consider for gsmmux           */
+
+#define TERM_MAGIC "AT+XDRV=DEAD_PARROT"            /* pollyd will commit suicide if this string *
+                                                     * is received by the daemon                 */
+#define TERM_LEN   strlen(TERM_MAGIC)
+#define TERM_DELAY 10-SEC_SLEEP                     /* sleep X second after receiving TERM_MAGIC */
 
 /* for debugging */
 #define DEBUG 1
