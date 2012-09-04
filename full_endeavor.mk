@@ -226,8 +226,6 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_LOCALES += en_US xhdpi
 
-# CM version
-CM_EXTRAVERSION = alpha-8
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product-if-exists, vendor/htc/endeavoru/endeavoru-vendor.mk)
