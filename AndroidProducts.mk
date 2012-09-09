@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/full_endeavor.mk
+	$(LOCAL_DIR)/full_endeavoru.mk

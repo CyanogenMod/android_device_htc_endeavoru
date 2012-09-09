@@ -31,6 +31,9 @@
 
 #include <hardware/lights.h>
 
+#define LOGE ALOGE
+#define LOGV ALOGV
+
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 static struct light_state_t g_notification;
@@ -179,9 +182,6 @@ static void set_speaker_light_locked_dual(struct light_device_t *dev,
   unsigned int bcolor = LED_BLANK;
   unsigned int blinkMode = BLINK_MODE_LONG;
 
-  // NOTE: (tgascoigne) I couldn't get dual leds to work, does the hox support this? :/
-  // Currently just blinks the color that's already on
-
   if ((bcolorRGB >> 8) & 0xFF) bcolor = LED_GREEN;
   if ((bcolorRGB >> 16) & 0xFF) bcolor = LED_AMBER;
 
@@ -313,12 +313,13 @@ static struct hw_module_methods_t lights_module_methods = {
   .open = open_lights,
 };
 
-const struct hw_module_t HAL_MODULE_INFO_SYM = {
+struct hw_module_t HAL_MODULE_INFO_SYM = 
+{
   .tag = HARDWARE_MODULE_TAG,
   .version_major = 1,
   .version_minor = 0,
   .id = LIGHTS_HARDWARE_MODULE_ID,
-  .name = "Lights module",
+  .name = "Tegra3 Lights module",
   .author = "The CyanogenMod Project",
   .methods = &lights_module_methods,
 };

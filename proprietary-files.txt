@@ -1,4 +1,5 @@
 # ril
+bin/rild
 lib/libhtc_ril.so
 
 # nfc
@@ -8,50 +9,55 @@ lib/libpn544_fw.so
 # keylayout
 usr/keylayout/tegra-kbc.kl
 
-# agps
+# gps/agps
+app/PGPSDownloader.apk
+bin/agpsd
+bin/navl_server
+bin/cplc_main
+bin/GPSCConfigFile.cfg
+bin/pathconfigfile.txt
 bin/RXN_IntApp
+bin/rilposd
 etc/gps/agps.truststore
 etc/gps/agps.truststore_lab
 etc/gps/tigpsrouter
 etc/gps/RXN/MSLConfig.txt
 etc/gps/RXN/license.key
 etc/gps/RXN/security.key
-
-# gps
 lib/libsuplhelperservicejni.so
 lib/libsupllocationprovider.so
 lib/libgps.so
 lib/libgpsservices.so
 lib/libmcphal.so
 lib/libmcphalgps.so
-bin/navl_server
-bin/cplc_main
-bin/GPSCConfigFile.cfg
-bin/pathconfigfile.txt
+lib/libpos.so
+lib/librilpos.so
 
-# uim (bluetooth, fm, etc,.)
+# bluetooth
 bin/uim-sysfs
-etc/firmware/TIInit_10.4.27.bts
-etc/firmware/TIInit_10.5.20.bts
+etc/firmware/TIInit_7.2.31.bts
+etc/firmware/TIInit_7.6.15.bts
+etc/firmware/TIInit_12.7.27.bts
 etc/firmware/TIInit_10.6.15.bts
+etc/firmware/vac_config.ini
 etc/firmware/WL128x_2.21_1.1.bts
-etc/firmware/fm_rx_init_1283.1.bts
-etc/firmware/fm_rx_init_1283.2.bts
-etc/firmware/fmc_init_1283.1.bts
-etc/firmware/fmc_init_1283.2.bts
+lib/libbt-aptx-4.0.3.so
 
 # voicemail
 etc/voicemail-conf.xml
 
-# accelerometer
+# sensors
 bin/akmd
-
-# gyroscope
 bin/ewtzmud
+lib/libmllite.so
+lib/libmlplatform.so
+lib/libmpl.so
+lib/libmpl_jni.so
+lib/libsensors_mpl.so
 
 # icera
 lib/libril-icera.so
-bin/rild
+bin/fild
 
 # radio nvm
 bin/nvm_server
@@ -60,20 +66,13 @@ bin/getnvm.sh
 bin/IMCdownload
 bin/make_sec_bin
 bin/poweroff_modem.sh
-bin/poweron_modem_hboot.sh
 bin/poweron_modem_fls.sh
 bin/InjectionTool
 bin/IMCdownload
-lib/modules/cdc-acm.ko
 bin/gsm0710muxd
 bin/mknod
 etc/Flash_Loader.conf
 etc/QUO_6260.fls.clean
-
-# FM Radio
-lib/libfmchr.so
-lib/libfmradio.so
-lib/libfmstack.so
 
 # graphics
 lib/libcgdrv.so
@@ -102,7 +101,7 @@ lib/libnvwsi.so
 
 # sound
 lib/libasound.so
-
+lib/libcall_volume.so
 
 # egl
 lib/egl/libEGL_tegra.so
@@ -111,8 +110,6 @@ lib/egl/libGLESv1_CM_perfhud.so
 lib/egl/libGLESv1_CM_tegra.so
 lib/egl/libGLESv2_perfhud.so
 lib/egl/libGLESv2_tegra.so
-
-lib/libsensors_mpl.so
 
 # nv firmware
 etc/firmware/nvavp_os_00001000.bin
@@ -149,15 +146,19 @@ etc/firmware/nvrm_avp_eff00000.bin
 
 # wifi
 etc/firmware/ti-connectivity/wl1271-nvs.bin
+etc/firmware/ti-connectivity/wl1271-nvs_127x.bin
+etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin
+etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin
+etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin
 etc/firmware/ti-connectivity/wl128x-fw-4-mr.bin
+etc/firmware/ti-connectivity/wl128x-fw-4-plt.bin
 etc/firmware/ti-connectivity/wl128x-fw-4-sr.bin
-etc/firmware/ti-connectivity/wl128x-fw-mr.bin.r4
-etc/firmware/ti-connectivity/wl128x-fw-mr.bin.r5
 
 # stagefright
 lib/libstagefrighthw.so
 
 # camera
+lib/libsurfaceflinger_client.so
 lib/libcapsjava.so
 lib/libscalado.so
 lib/libscalado_htcalbum2.so
@@ -197,6 +198,10 @@ lib/libnvapputil.so
 lib/libnvasfparserhal.so
 lib/libnvaviparserhal.so
 lib/libnvavp.so
+lib/libhtcsunny2engine.so
+lib/libhtcsunnyengine.so
+lib/libhtcsurfaces.so
+lib/libhtc_dis.so
 
 # soundimage
 etc/soundimage/CodecDSPID.txt
@@ -226,39 +231,26 @@ etc/soundimage/Sound_Voip_Original_BT.txt
 etc/soundimage/Sound_Voip_Original_HP.txt
 etc/soundimage/Sound_Voip_Original_REC.txt
 etc/soundimage/Sound_Voip_Original_SPK.txt
-etc/soundimage/srs_geq10.cfg
-etc/soundimage/srs_global.cfg
-etc/soundimage/srsfx_trumedia_51.cfg
-etc/soundimage/srsfx_trumedia_movie.cfg
-etc/soundimage/srsfx_trumedia_music.cfg
-etc/soundimage/srsfx_trumedia_voice.cfg
 
 # battery
 bin/htcbatt
+
+# hdmi
+bin/hdcp_test
+bin/hdmid
+
+# drm
+lib/drm/libdrmwvmplugin.so
+lib/libwvdrm_L1.so
+lib/libwvm.so
+lib/libWVStreamControlAPI_L1.so
 
 # misc
 lib/libnvcontrol_jni.so
 lib/libnvcpud.so
 lib/libnvcpud_client.so
 
-# image stabilization
-lib/libhtc_dis.so
-
-# lib/libhtc*
-lib/libhtc-opt2.so
-lib/libhtcsunny2engine.so
-lib/libhtcsunnyengine.so
-lib/libhtcsurfaces.so
-
-# audio
-lib/libcall_volume.so
-lib/libbt-aptx-4.0.3.so
-
-lib/libmllite.so
-lib/libmlplatform.so
-lib/libmpl.so
-lib/libmpl_jni.so
-
+# hw
 lib/hw/camera.tegra.so
 lib/hw/gralloc.tegra.so
 lib/hw/hwcomposer.tegra.so
@@ -268,5 +260,3 @@ lib/hw/gps.tegra.so
 lib/hw/hwcomposer.tegra.so
 lib/hw/nfc.endeavoru.so
 lib/hw/sensors.endeavoru.so
-
-app/PGPSDownloader.apk
