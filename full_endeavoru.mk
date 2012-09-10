@@ -42,14 +42,14 @@ PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/dsp/AIC3008_REG_DualMic.csv:system/etc/AIC3008_REG_DualMic.csv \
 	device/htc/endeavoru/dsp/DSP_number.txt:system/etc/DSP_number.txt \
 	device/htc/endeavoru/configs/nvcamera.conf:system/etc/nvcamera.conf \
-        device/htc/endeavoru/configs/media_profiles.xml:system/etc/media_profiles.xml \
-        device/htc/endeavoru/configs/enctune.conf:system/etc/enctune.conf \
+	device/htc/endeavoru/configs/media_profiles.xml:system/etc/media_profiles.xml \
+	device/htc/endeavoru/configs/enctune.conf:system/etc/enctune.conf \
 	device/htc/endeavoru/configs/gps.conf:system/etc/gps.conf \
 	device/htc/endeavoru/configs/SuplRootCert:system/etc/SuplRootCert
 
 # BT config
 PRODUCT_COPY_FILES += \
-  system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
+	system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
 
 # Prebuilt Alsa configs
 PRODUCT_COPY_FILES += \
@@ -77,7 +77,7 @@ PRODUCT_COPY_FILES += \
 
 # Media configs
 PRODUCT_COPY_FILES += \
-    device/htc/endeavoru/media_codecs.xml:system/etc/media_codecs.xml
+	device/htc/endeavoru/media_codecs.xml:system/etc/media_codecs.xml
 
 # Input device configeration files
 PRODUCT_COPY_FILES += \
@@ -89,41 +89,40 @@ PRODUCT_COPY_FILES += \
 
 # Any prebuilt kernel modules
 PRODUCT_COPY_FILES += \
-        device/htc/endeavoru/modules/baseband_usb_chr.ko:system/lib/modules/baseband_usb_chr.ko \
-        device/htc/endeavoru/modules/baseband-xmm-power2.ko:system/lib/modules/baseband-xmm-power2.ko \
-        device/htc/endeavoru/modules/bluetooth.ko:system/lib/modules/bluetooth.ko \
-        device/htc/endeavoru/modules/bnep.ko:system/lib/modules/bnep.ko \
-        device/htc/endeavoru/modules/btwilink.ko:system/lib/modules/btwilink.ko \
-        device/htc/endeavoru/modules/cavm_sqos_mod.ko:system/lib/modules/cavm_sqos_mod.ko \
-        device/htc/endeavoru/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
-        device/htc/endeavoru/modules/cfg80211.ko:system/lib/modules/cfg80211.ko \
-        device/htc/endeavoru/modules/compat.ko:system/lib/modules/compat.ko \
-        device/htc/endeavoru/modules/fm_drv.ko:system/lib/modules/fm_drv.ko \
-        device/htc/endeavoru/modules/gps_drv.ko:system/lib/modules/gps_drv.ko \
-        device/htc/endeavoru/modules/hci_uart.ko:system/lib/modules/hci_uart.ko \
-        device/htc/endeavoru/modules/htc_sqos_ctrlmsg.ko:system/lib/modules/htc_sqos_ctrlmsg.ko \
-        device/htc/endeavoru/modules/htc_sqos_encoder.ko:system/lib/modules/htc_sqos_encoder.ko\
-        device/htc/endeavoru/modules/htc_sqos_wifi.ko:system/lib/modules/htc_sqos_wifi.ko \
-        device/htc/endeavoru/modules/kineto_gan.ko:system/lib/modules/kineto_gan.ko \
-        device/htc/endeavoru/modules/lib80211.ko:system/lib/modules/lib80211.ko \
-        device/htc/endeavoru/modules/mac80211.ko:system/lib/modules/mac80211.ko \
-        device/htc/endeavoru/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
-        device/htc/endeavoru/modules/rfcomm.ko:system/lib/modules/rfcomm.ko \
-        device/htc/endeavoru/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
-        device/htc/endeavoru/modules/st_drv.ko:system/lib/modules/st_drv.ko \
-        device/htc/endeavoru/modules/ti_hci_drv.ko:system/lib/modules/ti_hci_drv.ko \
-        device/htc/endeavoru/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
-        device/htc/endeavoru/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
+	device/htc/endeavoru/modules/baseband_usb_chr.ko:system/lib/modules/baseband_usb_chr.ko \
+	device/htc/endeavoru/modules/baseband-xmm-power2.ko:system/lib/modules/baseband-xmm-power2.ko \
+	device/htc/endeavoru/modules/bluetooth.ko:system/lib/modules/bluetooth.ko \
+	device/htc/endeavoru/modules/bnep.ko:system/lib/modules/bnep.ko \
+	device/htc/endeavoru/modules/btwilink.ko:system/lib/modules/btwilink.ko \
+	device/htc/endeavoru/modules/cavm_sqos_mod.ko:system/lib/modules/cavm_sqos_mod.ko \
+	device/htc/endeavoru/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
+	device/htc/endeavoru/modules/cfg80211.ko:system/lib/modules/cfg80211.ko \
+	device/htc/endeavoru/modules/compat.ko:system/lib/modules/compat.ko \
+	device/htc/endeavoru/modules/fm_drv.ko:system/lib/modules/fm_drv.ko \
+	device/htc/endeavoru/modules/gps_drv.ko:system/lib/modules/gps_drv.ko \
+	device/htc/endeavoru/modules/hci_uart.ko:system/lib/modules/hci_uart.ko \
+	device/htc/endeavoru/modules/htc_sqos_ctrlmsg.ko:system/lib/modules/htc_sqos_ctrlmsg.ko \
+	device/htc/endeavoru/modules/htc_sqos_encoder.ko:system/lib/modules/htc_sqos_encoder.ko\
+	device/htc/endeavoru/modules/htc_sqos_wifi.ko:system/lib/modules/htc_sqos_wifi.ko \
+	device/htc/endeavoru/modules/kineto_gan.ko:system/lib/modules/kineto_gan.ko \
+	device/htc/endeavoru/modules/lib80211.ko:system/lib/modules/lib80211.ko \
+	device/htc/endeavoru/modules/mac80211.ko:system/lib/modules/mac80211.ko \
+	device/htc/endeavoru/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
+	device/htc/endeavoru/modules/rfcomm.ko:system/lib/modules/rfcomm.ko \
+	device/htc/endeavoru/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+	device/htc/endeavoru/modules/st_drv.ko:system/lib/modules/st_drv.ko \
+	device/htc/endeavoru/modules/ti_hci_drv.ko:system/lib/modules/ti_hci_drv.ko \
+	device/htc/endeavoru/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
+	device/htc/endeavoru/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
 # Camera
 PRODUCT_PACKAGES := \
-    Camera \
-    camera.tegra \
-    surfaceflinger_client
+	camera.tegra \
+	surfaceflinger_client
 
 # Torch
 PRODUCT_PACKAGES += \
-        Torch
+	Torch
 
 # Polly
 PRODUCT_PACKAGES += \
@@ -132,36 +131,36 @@ PRODUCT_PACKAGES += \
 
 # WI-Fi
 PRODUCT_PACKAGES += \
-         dhcpcd.conf \
-         hostapd.conf \
-         wifical.sh \
-         TQS_D_1.7.ini \
-         TQS_D_1.7_127x.ini \
-         crda \
-         regulatory.bin \
-         hostapd \
-         hostapd_cli \
-         calibrator \
-	 iw
+	dhcpcd.conf \
+	hostapd.conf \
+	wifical.sh \
+	TQS_D_1.7.ini \
+	TQS_D_1.7_127x.ini \
+	crda \
+	regulatory.bin \
+	hostapd \
+	hostapd_cli \
+	calibrator \
+	iw
 
 # BlueZ test tools & Shared Transport user space mgr
 PRODUCT_PACKAGES += \
-         hciconfig \
-         hcitool
+	hciconfig \
+	hcitool
 
 # lights
 PRODUCT_PACKAGES += \
-        lights.endeavoru
+	lights.endeavoru
 
 # Power HAL
 PRODUCT_PACKAGES += \
-        power.endeavoru
+	power.endeavoru
 
 # Audio
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
-        libaudioutils \
-        libtinyalsa
+	libaudioutils \
+	libtinyalsa
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -174,15 +173,7 @@ PRODUCT_PACKAGES += \
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
-	LiveWallpapers \
-	LiveWallpapersPicker \
-	VisualizationWallpapers \
 	librs_jni
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-	make_ext4fs \
-	setup_fs
 
 # Common
 PRODUCT_PACKAGES += \
@@ -193,43 +184,43 @@ PRODUCT_PACKAGES += \
 
 # for bugmailer
 ifneq ($(TARGET_BUILD_VARIANT),user)
-    PRODUCT_PACKAGES += send_bug
-    PRODUCT_COPY_FILES += \
-        system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
-        system/extras/bugmailer/send_bug:system/bin/send_bug
+	PRODUCT_PACKAGES += send_bug
+	PRODUCT_COPY_FILES += \
+		system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
+		system/extras/bugmailer/send_bug:system/bin/send_bug
 endif
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+	frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+	frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
+	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+	frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
 # Other overrides
 PRODUCT_PROPERTY_OVERRIDES += \
-        ro.com.google.locationfeatures=1 \
-        ro.setupwizard.enable_bypass=1 \
-        dalvik.vm.execution-mode=int:jit \
-        dalvik.vm.lockprof.threshold=500 \
-        dalvik.vm.dexopt-flags=m=y \
+	ro.com.google.locationfeatures=1 \
+	ro.setupwizard.enable_bypass=1 \
+	dalvik.vm.execution-mode=int:jit \
+	dalvik.vm.lockprof.threshold=500 \
+	dalvik.vm.dexopt-flags=m=y \
 	persist.sys.usb.config=mass_storage,adb
 
 # Tegra 3 specific overrides
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.tegra.nvmmlite=1 \
-        tf.enable=y
+	tf.enable=y
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
