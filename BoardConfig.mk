@@ -80,11 +80,29 @@ BOARD_VOLD_MAX_PARTITIONS := 20
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/fsl-tegra-udc/gadget/lun0/file
 
+# Partitions Info
+#cat /proc/emmc
+#dev:        size     erasesize name
+#mmcblk0p5: 00800000 00001000 "recovery"
+#mmcblk0p4: 00800000 00001000 "boot"
+#mmcblk0p12: 50000000 00001000 "system"
+#mmcblk0p13: 14000000 00001000 "cache"
+#mmcblk0p17: 00200000 00001000 "misc"
+#mmcblk0p1: 00600000 00001000 "wlan"
+#mmcblk0p2: 00200000 00001000 "WDM"
+#mmcblk0p20: 00200000 00001000 "pdata"
+#mmcblk0p3: 00600000 00001000 "radiocab"
+#mmcblk0p14: 650000000 00001000 "internalsd"
+#mmcblk0p15: 89400000 00001000 "userdata"
+#mmcblk0p19: 01600000 00001000 "devlog"
+#mmcblk0p16: 00200000 00001000 "extra"
+
 # Kernel / Ramdisk
 TARGET_PREBUILT_KERNEL := device/htc/endeavoru/prebuilt/kernel
 TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 8388608
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1342177280
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2302672896
 BOARD_FLASH_BLOCK_SIZE := 4096
