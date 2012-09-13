@@ -28,13 +28,6 @@ PRODUCT_COPY_FILES := \
 	device/htc/endeavoru/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc \
 	device/htc/endeavoru/ramdisk/init:root/init
 
-# Recovery stuff
-PRODUCT_COPY_FILES := \
-	device/htc/endeavoru/recovery/sbin/choice_fn:recovery/root/sbin/choice_fn \
-	device/htc/endeavoru/recovery/sbin/detect_key:recovery/root/sbin/detect_key \
-	device/htc/endeavoru/recovery/sbin/htcbatt:recovery/root/sbin/htcbatt \
-	device/htc/endeavoru/recovery/sbin/offmode_charging:recovery/root/sbin/offmode_charging
-
 # Prebuilt Audio/GPS/Camera configs
 PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/dsp/asound.conf:system/etc/asound.conf \
@@ -118,7 +111,7 @@ PRODUCT_COPY_FILES += \
 # Camera
 PRODUCT_PACKAGES := \
 	camera.tegra \
-	surfaceflinger_client
+	libsurfaceflinger_client
 
 # Torch
 PRODUCT_PACKAGES += \

@@ -239,3 +239,4 @@ lib/hw/gralloc.tegra.so
 lib/hw/hwcomposer.tegra.so
 lib/hw/nfc.endeavoru.so
 lib/hw/sensors.endeavoru.so
+lib/hw/vendor-camera.tegra.so
