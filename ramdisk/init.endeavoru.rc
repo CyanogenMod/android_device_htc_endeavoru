@@ -9,11 +9,12 @@ on early-init
     mkdir /mnt/sdcard 0775 system system
     symlink /mnt/sdcard /sdcard
 
-on early-boot
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
+# for now commenting this, it's not needed if using cm default kernel.
+#on early-boot
+#    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+#    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
+#    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
+#    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
 
 on emmc-fs
     mount ext4 /dev/block/mmcblk0p12 /system wait rw
