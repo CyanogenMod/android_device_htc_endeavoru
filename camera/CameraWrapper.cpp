@@ -91,10 +91,10 @@ static int check_vendor_module()
     return rv;
 }
 
-const static char * video_preview_sizes[] = {
+/*const static char * video_preview_sizes[] = {
     "1920x1080,1280x720,640x480",
     "640x480,352x288,320x240,176x144"
-};
+};*/
 
 const static char * iso_values[] = {"auto,ISO50,ISO100,ISO200,ISO400,ISO800","auto"};
 

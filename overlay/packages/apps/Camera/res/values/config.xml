@@ -20,11 +20,13 @@
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
 <resources>
-    <!-- Enable HTCCamMode -->
+    <!-- Allows setting video size before recording starts -->
+    <bool name="needsEarlyVideoSize">true</bool>
+    <!-- HTC Camcorder Mode -->
     <bool name="needsHTCCamMode">true</bool>
     <!-- Disable face detection on the front camera -->
     <bool name="noFaceDetectOnFrontCamera">true</bool>
-    <!-- Disable face detection on the front camera -->
+    <!-- Disable face detection on the rear camera -->
     <bool name="noFaceDetectOnRearCamera">true</bool>
 </resources>
 

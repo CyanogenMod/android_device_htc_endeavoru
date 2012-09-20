@@ -37,8 +37,7 @@ PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/configs/nvcamera.conf:system/etc/nvcamera.conf \
 	device/htc/endeavoru/configs/media_profiles.xml:system/etc/media_profiles.xml \
 	device/htc/endeavoru/configs/enctune.conf:system/etc/enctune.conf \
-	device/htc/endeavoru/configs/gps.conf:system/etc/gps.conf \
-	device/htc/endeavoru/configs/SuplRootCert:system/etc/SuplRootCert
+	device/htc/endeavoru/configs/gps.conf:system/etc/gps.conf
 
 # BT config
 PRODUCT_COPY_FILES += \
@@ -82,29 +81,17 @@ PRODUCT_COPY_FILES += \
 
 # Any prebuilt kernel modules
 PRODUCT_COPY_FILES += \
-	device/htc/endeavoru/modules/baseband_usb_chr.ko:system/lib/modules/baseband_usb_chr.ko \
-	device/htc/endeavoru/modules/baseband-xmm-power2.ko:system/lib/modules/baseband-xmm-power2.ko \
 	device/htc/endeavoru/modules/bluetooth.ko:system/lib/modules/bluetooth.ko \
 	device/htc/endeavoru/modules/bnep.ko:system/lib/modules/bnep.ko \
-	device/htc/endeavoru/modules/btwilink.ko:system/lib/modules/btwilink.ko \
 	device/htc/endeavoru/modules/cavm_sqos_mod.ko:system/lib/modules/cavm_sqos_mod.ko \
-	device/htc/endeavoru/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
 	device/htc/endeavoru/modules/cfg80211.ko:system/lib/modules/cfg80211.ko \
 	device/htc/endeavoru/modules/compat.ko:system/lib/modules/compat.ko \
-	device/htc/endeavoru/modules/fm_drv.ko:system/lib/modules/fm_drv.ko \
-	device/htc/endeavoru/modules/gps_drv.ko:system/lib/modules/gps_drv.ko \
 	device/htc/endeavoru/modules/hci_uart.ko:system/lib/modules/hci_uart.ko \
 	device/htc/endeavoru/modules/htc_sqos_ctrlmsg.ko:system/lib/modules/htc_sqos_ctrlmsg.ko \
 	device/htc/endeavoru/modules/htc_sqos_encoder.ko:system/lib/modules/htc_sqos_encoder.ko\
 	device/htc/endeavoru/modules/htc_sqos_wifi.ko:system/lib/modules/htc_sqos_wifi.ko \
-	device/htc/endeavoru/modules/kineto_gan.ko:system/lib/modules/kineto_gan.ko \
-	device/htc/endeavoru/modules/lib80211.ko:system/lib/modules/lib80211.ko \
 	device/htc/endeavoru/modules/mac80211.ko:system/lib/modules/mac80211.ko \
-	device/htc/endeavoru/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
 	device/htc/endeavoru/modules/rfcomm.ko:system/lib/modules/rfcomm.ko \
-	device/htc/endeavoru/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
-	device/htc/endeavoru/modules/st_drv.ko:system/lib/modules/st_drv.ko \
-	device/htc/endeavoru/modules/ti_hci_drv.ko:system/lib/modules/ti_hci_drv.ko \
 	device/htc/endeavoru/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
 	device/htc/endeavoru/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
@@ -153,7 +140,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	libaudioutils \
-	libtinyalsa
+	libtinyalsa \
+	tinymix \
+	tinyplay \
+	tinycap
 
 # NFC
 PRODUCT_PACKAGES += \
