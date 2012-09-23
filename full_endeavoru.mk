@@ -29,7 +29,7 @@ PRODUCT_COPY_FILES := \
 	device/htc/endeavoru/ramdisk/init:root/init
 
 # add post-boot which moves hardcoded stuff to user side from now on
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES += \
         device/htc/endeavoru/init.tegra.post_boot.sh:system/etc/init.tegra.post_boot.sh
 
 # Prebuilt Audio/GPS/Camera configs
