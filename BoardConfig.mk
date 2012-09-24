@@ -101,7 +101,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/fsl-tegra-udc/gadget/lu
 # Try kernel building
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
 TARGET_KERNEL_CONFIG :=  cyanogenmod_endeavoru_defconfig
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 
 # Kernel / Ramdisk
 TARGET_PREBUILT_KERNEL := device/htc/endeavoru/prebuilt/kernel
