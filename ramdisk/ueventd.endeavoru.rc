@@ -78,8 +78,3 @@
 
 # simlock
 /dev/simlock              0660  radio        radio
-
-# sysfs properties
-/sys/devices/virtual/input/input*   enable      0660  root   input
-/sys/devices/virtual/input/input*   poll_delay  0660  root   input
-/sys/devices/virtual/usb_composite/*   enable      0664  root   system

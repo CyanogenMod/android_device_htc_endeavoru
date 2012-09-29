@@ -10,20 +10,15 @@ on early-init
     symlink /mnt/sdcard /sdcard
 
 on emmc-fs
-    mount ext4 /dev/block/mmcblk0p12 /system wait rw
-    mount ext4 /dev/block/mmcblk0p15 /data wait rw noatime nosuid nodev noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p13 /cache wait rw noatime nosuid nodev noauto_da_alloc
     mkdir /rca 0775 radio radio
-    mount ext4 /dev/block/mmcblk0p3 /rca wait noatime ro
+    mkdir /rfs 0755 radio radio
+    mkdir /devlog 0700 root root
+    mount_all /fstab.endeavoru
     chmod 0660 /rca/calib.nvm
     chmod 0660 /rca
-    mkdir /rfs 0755 radio radio
-    mount ext4 /dev/block/mmcblk0p18 /rfs wait noatime rw
     chmod 0660 /rfs
-    mkdir /devlog 0700 root root
-    mount ext4 /dev/block/mmcblk0p19 /devlog nosuid nodev
     start poweron_modem
-loglevel 8
+    loglevel 8
 
 on post-fs-data
     # Set indication (checked by vold) that we have finished this action
