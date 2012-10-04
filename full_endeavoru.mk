@@ -24,8 +24,9 @@ PRODUCT_COPY_FILES := \
 	device/htc/endeavoru/ramdisk/init.rc:root/init.rc \
 	device/htc/endeavoru/ramdisk/init.endeavoru.rc:root/init.endeavoru.rc \
 	device/htc/endeavoru/ramdisk/init.usb.rc:root/init.usb.rc \
+	device/htc/endeavoru/ramdisk/ueventd.rc:root/ueventd.rc \
 	device/htc/endeavoru/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc \
-	device/htc/endeavoru/ramdisk/fstab.endeavoru:root/fstab.endeavoru
+	device/htc/endeavoru/ramdisk/init:root/init
 
 # add post-boot which moves hardcoded stuff to user side from now on
 PRODUCT_COPY_FILES += \
