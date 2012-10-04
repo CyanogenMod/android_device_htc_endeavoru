@@ -104,7 +104,7 @@ TARGET_KERNEL_CONFIG :=  cyanogenmod_endeavoru_defconfig
 #TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 
 # Kernel / Ramdisk
-TARGET_PREBUILT_KERNEL := device/htc/endeavoru/prebuilt/kernel
+#TARGET_PREBUILT_KERNEL := device/htc/endeavoru/prebuilt/kernel
 TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
