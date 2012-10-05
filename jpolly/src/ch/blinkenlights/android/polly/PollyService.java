@@ -108,7 +108,19 @@ public class PollyService extends Service {
 		**************************************************************/
 		private void checkPhoneState() {
 			if(tMgr.getCallState() == tMgr.CALL_STATE_OFFHOOK) {
-				xlog("we are IN_CALL - forcing audio setting");
+				xlog("switched to INCALL mode - setting initial volume");
+				lastvol = -1;
+				updateIncallVolume();
+				
+				/* the modem may suffer from alzheimer's, a hacky
+				** solution is to sleep 1 second and send it again.
+				** I don't like this, but we have NO IDEA when the
+				** modem is ready. Thank you HTC.
+				*/
+				try {Thread.sleep(1000);}
+					catch (InterruptedException e) { xlog("Sleep was interrupted"); }
+				
+				xlog("sent incall volume a 2nd time");
 				lastvol = -1;
 				updateIncallVolume();
 			}
