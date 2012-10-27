@@ -57,7 +57,7 @@ static void endeavoru_power_init(struct power_module *module)
      * cpufreq interactive governor: timer 20ms, min sample 100ms,
      * hispeed 700MHz at load 40%
      */
-    /* handle this in the new init.tegra.post_boot.sh
+
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate",
                 "20000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time",
@@ -68,7 +68,6 @@ static void endeavoru_power_init(struct power_module *module)
 		"0");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/input_boost",
 		"1");
-    */
 }
 
 static void endeavoru_power_set_interactive(struct power_module *module, int on)
