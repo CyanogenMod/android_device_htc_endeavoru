@@ -78,14 +78,6 @@ static void endeavoru_power_set_interactive(struct power_module *module, int on)
 
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/boost_factor",
                 on ? "0" : "2");
-
-    /*
-     * The new interactive governor (grouper) calls this value "boost"
-     * Set this value too for highest compatibility. (in case of backports)
-     * That interactive version only distincts between 0 and 1.
-     */
-    sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/boost_val",
-                on ? "0" : "1");
 }
 
 static void endeavoru_power_hint(struct power_module *module, power_hint_t hint,

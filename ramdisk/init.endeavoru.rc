@@ -68,7 +68,6 @@ on boot
 # Power management settings
     write /sys/module/cpu_tegra3/parameters/no_lp 0
     write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
-    write /sys/devices/system/cpu/cpufreq/interactive/boost 1
     write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
     write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
     write /sys/devices/system/cpu/cpu1/online 0
@@ -80,8 +79,6 @@ on boot
 # Interactive governor settings
     chown system system /sys/devices/system/cpu/cpufreq/interactive/boost_factor
     chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/boost_factor
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
-    chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/boost
     chown system system /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
     chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
     chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
