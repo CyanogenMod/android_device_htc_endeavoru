@@ -15,12 +15,7 @@ if [ -d /sys/devices/system/cpu/cpufreq/interactive ] ; then
         echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
         echo 30000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
         echo 80 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-        if [ -f sys/devices/system/cpu/cpufreq/interactive/boost_factor ] ; then
-                echo 0 > /sys/devices/system/cpu/cpufreq/interactive/boost_factor
-        fi
-        if [ -f /sys/devices/system/cpu/cpufreq/interactive/boost ] ; then
-                echo 0 > /sys/devices/system/cpu/cpufreq/interactive/boost
-        fi
+        echo 0 > /sys/devices/system/cpu/cpufreq/interactive/boost_factor
         echo 1 > /sys/devices/system/cpu/cpufreq/interactive/input_boost
 fi
 
