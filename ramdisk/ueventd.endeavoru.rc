@@ -62,6 +62,9 @@
 /dev/rfkill               0660   root       wifi
 /dev/block/mmcblk0p1      0660   root       wifi
 
+# FM
+/dev/tifm               0600   fmradio   fmradio
+
 # BT
 /dev/ttyHS0               0660   bluetooth  bluetooth
 
