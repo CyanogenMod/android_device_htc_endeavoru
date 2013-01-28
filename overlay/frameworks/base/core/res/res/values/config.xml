@@ -224,5 +224,8 @@
 
     <!-- If this is true, the screen will fade off. -->
     <bool name="config_animateScreenLights">false</bool>
+    
+    <!-- remove assist key from hw keys rebinding menu -->
+    <integer name="config_deviceHardwareKeys">7</integer>
 
 </resources>
