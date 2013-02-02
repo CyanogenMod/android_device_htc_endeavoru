@@ -48,6 +48,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
 
+# netd prebuilt from AOSP hox hacked, no reload. tether works with this, temporarily fix. Thanks for Adrian Ulrich
+PRODUCT_COPY_FILES += \
+	device/htc/endeavoru/prebuilt/netd:system/bin/netd
+
 # Prebuilt Alsa configs
 PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf \
@@ -216,8 +220,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.execution-mode=int:jit \
 	dalvik.vm.lockprof.threshold=500 \
 	dalvik.vm.dexopt-flags=m=y \
-	wifi.softap.interface=wlan1 \
-	wifi.softapconcurrent.interface=wlan1 \
+	wifi.softap.interface=wlan0 \
+	wifi.softapconcurrent.interface=wlan0 \
 	persist.sys.usb.config=mtp,adb
 
 # Tegra 3 specific overrides

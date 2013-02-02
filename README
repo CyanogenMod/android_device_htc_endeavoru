@@ -6,8 +6,6 @@ Credits to Adrian Ulrich, tgascoigne, rogro
 Bugs:
 
 TODO
-
-- Wifi tether - needs softap patch reviewed
 - BT more test, on/off. dodgy
 - Symlinking fstab?
 
