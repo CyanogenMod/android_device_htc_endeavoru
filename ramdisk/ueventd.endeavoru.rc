@@ -18,9 +18,6 @@
 /dev/tegra_rpc	0660	media	media
 /dev/tegra_sema	0660	media	media
 /dev/tegra_mediaserver	0660 	media 	media
-
-# Camera
-/dev/block/mmcblk0p2      0660   media      camera
 /dev/s5k3h2y	0660	media	camera
 /dev/s5k6a1gx03	0660	media	camera
 /dev/aat1271	0600	media	camera
@@ -42,8 +39,6 @@
 /dev/video1     0660    media   camera
 /dev/tf_driver	0666	system	system
 /dev/codec_aic3008     0660    system   audio
-
-# Sensors
 /dev/ewtzmu2daemon        0666   system     system
 /dev/ewtzmu2hal		  0666   system     system
 /dev/ewtzmu2		  0666   system     system
@@ -56,14 +51,13 @@
 /dev/bma150               0666   system     system
 /dev/cm3602               0666   system     system
 /dev/akm8976_pffd         0666   system     system
-/dev/lightsensor        0640    system      system
+
+/dev/block/mmcblk0p2      0660   media      camera
+
 
 # wifi
 /dev/rfkill               0660   root       wifi
 /dev/block/mmcblk0p1      0660   root       wifi
-
-# FM
-/dev/tifm               0600   fmradio   fmradio
 
 # BT
 /dev/ttyHS0               0660   bluetooth  bluetooth
@@ -75,9 +69,6 @@
 /dev/smd9                                      0600    system  system
 /dev/ttyHSUSB3	0660    autobot_access	autobot_access  #Autobot car pc
 /dev/ttyHSUSB1	0600    system	system  #Autobot car gps
-
-# simlock
-/dev/simlock              0660  radio        radio
 
 # sysfs properties
 /sys/devices/virtual/input/input*   enable      0660  root   input

@@ -27,6 +27,6 @@
     <!-- Disable face detection on the front camera -->
     <bool name="noFaceDetectOnFrontCamera">true</bool>
     <!-- Disable face detection on the rear camera -->
-    <bool name="noFaceDetectOnRearCamera">true</bool>
+    <bool name="noFaceDetectOnBackCamera">true</bool>
 </resources>
 

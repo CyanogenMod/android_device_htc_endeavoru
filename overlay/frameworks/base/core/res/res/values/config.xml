@@ -42,11 +42,11 @@
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
 
     <!-- Package name providing network location support. -->
-    <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.location</string>
-
+<!--    <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.location</string>
+-->
     <!-- Package name providing geocoder API support. -->
-    <string name="config_geocodeProviderPackageName" translatable="false">com.google.android.location</string>
-
+<!--    <string name="config_geocodeProviderPackageName" translatable="false">com.google.android.location</string>
+-->
     <!-- Flag indicating whether we should enable the automatic brightness in Settings.
          config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
     <bool name="config_automatic_brightness_available">true</bool>
@@ -207,7 +207,7 @@
     <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
 
     <!-- Flag indicating whether we should enable automatic brightness for the button and keyboard backlights. -->
-    <bool name="config_autoBrightnessButtonKeyboard">false</bool>
+<!--    <bool name="config_autoBrightnessButtonKeyboard">false</bool>-->
 
     <!-- Component name of the default wallpaper. This will be ImageWallpaper if not
          specified -->

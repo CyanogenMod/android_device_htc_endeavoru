@@ -2,6 +2,6 @@
  {
    "repository": "android_kernel_htc_endeavoru",
    "target_path": "kernel/htc/endeavoru",
-   "branch": "jellybean"
+   "branch": "cm-10.1"
  }
 ]

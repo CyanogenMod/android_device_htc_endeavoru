@@ -26,6 +26,10 @@ PRODUCT_COPY_FILES := \
 	device/htc/endeavoru/ramdisk/init.usb.rc:root/init.usb.rc \
 	device/htc/endeavoru/ramdisk/ueventd.rc:root/ueventd.rc \
 	device/htc/endeavoru/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc \
+        device/htc/endeavoru/ramdisk/fstab.endeavoru.ext4:root/fstab.endeavoru.ext4 \
+        device/htc/endeavoru/ramdisk/fstab.endeavoru.vfat:root/fstab.endeavoru.vfat \
+        device/htc/endeavoru/ramdisk/fstab.endeavoru:root/fstab.endeavoru \
+	device/htc/endeavoru/ramdisk/endeavoru_mounthelper.sh:root/endeavoru_mounthelper.sh \
 	device/htc/endeavoru/ramdisk/init:root/init
 
 # Prebuilt Audio/GPS/Camera configs
@@ -108,6 +112,19 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	pollyd \
 	Polly
+
+# hox tools
+PRODUCT_PACKAGES += \
+	ugexec \
+	libbt-vendor \
+	hox-uim-sysfs 
+#\
+#        tegra-fqd
+
+# Stagefright
+PRODUCT_PACKAGES += \
+	libstagefrighthw
+
 
 # WI-Fi
 PRODUCT_PACKAGES += \

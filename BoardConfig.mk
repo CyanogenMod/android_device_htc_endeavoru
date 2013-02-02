@@ -39,6 +39,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_ARCH := arm
 
 # Board nameing
 TARGET_NO_RADIOIMAGE := true
@@ -63,11 +64,13 @@ BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
 WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
 WIFI_FIRMWARE_LOADER             := ""
+WIFI_BAND := 802_11_ABGN
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 endif
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
 
 # HTC ril compatability
 BOARD_USE_NEW_LIBRIL_HTC := true
@@ -80,6 +83,9 @@ NEED_WORKAROUND_CORTEX_A9_745320 := true
 BOARD_VOLD_MAX_PARTITIONS := 20
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/fsl-tegra-udc/gadget/lun0/file
+BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p14
+BOARD_HAS_SDCARD_INTERNAL := true
+
 
 # Partitions Info
 #cat /proc/emmc
@@ -101,7 +107,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/fsl-tegra-udc/gadget/lu
 # Try kernel building
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
 TARGET_KERNEL_CONFIG :=  cyanogenmod_endeavoru_defconfig
-#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 
 # Kernel / Ramdisk
 #TARGET_PREBUILT_KERNEL := device/htc/endeavoru/prebuilt/kernel
@@ -119,3 +125,4 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_UMS_LUNFILE := "/sys/devices/platform/fsl-tegra-udc/gadget/lun0/file"
+

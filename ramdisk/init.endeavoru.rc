@@ -1,63 +1,85 @@
-import init.usb.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     write /sys/class/firmware/timeout 5
 
-    # for backwards compatibility
-    export EXTERNAL_STORAGE /mnt/sdcard
-    mkdir /mnt/sdcard 0775 system system
-    symlink /mnt/sdcard /sdcard
+on init
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0775 root root
 
-# for now commenting this, it's not needed if using cm default kernel.
-#on early-boot
-#    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-#    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
-#    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
-#    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
 
-on emmc-fs
-    mount ext4 /dev/block/mmcblk0p12 /system wait rw
-    mount ext4 /dev/block/mmcblk0p15 /data wait rw noatime nosuid nodev noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p13 /cache wait rw noatime nosuid nodev noauto_da_alloc
+    # Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+
+on early-boot
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
+    
+on fs
+    setprop ro.crypto.umount_sd false
+    
+    # create htc specific mount targets
     mkdir /rca 0775 radio radio
-    mount ext4 /dev/block/mmcblk0p3 /rca wait noatime ro
+    mkdir /rfs 0755 radio radio
+    mkdir /devlog 0700 root root
+
+    mount_all /fstab.endeavoru
+
+    # ..and 'fix' permissions (silly HTC)
     chmod 0660 /rca/calib.nvm
     chmod 0660 /rca
-    mkdir /rfs 0755 radio radio
-    mount ext4 /dev/block/mmcblk0p18 /rfs wait noatime rw
     chmod 0660 /rfs
-    mkdir /devlog 0700 root root
-    mount ext4 /dev/block/mmcblk0p19 /devlog nosuid nodev
+
     start poweron_modem
-loglevel 8
+    start pollyd
+    start tegra-fqd
+
 
 on post-fs-data
+    mkdir /data/nvcam 0777 system system
+    mkdir /data/misc/wifi 0777 wifi wifi
+    mkdir /data/misc/wifi/sockets 0777 wifi wifi
+    mkdir /data/misc/wifi/hostapd 0777 wifi wifi
+    mkdir /data/misc/dhcp 0777 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+    
+    # mount internal storage
+    start hox_sdcard_mount
+    wait /dev/.endeavoru_mounthelper_done 2
+    
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
+# Load modules while booting
+#    insmod /system/lib/modules/compat.ko
+#    insmod /system/lib/modules/cfg80211.ko
+#    insmod /system/lib/modules/mac80211.ko
+#    insmod /system/lib/modules/wl12xx.ko debug_level=0x63c00
+#    insmod /system/lib/modules/kineto_gan.ko
+
+    start wifi_modules
 
 on boot
-# Setup paths used for socket communication with the dhcp daemon(dhcpd)
-    	mkdir /data/nvcam 0777 system system
-	mkdir /data/misc/wifi 0777 wifi wifi
-	mkdir /data/misc/wifi/sockets 0777 wifi wifi
-        mkdir /data/misc/wifi/hostapd 0777 wifi wifi
-   	mkdir /data/misc/dhcp 0777 dhcp dhcp
-    	chown dhcp dhcp /data/misc/dhcp
 
-# bluetooth power up/down interface
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chmod 0660                /sys/class/rfkill/rfkill0/state
-
+    # HTC junk / scaling_min_freq needed for bluedroid power hack
     chown system /sys/module/edp/parameters/edp_ap_limit
-    chown system /sys/block/mmcblk0/queue/scheduler
     chown system /sys/devices/system/cpu/cpufreq/ondemand/touch_poke
     chown system /sys/devices/system/cpu/cpu_on
     chown system /sys/kernel/debug/tegra_hotplug/min_cpus
     chown system /sys/kernel/debug/tegra_hotplug/max_cpus
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown system /sys/kernel/tegra_cap/core_cap_level
+    chown system /sys/kernel/tegra_cap/core_cap_state
+    chown media /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
     chown system /sys/devices/system/cpu/cpu1/online
@@ -71,17 +93,14 @@ on boot
     chmod 0660 /sys/kernel/debug/tegra_hotplug/min_cpus
     chown system /sys/htc/power_save
     chown system /sys/kernel/debug/tegra_emc/eack_state
-
 # Power management settings
     write /sys/module/cpu_tegra3/parameters/no_lp 0
     write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
     write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
     write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-    write /sys/devices/system/cpu/cpu1/online 0
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/kernel/debug/tegra_hotplug/max_cpus 1
-    write /sys/module/cpuidle/parameters/lp2_in_idle 1
+    write /sys/module/cpuidle/parameters/lp2_in_idle 0
+    write /sys/kernel/debug/tegra_hotplug/max_cpus 4
+    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
 
 # Interactive governor settings
     chown system system /sys/devices/system/cpu/cpufreq/interactive/boost_factor
@@ -95,49 +114,60 @@ on boot
     chown system system /sys/devices/system/cpu/cpufreq/interactive/sustain_load
     chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/sustain_load
 
-# for radio signal stable
+    # for radio signal stable
     chown radio radio /sys/class/power_supply/battery/charger_control
     chmod 0660 /sys/class/power_supply/battery/charger_control
     chown radio radio /sys/class/power_supply/battery/phone_call
     chmod 0660 /sys/class/power_supply/battery/phone_call
 
     chown media system /dev/mux9
-
+#HTC SSD Camera
 # For Flashlight Restriction
     chown radio system /sys/camera_led_status/led_ril_status
     chown system system /sys/camera_led_status/led_wimax_status
     chown system system /sys/camera_led_status/led_hotspot_status
-    chown system camera /sys/class/leds/flashlight/brightness
-    chmod 0660          /sys/class/leds/flashlight/brightness
+#HTC CPU poke
+    chown media system /sys/htc/media_boost_freq
+    chown media system /sys/htc/cpu_temp
 
 # Define DATA USAGE CTRL file permission
     chown system system /proc/net/xt_qtaguid/ctrl
-    chmod 0664 /proc/net/xt_qtaguid/ctrl
+    chmod 0666 /proc/net/xt_qtaguid/ctrl
 
 # Load modules while booting
-	insmod /system/lib/modules/compat.ko
-	insmod /system/lib/modules/cfg80211.ko
-	insmod /system/lib/modules/mac80211.ko
-        insmod /system/lib/modules/wl12xx.ko debug_level=0x63c00
-	insmod /system/lib/modules/kineto_gan.ko
+    insmod /system/lib/modules/compat.ko
+    insmod /system/lib/modules/cfg80211.ko
+    insmod /system/lib/modules/mac80211.ko
+    insmod /system/lib/modules/wl12xx.ko debug_level=0x63c00
+    insmod /system/lib/modules/kineto_gan.ko
+
 
 # bluetooth
     # UART device
     chmod 0660 /dev/ttyHS2
-    chown bluetooth bluetooth /dev/ttyHS2
+    chown bluetooth 3008 /dev/ttyHS2
 
-# power up/down interface
+    # power up/down interface
+    chmod 0660 /sys/class/rfkill/rfkill1/state
+    chmod 0660 /sys/class/rfkill/rfkill1/type
+    chown bluetooth 3008 /sys/class/rfkill/rfkill1/state
+    chown bluetooth 3008 /sys/class/rfkill/rfkill1/type
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chown bluetooth 3008 /sys/class/rfkill/rfkill0/state
+    chown bluetooth 3008 /sys/class/rfkill/rfkill0/type
 
-# bluetooth MAC address programming
-    chown bluetooth bluetooth ro.bt.bdaddr_path
-    chown bluetooth bluetooth /system/etc/bluetooth
-    setprop ro.bt.bdaddr_path "/system/etc/bluetooth/bdaddr"
+    # bluetooth MAC address programming
+    chown bluetooth 3008 ro.bt.bdaddr_path
+    chown bluetooth 3008 /system/etc/bluetooth
+    chown bluetooth 3008 /data/misc/bluetooth
+    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
 
-    chown media media /sys/devices/platform/tegra_uart.2/a2dp_tuning
+    # bluetooth LPM
+    chmod 0220 /proc/bluetooth/sleep/lpm
+    chmod 0220 /proc/bluetooth/sleep/btwrite
+    chown bluetooth 3008 /proc/bluetooth/sleep/lpm
+    chown bluetooth 3008 /proc/bluetooth/sleep/btwrite
 
 #GPS
     setprop ro.gps.supl.supported true
@@ -211,29 +241,34 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
 
-# Increase read ahead size of mmc block devices from default(128) to 1MB
-# Reduces power comsuption during video playback from sdcards
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
-
-# Discretix DRM change start
+    # Discretix DRM change start
     mkdir /data/DxDrm
     mkdir /data/DxDrm/fuse
     chmod 555 /data/DxDrm
     mkdir /sdcard/download
     copy /etc/DxDrmConfig_Server.txt /data/DxDrm/DxDrmConfig_Server.txt
+    # Discretix DRM change end
 
-# AUDIO
+#AUD
     mkdir /data/audio
     chmod 755 /data/audio
     chown media audio /data/audio
-    start call_vol3
 
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
     class main
     user compass
     group compass misc input
+
+service pollyd /system/bin/pollyd
+    class main
+    user root
+    group root
+
+service tegra-fqd /system/bin/tegra-fqd
+    class main
+    user root
+    group root
     
 # gyro daemon
 service ewtzmud /system/bin/ewtzmud
@@ -262,6 +297,20 @@ service init-acmx2 /system/bin/chmod 777 /dev/ttyACMX0
     class core
     oneshot
 
+service hox_sdcard_mount /system/bin/sh /endeavoru_mounthelper.sh
+    class main
+    user root
+    group root
+    oneshot
+    disabled
+
+service wifi_modules /system/bin/sh /wifi_loader.sh
+    class main
+    user root
+    group root
+    oneshot
+    disabled
+
 service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
     class main
     user root
@@ -269,13 +318,13 @@ service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
     oneshot
     disabled
 
-service uim /system/bin/uim-sysfs
+service uim /system/bin/hox-uim-sysfs
     class core
     user root
     group media bluetooth
     oneshot
 
-service nav /system/bin/navl_server --android_log NAVD-p3 -nav\"-c/system/bin/pathconfigfile.txt\"
+service nav /system/bin/ugexec 0 1000 7 /system/bin/navl_server --android_log NAVD-p3 -nav\"-c/system/bin/pathconfigfile.txt\"
     class main
     user root
     oneshot
@@ -296,6 +345,11 @@ service cplc_main /system/bin/cplc_main
 service htcbatt /system/bin/htcbatt
      class core
      oneshot
+
+# Write BT BD_ADDR
+service btmacreader /system/bin/btmacreader
+    class main
+    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant \
 	-Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
@@ -354,6 +408,7 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
 	disabled
 	oneshot
 
+
 service hostapd_bin /system/bin/hostapd -dd /data/misc/wifi/hostapd.conf
          socket wpa_wlan0 dgram 660 wifi wifi
          class main
@@ -385,6 +440,21 @@ service chmod_nvs_wlan0 /system/bin/chmod 644 /data/misc/wifi/wl1271-nvs-calibra
 	user root
 	group root
 	oneshot
+# HTC_WIFI_END
+
+# virtual sdcard daemon running as media_rw (1023)
+service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
+    class main
+    user root
+    group root
+
+# bugreport is triggered by the VOLUME-DOWN and VOLUME-UP keys
+service bugreport /system/bin/bugmailer.sh -b /system/media/audio/ui/Dock.ogg -e /system/media/audio/ui/Undock.ogg
+    class main
+    disabled
+    oneshot
+    keycodes 115 114
+
 
 #Prepare TF service
 service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
@@ -399,10 +469,6 @@ on property:tf.enable=y
     mkdir /data/tf
     start tf_daemon
 
-# Discretix DRM change start
-service dx_drm_server /system/bin/DxDrmServerIpc -f -o allow_other /data/DxDrm/fuse
-    class main
-
 # create filesystems if necessary
 service setup_fs /system/bin/setup_fs \
         /dev/block/platform/sdhci-tegra.3/by-name/UDA \
@@ -412,22 +478,3 @@ service setup_fs /system/bin/setup_fs \
     user root
     group root
     oneshot
-
-service cand /system/bin/cand
-	class main
-	user root
-
-service post_boot /system/bin/sh /system/etc/post_boot.sh
-	class main
-	user root
-	disabled
-	oneshot
-
-service call_vol3 /system/bin/pollyd
-       class main
-       user root
-
-on property:init.svc.bootanim=stopped
-   write /sys/kernel/debug/tegra_hotplug/max_cpus 4
-   write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-    start post_boot
