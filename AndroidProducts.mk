@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/device_endeavoru.mk
+	$(LOCAL_DIR)/full_endeavoru.mk

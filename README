@@ -7,11 +7,8 @@ Bugs:
 
 TODO
 
-- Wifi tether
+- Wifi tether - needs softap patch reviewed
 - BT more test, on/off. dodgy
-- MTP
 - Symlinking fstab?
 
-[X] face detect off - camera patch needed to submit, back cam face detect
-[X] sound recording
 

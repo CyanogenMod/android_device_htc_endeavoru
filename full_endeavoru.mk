@@ -30,6 +30,7 @@ PRODUCT_COPY_FILES := \
         device/htc/endeavoru/ramdisk/fstab.endeavoru.vfat:root/fstab.endeavoru.vfat \
         device/htc/endeavoru/ramdisk/fstab.endeavoru:root/fstab.endeavoru \
 	device/htc/endeavoru/ramdisk/endeavoru_mounthelper.sh:root/endeavoru_mounthelper.sh \
+	device/htc/endeavoru/ramdisk/wifi_loader.sh:root/wifi_loader.sh \
 	device/htc/endeavoru/ramdisk/init:root/init
 
 # Prebuilt Audio/GPS/Camera configs
@@ -215,7 +216,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.execution-mode=int:jit \
 	dalvik.vm.lockprof.threshold=500 \
 	dalvik.vm.dexopt-flags=m=y \
-	persist.sys.usb.config=mass_storage,adb
+	wifi.softap.interface=wlan1 \
+	wifi.softapconcurrent.interface=wlan1 \
+	persist.sys.usb.config=mtp,adb
 
 # Tegra 3 specific overrides
 PRODUCT_PROPERTY_OVERRIDES += \
