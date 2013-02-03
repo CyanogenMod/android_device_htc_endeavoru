@@ -200,6 +200,10 @@ on boot
     chown system system /sys/class/leds/amber/brightness
     chown system system /sys/class/leds/amber/blink
 
+# light
+    chown system system /sys/class/leds/flashlight/brightness
+    chmod 666 /sys/class//leds/flashlight/brightness
+
 # didim
     chown system system /sys/class/graphics/fb0/device/smartdimmer/enable
     chown system system /sys/class/graphics/fb0/device/smartdimmer/aggressiveness
