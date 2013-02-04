@@ -48,9 +48,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
 
-# netd prebuilt from AOSP hox hacked, no reload. tether works with this, temporarily fix. Thanks for Adrian Ulrich
+# netd/hostapd prebuilt from AOSP hox hacked, no reload. tether works with this, temporarily fix. Thanks for Adrian Ulrich
 PRODUCT_COPY_FILES += \
-	device/htc/endeavoru/prebuilt/netd:system/bin/netd
+	device/htc/endeavoru/prebuilt/netd:system/bin/netd \
+	device/htc/endeavoru/prebuilt/hostapd:system/bin/hostapd \
+	device/htc/endeavoru/prebuilt/hostapd_cli:system/bin/hostapd_cli
 
 # Prebuilt Alsa configs
 PRODUCT_COPY_FILES += \
