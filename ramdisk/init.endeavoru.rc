@@ -48,6 +48,9 @@ on fs
 
 
 on post-fs-data
+    # change back to bluetooth from system
+    chown bluetooth net_bt_stack /data/misc/bluetooth
+
     mkdir /data/nvcam 0777 system system
     mkdir /data/misc/wifi 0777 wifi wifi
     mkdir /data/misc/wifi/sockets 0777 wifi wifi
