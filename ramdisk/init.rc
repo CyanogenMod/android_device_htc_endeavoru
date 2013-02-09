@@ -124,6 +124,9 @@ loglevel 1
 # This is needed by any process that uses socket tagging.
     chmod 0644 /dev/xt_qtaguid
 
+# Wifi: Disable the IPv6 of p2p0 interface
+    write /proc/sys/net/ipv6/conf/p2p0/disable_ipv6 1
+
 
 on post-fs
     # once everything is setup, no need to modify /
@@ -337,6 +340,7 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown root radio /proc/cmdline
+
 
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
