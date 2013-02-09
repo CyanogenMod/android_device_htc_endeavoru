@@ -48,11 +48,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
 
-# netd/hostapd prebuilt from AOSP hox hacked, no reload. tether works with this, temporarily fix. Thanks for Adrian Ulrich
+# netd prebuilt from AOSP hox hacked, no reload. tether works with this, temporarily fix. Thanks for Adrian Ulrich
 PRODUCT_COPY_FILES += \
-	device/htc/endeavoru/prebuilt/netd:system/bin/netd \
-	device/htc/endeavoru/prebuilt/hostapd:system/bin/hostapd \
-	device/htc/endeavoru/prebuilt/hostapd_cli:system/bin/hostapd_cli
+	device/htc/endeavoru/prebuilt/netd:system/bin/netd
 
 # Prebuilt Alsa configs
 PRODUCT_COPY_FILES += \
@@ -89,22 +87,6 @@ PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/usr/idc/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \
 	device/htc/endeavoru/usr/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
 	device/htc/endeavoru/usr/idc/tv-touchscreen.idc:system/usr/idc/tv-touchscreen.idc
-
-# Any prebuilt kernel modules
-PRODUCT_COPY_FILES += \
-	device/htc/endeavoru/modules/bluetooth.ko:system/lib/modules/bluetooth.ko \
-	device/htc/endeavoru/modules/bnep.ko:system/lib/modules/bnep.ko \
-	device/htc/endeavoru/modules/cavm_sqos_mod.ko:system/lib/modules/cavm_sqos_mod.ko \
-	device/htc/endeavoru/modules/cfg80211.ko:system/lib/modules/cfg80211.ko \
-	device/htc/endeavoru/modules/compat.ko:system/lib/modules/compat.ko \
-	device/htc/endeavoru/modules/hci_uart.ko:system/lib/modules/hci_uart.ko \
-	device/htc/endeavoru/modules/htc_sqos_ctrlmsg.ko:system/lib/modules/htc_sqos_ctrlmsg.ko \
-	device/htc/endeavoru/modules/htc_sqos_encoder.ko:system/lib/modules/htc_sqos_encoder.ko\
-	device/htc/endeavoru/modules/htc_sqos_wifi.ko:system/lib/modules/htc_sqos_wifi.ko \
-	device/htc/endeavoru/modules/mac80211.ko:system/lib/modules/mac80211.ko \
-	device/htc/endeavoru/modules/rfcomm.ko:system/lib/modules/rfcomm.ko \
-	device/htc/endeavoru/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
-	device/htc/endeavoru/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
 # Camera
 PRODUCT_PACKAGES := \

@@ -51,21 +51,19 @@ TARGET_TEGRA_VERSION := t30
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/htc/endeavoru/configs/egl.cfg
 
- # Connectivity - Wi-Fi
+# Connectivity - Wi-Fi
 USES_TI_MAC80211 := true
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
-BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_wl12xx
-BOARD_WLAN_DEVICE                := wl12xx_mac80211
-#BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
-BOARD_SOFTAP_DEVICE_TI           := NL80211
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
-WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
-WIFI_FIRMWARE_LOADER             := ""
-WIFI_BAND := 802_11_ABGN
+ifdef USES_TI_MAC80211
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+WPA_SUPPLICANT_VERSION := VER_0_8_X_TI
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_WLAN_DEVICE := wl12xx_mac80211
+BOARD_SOFTAP_DEVICE := wl12xx_mac80211
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wl12xx_sdio.ko"
+WIFI_DRIVER_MODULE_NAME := "wl12xx_sdio"
+WIFI_FIRMWARE_LOADER := ""
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
+endif
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
@@ -103,13 +101,24 @@ BOARD_HAS_SDCARD_INTERNAL := true
 #mmcblk0p19: 01600000 00001000 "devlog"
 #mmcblk0p16: 00200000 00001000 "extra"
 
-# Try kernel building
+# Kernel
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
-TARGET_KERNEL_CONFIG :=  cyanogenmod_endeavoru_defconfig
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
+
+# Building wifi modules
+TARGET_MODULES_SOURCE := "kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03"
+
+WIFI_MODULES:
+	make -C $(TARGET_MODULES_SOURCE) KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)
+	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/compat/compat.ko $(KERNEL_MODULES_OUT)
+	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/net/mac80211/mac80211.ko $(KERNEL_MODULES_OUT)
+	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/net/wireless/cfg80211.ko $(KERNEL_MODULES_OUT)
+	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/drivers/net/wireless/wl12xx/wl12xx.ko $(KERNEL_MODULES_OUT)
+	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/drivers/net/wireless/wl12xx/wl12xx_sdio.ko $(KERNEL_MODULES_OUT)
+
+TARGET_KERNEL_MODULES := WIFI_MODULES
 
 # Kernel / Ramdisk
-#TARGET_PREBUILT_KERNEL := device/htc/endeavoru/prebuilt/kernel
 TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608

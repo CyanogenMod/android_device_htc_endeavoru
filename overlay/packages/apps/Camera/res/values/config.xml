@@ -28,5 +28,13 @@
     <bool name="noFaceDetectOnFrontCamera">true</bool>
     <!-- Disable face detection on the rear camera -->
     <bool name="noFaceDetectOnBackCamera">true</bool>
+
+    <!-- Force use of profile video size -->
+    <bool name="useProfileVideoSize">true</bool>
+    <!-- The camera removes the focus modes by default when touch-to-focus
+         exists. Use this option to change that behavior -->
+    <bool name="wantsFocusModes">true</bool>
+
+
 </resources>
 

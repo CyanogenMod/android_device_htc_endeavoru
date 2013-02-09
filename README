@@ -1,12 +1,9 @@
 CM10.1 device tree for HTC One X (endeavoru)
 
-Maintainers: Boris mdeejay, tbalden (Illes Pal Zoltan)
+Maintainers: Boris mdeejay, gorbi (Nagaprasad N), tbalden (Illes Pal Zoltan)
 Credits to Adrian Ulrich, tgascoigne, rogro
 
 Bugs:
 
-TODO
-- BT more test, on/off. dodgy
-- Symlinking fstab?
 
 

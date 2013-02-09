@@ -436,8 +436,19 @@ int camera_send_command(struct camera_device * device,
     if(!device)
         return -EINVAL;
 
-    return VENDOR_CALL(device, send_command, cmd, arg1, arg2);
+    /* send_command may cause the camera hal do to unexpected things like lockups.
+     * we assume it wont. if it does so, prevent this by returning 0 */
+
+    if(cmd == 6) {
+        /* this command causes seg fault and camera crashes as this send_command calls
+         * for proprietary face detection models not supported in our framework */
+        ALOGV("send_command related to face detection suppressed");
+        return 0;
+    } else {
+        return VENDOR_CALL(device, send_command, cmd, arg1, arg2);
+    }
 }
+
 
 void camera_release(struct camera_device * device)
 {
