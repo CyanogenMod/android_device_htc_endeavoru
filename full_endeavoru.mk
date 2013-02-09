@@ -48,10 +48,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
 
-# netd prebuilt from AOSP hox hacked, no reload. tether works with this, temporarily fix. Thanks for Adrian Ulrich
-PRODUCT_COPY_FILES += \
-	device/htc/endeavoru/prebuilt/netd:system/bin/netd
-
 # Prebuilt Alsa configs
 PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf \
@@ -196,6 +192,8 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+
+#	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 
 # Other overrides
 PRODUCT_PROPERTY_OVERRIDES += \
