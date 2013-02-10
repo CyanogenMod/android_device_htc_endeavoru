@@ -79,7 +79,7 @@ NEED_WORKAROUND_CORTEX_A9_745320 := true
 # Vold / USB
 BOARD_VOLD_MAX_PARTITIONS := 20
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/fsl-tegra-udc/gadget/lun0/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/tegra-udc.0/gadget/lun0/file"
 BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p14
 BOARD_HAS_SDCARD_INTERNAL := true
 
