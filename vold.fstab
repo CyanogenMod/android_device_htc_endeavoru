@@ -12,4 +12,5 @@
 
 # Mounts the first usable partition of the specified device
 #dev_mount sdcard /mnt/sdcard auto /devices/platform/sdhci-tegra.2/mmc_host/mmc1
-#dev_mount sdcard /mnt/sdcard 14 /devices/platform/sdhci-tegra.3/mmc_host/mmc0
+dev_mount sdcard /storage/sdcard0 14 /devices/platform/sdhci-tegra.3/mmc_host/mmc0
+dev_mount usb /mnt/usb auto /devices/platform/tegra-ehci

@@ -20,9 +20,17 @@
 <!-- See storage config details at http://source.android.com/tech/storage/ -->
 
 <StorageList xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- internal emulated storage -->
+    <!-- internal storage -->
     <storage
+        android:mountPoint="/storage/sdcard0"
         android:storageDescription="@string/storage_internal"
-        android:emulated="true"
-        android:mtpReserve="50" />
+        android:primary="true"
+        android:allowMassStorage="true"
+        android:maxFileSize="4096" />
+    <!-- USB OTG -->
+    <storage
+        android:mountPoint="/mnt/usb"
+        android:storageDescription="@string/storage_usb"
+        android:primary="false"
+        android:removable="true" />
 </StorageList>

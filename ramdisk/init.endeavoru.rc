@@ -4,19 +4,16 @@ on early-init
     write /sys/class/firmware/timeout 5
 
 on init
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0775 root root
+    export EXTERNAL_STORAGE /storage/sdcard0
+    mkdir /storage 0775 system system
+    mkdir /storage/sdcard0 0775 system system
 
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
+    # For backwards compatibility
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
 
-    # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    # create directory for mounting usb drives
+    mkdir /mnt/usb 0775 system system
 
 on early-boot
 
@@ -59,8 +56,8 @@ on post-fs-data
     chown dhcp dhcp /data/misc/dhcp
     
     # mount internal storage
-    start hox_sdcard_mount
-    wait /dev/.endeavoru_mounthelper_done 2
+    #start hox_sdcard_mount
+    #wait /dev/.endeavoru_mounthelper_done 2
     
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
@@ -473,12 +470,6 @@ service chmod_nvs_wlan0 /system/bin/chmod 644 /data/misc/wifi/wl1271-nvs-calibra
 	group root
 	oneshot
 # HTC_WIFI_END
-
-# virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
-    class main
-    user root
-    group root
 
 # bugreport is triggered by the VOLUME-DOWN and VOLUME-UP keys
 service bugreport /system/bin/bugmailer.sh -b /system/media/audio/ui/Dock.ogg -e /system/media/audio/ui/Undock.ogg

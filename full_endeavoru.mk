@@ -29,7 +29,6 @@ PRODUCT_COPY_FILES := \
         device/htc/endeavoru/ramdisk/fstab.endeavoru.ext4:root/fstab.endeavoru.ext4 \
         device/htc/endeavoru/ramdisk/fstab.endeavoru.vfat:root/fstab.endeavoru.vfat \
         device/htc/endeavoru/ramdisk/fstab.endeavoru:root/fstab.endeavoru \
-	device/htc/endeavoru/ramdisk/endeavoru_mounthelper.sh:root/endeavoru_mounthelper.sh \
 	device/htc/endeavoru/ramdisk/wifi_loader.sh:root/wifi_loader.sh \
 	device/htc/endeavoru/ramdisk/init:root/init
 
@@ -47,6 +46,10 @@ PRODUCT_COPY_FILES += \
 # BT config
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
+
+# WiFi config - needed for initial startup of wifi, when data/misc/wifi doesnt have the file yet.
+PRODUCT_COPY_FILES += \
+	device/htc/endeavoru/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # Prebuilt Alsa configs
 PRODUCT_COPY_FILES += \
