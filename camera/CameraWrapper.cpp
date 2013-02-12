@@ -97,6 +97,7 @@ static int check_vendor_module()
 };*/
 
 const static char * iso_values[] = {"auto,ISO50,ISO100,ISO200,ISO400,ISO800","auto"};
+const static char * scene_mode_values[] = {"auto,action,portrait,landscape,beach,fireworks,night,night-portrait,snow,sports,steadyphoto,sunset,theatre,barcode,candlelight,hdr,text","auto"};
 
 static char * camera_fixup_getparams(int id, const char * settings)
 {
@@ -117,6 +118,8 @@ static char * camera_fixup_getparams(int id, const char * settings)
     params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
 #endif
 //    params.set("cam-mode", "1");
+
+    params.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES, scene_mode_values[id]);
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
@@ -164,6 +167,12 @@ char * camera_fixup_setparams(int id, const char * settings)
             params.set(android::CameraParameters::KEY_ISO_MODE, "800");
     }
 #endif
+
+    if(params.get("scene-mode")) {
+        const char* sceneMode = params.get(android::CameraParameters::KEY_SCENE_MODE);
+        if(strcmp(sceneMode, "hdr") == 0)
+            params.set(android::CameraParameters::KEY_SCENE_MODE, "backlight-hdr");
+    }
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
