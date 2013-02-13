@@ -41,7 +41,9 @@ PRODUCT_COPY_FILES += \
 	device/htc/endeavoru/configs/nvcamera.conf:system/etc/nvcamera.conf \
 	device/htc/endeavoru/configs/media_profiles.xml:system/etc/media_profiles.xml \
 	device/htc/endeavoru/configs/enctune.conf:system/etc/enctune.conf \
-	device/htc/endeavoru/configs/gps.conf:system/etc/gps.conf
+	device/htc/endeavoru/configs/gps.conf:system/etc/gps.conf \
+	device/htc/endeavoru/prebuilt/post-boot.sh:system/etc/post-boot.sh
+
 
 # BT config
 PRODUCT_COPY_FILES += \
