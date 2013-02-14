@@ -81,8 +81,12 @@ on boot
     chown system /sys/devices/system/cpu/cpu_on
     chown system /sys/kernel/debug/tegra_hotplug/min_cpus
     chown system /sys/kernel/debug/tegra_hotplug/max_cpus
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown system /sys/kernel/tegra_cap/core_cap_level
+    chown system /sys/kernel/tegra_cap/core_cap_state
+    chown media.system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
     chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
     chown system /sys/devices/system/cpu/cpu1/online
     chown system /sys/devices/system/cpu/cpu2/online
@@ -96,6 +100,28 @@ on boot
     chmod 0660 /sys/kernel/debug/tegra_hotplug/min_cpus
     chown system /sys/htc/power_save
     chown system /sys/kernel/debug/tegra_emc/eack_state
+# Power management settings
+    write /sys/module/cpu_tegra3/parameters/no_lp 0
+    write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
+    write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+    write /sys/module/cpuidle/parameters/lp2_in_idle 0
+    write /sys/kernel/debug/tegra_hotplug/max_cpus 4
+    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
+    write /sys/module/cpu_tegra/parameters/cpu_user_cap 1500000
+
+# Interactive governor settings
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost_factor
+    chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/boost_factor
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
+    chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+    chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/max_boost
+    chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/max_boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/sustain_load
+    chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/sustain_load
+
 
     # Preload app folder
     mkdir /data/preload 0771 system system
@@ -116,21 +142,6 @@ on boot
 
 # Load kineto_gan.ko while booting
     insmod /system/lib/modules/kineto_gan.ko
-
-    # HTC PnPMgr sysfs file node
-    chown system system /sys/power/pnpmgr/apps/activity_trigger
-    chown system system /sys/power/pnpmgr/cpufreq/perflock_scaling_min
-    chown system system /sys/power/pnpmgr/cpufreq/perflock_scaling_max
-    chown system system /sys/power/pnpmgr/hotplug/cpu_auto_hotplug
-    chown system system /sys/power/pnpmgr/hotplug/min_on_cpus
-    chown system system /sys/power/pnpmgr/hotplug/cpu1_online
-    chown system system /sys/power/pnpmgr/hotplug/cpu2_online
-    chown system system /sys/power/pnpmgr/hotplug/cpu3_online
-    chown system system /sys/power/pnpmgr/thermal/edp_ap_limit
-    chown system system /sys/power/pnpmgr/cpufreq/ap_dvcs
-    chown system system /sys/power/launch_activity
-    chown system system /sys/power/cpunum_ceiling
-    chown system system /sys/power/cpunum_floor
 
 # Camera
     chown media media /sys/htc/media_boost_freq
@@ -210,28 +221,6 @@ on boot
 
 # GPIO BB access for user radio
     chown radio system /sys/class/gpio/gpio32/value
-
-# Power management settings
-    write /sys/module/cpu_tegra3/parameters/no_lp 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_max
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/touch_poke
-    chown system /sys/htc/power_save
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min 10000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-    write /sys/module/cpuidle/parameters/lp2_in_idle 1
 
 # AUD
     mkdir /data/audio
@@ -385,13 +374,6 @@ service chown_nvs_auto /system/bin/chown system.wifi /data/misc/wifi/wl1271-nvs-
 # HTC_WIFI_END
 # Wi-Fi--
 
-# HTC PnPMgr daemon
-service pnpmgr /system/bin/pnpmgr
-    class core
-    user root
-    group root
-    disabled
-
 # HTC Adaptive daemon
 service adaptive /system/bin/adaptive
     class core
@@ -464,25 +446,3 @@ service setup_fs /system/bin/setup_fs \
     group root
     oneshot
 
-on property:ro.boot.wipeddata=0
-    write /sys/kernel/debug/tegra_hotplug/max_cpus 3
-    write /sys/kernel/debug/tegra_hotplug/min_cpus 3
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1500000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1500000
-    write /sys/module/cpu_tegra/parameters/cpu_user_cap 1300000
-
-on property:ro.boot.wipeddata=1
-    write /sys/kernel/debug/tegra_hotplug/max_cpus 1
-    write /sys/kernel/debug/tegra_hotplug/min_cpus 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1500000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1500000
-    write /sys/module/cpu_tegra/parameters/cpu_user_cap 1300000
-
-on property:init.svc.bootanim=stopped
-    write /sys/kernel/debug/tegra_hotplug/max_cpus 4
-    write /sys/kernel/debug/tegra_hotplug/min_cpus 1
-    write /sys/module/cpu_tegra/parameters/cpu_user_cap 0 
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 51000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1500000
-    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-    start pnpmgr
