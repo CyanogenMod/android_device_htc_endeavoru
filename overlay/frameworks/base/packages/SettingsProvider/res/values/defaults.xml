@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /**
- * Copyright (c) 2009, The Android Open Source Project
+ * Copyright (c) 2012, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,5 +17,10 @@
  */
 -->
 <resources>
+    <!-- 30 seconds for default screen timeout -->
+    <integer name="def_screen_off_timeout">30000</integer>
+    <!-- Set the automatic brightness mode on by default -->
     <bool name="def_screen_brightness_automatic_mode">true</bool>
+    <!-- Default screen brightness, from 0 to 255. 87 is 34%. -->
+    <integer name="def_screen_brightness">10</integer>
 </resources>

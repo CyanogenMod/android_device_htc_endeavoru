@@ -67,6 +67,7 @@ int ti_op(bt_vendor_opcode_t opcode, void **param) {
     int fd;
     int *fd_array = (int (*)[]) param;
 
+    ALOGI("vendor op - %d", opcode);
     switch(opcode)
     {
         case BT_VND_OP_USERIAL_OPEN:
@@ -75,9 +76,6 @@ int ti_op(bt_vendor_opcode_t opcode, void **param) {
                 ALOGE(" Can't open tihci");
                 return -1;
             }
-
-            ALOGD("opened /dev/tihci as fd %d", fd);
-
             fd_array[CH_CMD] = fd;
             hci_tty_fd = fd; /* for userial_close op */
             return 1;        /* CMD/EVT/ACL on same fd */
@@ -85,19 +83,13 @@ int ti_op(bt_vendor_opcode_t opcode, void **param) {
             close(hci_tty_fd);
             return 0;
         /* Since new stack expects fwcfg_cb we are returning SUCCESS here
-         * in actual, firmware download is already happened when /dev/hci_tty
+         * in actual, firmware download is already happened when /dev/tihci
          * opened.
          */
         case BT_VND_OP_FW_CFG:
             bt_vendor_cbacks->fwcfg_cb(BT_VND_OP_RESULT_SUCCESS);
             return 0;
-        case BT_VND_OP_LPM_SET_MODE:
-            bt_vendor_cbacks->lpm_cb(BT_VND_OP_RESULT_SUCCESS); //dummy
-            return 0;
-        case BT_VND_OP_LPM_WAKE_SET_STATE:
-            return 0; // avoid logspam
         default:
-            ALOGI("skipping unimplemented vendor OP: %d", opcode);
             break;
     }
 
@@ -113,4 +105,3 @@ int main()
 {
     return 0;
 }
-

@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2012 The CyanogenMod Project
+# Copyright 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,77 +11,47 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+#
+# This file sets variables that control the way modules are built
+# thorughout the system. It should not be used to conditionally
+# disable makefiles (the proper mechanism to control what gets
+# included in a build is to use PRODUCT_PACKAGES in a product
+# definition file).
 #
 
-# Skip droiddoc build to save build time
-BOARD_SKIP_ANDROID_DOC_BUILD := true
+# This variable is set first, so it can be overridden
+# by BoardConfigVendor.mk
+USE_CAMERA_STUB := true
+BOARD_USES_GENERIC_AUDIO := true
 
-# Audio
-BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_ALSA_AUDIO := false
-COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB
+# inherit from the proprietary version
+-include vendor/htc/endeavoru/BoardConfigVendor.mk
 
-#Camera
-USE_CAMERA_STUB := false
-CAMERA_USES_SURFACEFLINGER_CLIENT_STUB := true
-BOARD_HAVE_HTC_FFC := true
-BOARD_NEEDS_MEMORYHEAPPMEM := true
-COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK 
-COMMON_GLOBAL_CPPFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
+TARGET_BOARD_PLATFORM := tegra
 
-# Target arch settings
-BOARD_HAS_LOCKED_BOOTLOADER := true
-TARGET_NO_BOOTLOADER := true
+#custom init rc
+TARGET_PROVIDES_INIT_RC := true
+
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_CPU_SMP := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+ARCH_ARM_HAVE_TLS_REGISTER := true
+ARCH_ARM_USE_NON_NEON_MEMCPY := true
 
-# Board nameing
-TARGET_NO_RADIOIMAGE := true
+TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := 
-TARGET_BOARD_PLATFORM := tegra
-TARGET_TEGRA_VERSION := t30
 
-# EGL settings
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/htc/endeavoru/configs/egl.cfg
+BOARD_EGL_CFG := device/htc/endeavoru/config/egl.cfg
+BOARD_EGL_NEEDS_LEGACY_FB := true
 
-# Connectivity - Wi-Fi
-USES_TI_MAC80211 := true
-ifdef USES_TI_MAC80211
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-WPA_SUPPLICANT_VERSION := VER_0_8_X_TI
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_WLAN_DEVICE := wl12xx_mac80211
-BOARD_SOFTAP_DEVICE := wl12xx_mac80211
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wl12xx_sdio.ko"
-WIFI_DRIVER_MODULE_NAME := "wl12xx_sdio"
-WIFI_FIRMWARE_LOADER := ""
-COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
-endif
+BOARD_KERNEL_CMDLINE := 
+BOARD_KERNEL_PAGESIZE := 2048
 
-# BT
-BOARD_HAVE_BLUETOOTH := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
-
-# HTC ril compatability
-BOARD_USE_NEW_LIBRIL_HTC := true
-TARGET_PROVIDES_LIBRIL := vendor/htc/endeavoru/proprietary/lib/libhtc-ril.so
-
-# Avoid the generation of ldrcc instructions
-NEED_WORKAROUND_CORTEX_A9_745320 := true
-
-# Vold / USB
-BOARD_VOLD_MAX_PARTITIONS := 20
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/tegra-udc.0/gadget/lun0/file"
-BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p14
-BOARD_HAS_SDCARD_INTERNAL := true
-
+TARGET_USERIMAGES_USE_EXT4 := true
 
 # Partitions Info
 #cat /proc/emmc
@@ -101,6 +70,30 @@ BOARD_HAS_SDCARD_INTERNAL := true
 #mmcblk0p19: 01600000 00001000 "devlog"
 #mmcblk0p16: 00200000 00001000 "extra"
 
+BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 8388608
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1342177280
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 2302672896
+BOARD_FLASH_BLOCK_SIZE := 4096
+
+BOARD_VOLD_MAX_PARTITIONS := 20
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/tegra-udc.0/gadget/lun0/file"
+
+# Wifi related defines
+USES_TI_MAC80211 := true
+ifdef USES_TI_MAC80211
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+WPA_SUPPLICANT_VERSION           := VER_0_8_X_TI
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_WLAN_DEVICE                := wl12xx_mac80211
+BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
+WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
+WIFI_FIRMWARE_LOADER             := ""
+COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
+endif
+
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
 TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
@@ -118,19 +111,31 @@ WIFI_MODULES:
 
 TARGET_KERNEL_MODULES := WIFI_MODULES
 
-# Kernel / Ramdisk
-TARGET_PROVIDES_INIT_TARGET_RC := true
-TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 8388608
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1342177280
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 2302672896
-BOARD_FLASH_BLOCK_SIZE := 4096
+# Avoid the generation of ldrcc instructions
+NEED_WORKAROUND_CORTEX_A9_745320 := true
 
-#Recovery
+# Audio(prebuilt)
+COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB
+
+# HTC specific
+BOARD_USE_NEW_LIBRIL_HTC := true
+COMMON_GLOBAL_CFLAGS += -DHTCLOG
+
+# Sensors invensense
+BOARD_USES_GENERIC_INVENSENSE := false
+
+# Camera
+BOARD_CAMERA_HAVE_ISO := true
+COMMON_GLOBAL_CFLAGS += -DHAVE_ISO
+COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
+
+# Bluetooth
+BOARD_HAVE_BLUETOOTH := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
+
+# Recovery
 TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/endeavoru/prebuilt/recovery_kernel
-BOARD_USES_MMCUTILS := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_HAS_NO_MISC_PARTITION := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_UMS_LUNFILE := "/sys/devices/platform/fsl-tegra-udc/gadget/lun0/file"
-
+BOARD_HAS_NO_SELECT_BUTTON := true

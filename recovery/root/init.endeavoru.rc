@@ -1,0 +1,43 @@
+on boot
+# leds
+    chown system system /sys/class/leds/amber/brightness
+    chown system system /sys/class/leds/amber/blink
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/green/blink
+
+
+service choice_fn /sbin/choice_fn
+    oneshot
+
+service mfgsrv /sbin/mfgsrv -i -t /dev/ttyS0
+    disabled
+
+# uh, this doesn't actually exist?
+service power_test /sbin/power_test
+    oneshot
+
+service htcbatt /sbin/htcbatt
+    oneshot
+
+service offmode_charging /sbin/offmode_charging
+    disabled
+    oneshot
+
+service detect_key /sbin/detect_key
+    disabled
+    oneshot
+
+on property:persist.service.zcharge.enable=1
+# backlight
+    write /sys/class/backlight/tegra-pwm-bl/brightness 0
+
+# Power management settings
+    write /sys/module/cpu_tegra3/parameters/no_lp 0
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 340000
+    write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+    write /sys/module/cpu_tegra3/parameters/auto_hotplug 0
+    write /sys/module/cpuidle/parameters/lp2_in_idle 1

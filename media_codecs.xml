@@ -77,12 +77,21 @@ Only the three quirks included above are recognized at this point:
 
 <MediaCodecs>
     <Decoders>
-        <MediaCodec name="OMX.Nvidia.mp4.decode" type="video/mp4v-es" />
-        <MediaCodec name="OMX.Nvidia.h263.decode" type="video/3gpp" />
-        <MediaCodec name="OMX.Nvidia.h264.decode" type="video/avc" />
-        <MediaCodec name="OMX.Nvidia.mpeg2v.decode" type="video/mpeg2" />
-        <MediaCodec name="OMX.Nvidia.mp2.decoder" type="audio/mpeg-L2" />
-
+        <MediaCodec name="OMX.Nvidia.h264.decode" >
+            <Type name="video/avc" />
+            <Quirk name="requires-allocate-on-input-ports" />
+            <Quirk name="requires-allocate-on-output-ports" />
+        </MediaCodec>
+        <MediaCodec name="OMX.Nvidia.mp4.decode" >
+            <Type name="video/mp4v-es" />
+            <Quirk name="requires-allocate-on-input-ports" />
+            <Quirk name="requires-allocate-on-output-ports" />
+        </MediaCodec>
+        <MediaCodec name="OMX.Nvidia.h263.decode" >
+            <Type name="video/3gpp" />
+            <Quirk name="requires-allocate-on-input-ports" />
+            <Quirk name="requires-allocate-on-output-ports" />
+        </MediaCodec>
         <MediaCodec name="OMX.google.mp3.decoder" type="audio/mpeg" />
         <MediaCodec name="OMX.google.amrnb.decoder" type="audio/3gpp" />
         <MediaCodec name="OMX.google.amrwb.decoder" type="audio/amr-wb" />
@@ -98,10 +107,21 @@ Only the three quirks included above are recognized at this point:
     </Decoders>
 
     <Encoders>
-        <MediaCodec name="OMX.Nvidia.mp4.encoder" type="video/mp4v-es" />
-        <MediaCodec name="OMX.Nvidia.h263.encoder" type="video/3gpp" />
-        <MediaCodec name="OMX.Nvidia.h264.encoder" type="video/avc" />
-
+        <MediaCodec name="OMX.Nvidia.h264.encoder" >
+            <Type name="video/avc" />
+            <Quirk name="requires-allocate-on-input-ports" />
+            <Quirk name="requires-allocate-on-output-ports" />
+        </MediaCodec>
+        <MediaCodec name="OMX.Nvidia.mp4.encoder" >
+            <Type name="video/mp4v-es" />
+            <Quirk name="requires-allocate-on-input-ports" />
+            <Quirk name="requires-allocate-on-output-ports" />
+        </MediaCodec>
+        <MediaCodec name="OMX.Nvidia.h263.encoder" >
+            <Type name="video/3gpp" />
+            <Quirk name="requires-allocate-on-input-ports" />
+            <Quirk name="requires-allocate-on-output-ports" />
+        </MediaCodec>
         <MediaCodec name="OMX.google.amrnb.encoder" type="audio/3gpp" />
         <MediaCodec name="OMX.google.amrwb.encoder" type="audio/amr-wb" />
         <MediaCodec name="OMX.google.aac.encoder" type="audio/mp4a-latm" />

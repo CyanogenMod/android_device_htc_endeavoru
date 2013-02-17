@@ -1,32 +1,14 @@
-ro.opengles.version = 131072
 #
 # system.prop for endeavoru
 #
 #
+tf.enable=y
 
-#Common display settings
-ro.sf.lcd_density=320
-ro.hwui.text_cache_width=2048
-ro.hwui.text_cache_height=256
-debug.sf.hw=1
-persist.sys.ui.hw = 1
-windowsmgr.max_events_per_sec = 240
-
-# UMS
-ro.vold.umsdirtyratio=50
-
-#RIL
-rild.libpath=/system/lib/libhtc_ril.so
-rild.libargs=-e wwan0
-ro.telephony.ril.v3=signalstrength,skipbrokendatacall
-modem.power.device=/sys/class/gpio/gpio32/value,0,1
-ro.ril.devicename=/dev/ttyACM1
-modem.powercontrol=disabled
 ro.ril.ecc.VODA-Africa-South=112,911,999
 ro.ril.ecc.HTC-GCC=999,112,997
 ro.ril.ecc.HTC-WWE=999
 ro.ril.ecc.HTC-Dutch=112
-ro.ril.ecc.HTC-SPA=112, 911
+ro.ril.ecc.HTC-SPA=112,911
 ro.ril.ecc.HTC-FRA=112,911
 ro.ril.ecc.HTC-ITA=112,911
 ro.ril.ecc.HTC-EastEurope=112
@@ -39,12 +21,27 @@ ro.ril.hsdpa.category=14
 ro.ril.hsupa.category=6
 ro.ril.hsxpa=4
 ro.ril.fast.dormancy.rule=1
+ro.ril.radio.svn=1
 ro.ril.disable.fd.plmn.prefix=23402,23410,23411,23420,27202
 ro.ril.enable.managed.roaming=1
 ro.ril.enable.sdr=1
 ro.ril.enable.amr.wideband=1
 ro.ril.enable.r8fd=0
 ro.ril.disable.cpc=1
+ro.ril.vmail.23415=1571,BT,121,VDF UK
+ro.ril.vmail.27203=171
+ro.ril.vmail.65502=181
+ro.ril.vmail.27211=171
+ro.ril.vmail.65510=100
+ro.ril.vmail.22299=4133,3ITA
+ro.ril.vmail.23410=901,O2 UK,905,TESCO,443,giffgaff
+ro.ril.vmail.22201=41901,I TIM
+ro.ril.vmail.22210=42020,Vodafone IT
+ro.ril.vmail.22288=4200,I WIND
+ro.ril.vmail.20801=888
+ro.ril.vmail.20810=123
+ro.ril.vmail.20826=777
+ro.ril.enable.pre_r8fd=1
 ro.ril.fd.pre_r8_tout.scr_off=2
 ro.ril.fd.pre_r8_tout.scr_on=3
 ro.ril.fd.r8_tout.scr_off=0
@@ -62,38 +59,46 @@ ro.ril.imc.uea2=0
 ro.ril.imc.uia2=0
 ro.ril.edpcch.pwr.boost=1
 ro.ril.hspa.mac.ehs=1
-ro.ril.enable.imc.feature=1
-ro.ril.projectname=endeavoru
-ro.ril.stkprof.param=FFFFFFFF7F1C00DF9703021F2200000083000000000040100000000000000000
 
-#Wi-Fi
+ro.opengles.version=131072
+
 wifi.interface=wlan0
-wifi.supplicant_scan_interval=60
-init.svc.wpa_supplicant=
-init.svc.dhcpcd_wlan0=
-dhcp.wlan0.autoip=
-dhcp.wlan0.dns1=
-dhcp.wlan0.dns2=
-dhcp.wlan0.dns3=
-dhcp.wlan0.dns4=
-dhcp.wlan0.gateway=
-dhcp.wlan0.ipaddress=
-dhcp.wlan0.leasetime=
-dhcp.wlan0.mask=
-dhcp.wlan0.ooxx=
-dhcp.wlan0.pid=
-dhcp.wlan0.reason=
-dhcp.wlan0.result=
-dhcp.wlan0.server=
-net.wlan0.dns1=
-net.wlan0.dns2=
-wifi.wpa_supp_ready=
-wlan.driver.status=
 
-#Audio
+# RIL hack
+ro.telephony.ril.v3=signalstrength,skipbrokendatacall
+
+rild.libpath=/system/lib/libhtc_ril.so
+rilswitch.vendorlibpath=/system/lib/libhtc_ril.so
+rild.libargs=-e wwan0
+ro.sf.lcd_density=320
+ro.hwui.text_cache_width=2048
+ro.hwui.text_cache_height=256
+
+# Default network type : 0 => WCDMA preferred
+ro.telephony.default_network=0
+
+# RIL, for IMC modem feature
+ro.ril.enable.imc.feature=1
+
+ro.ril.projectname=endeavoru
+
+# RIL, parameters for register BLUE stk feature to modem
+ro.ril.stkprof.param=FFFFFFFF7F0000DF9703021F2200000000000000000040100000000000000000
+
+# Icera fild
+modem.fild.rootdir=/data/rfs
+modem.fild.blocksize=65528
+modem.fild.baudrate=3500000
+modem.fild.hif=0
+modem.fild.coredump=enabled
+modem.fild.coredumpdir=/data/rfs/data/debug
+modem.power.device=/sys/class/gpio/gpio32/value,0,1
+ro.ril.devicename=/dev/ttyACM1
+modem.powercontrol=disabled
+
 # -----------------------------
-# speaker volume is from 20 to 31
-# this corresponds to -2dB to +8dB
+# Speaker volume is from 20 to 31
+# This corresponds to -2dB to +8dB
 # -----------------------------
 audio.speaker.voice.0=20
 audio.speaker.voice.1=21
@@ -102,8 +107,8 @@ audio.speaker.voice.3=26
 audio.speaker.voice.4=28
 audio.speaker.voice.5=31
 # -----------------------------
-# earpiece volume is from 20 to 31
-# this corresponds to -2dB to +8dB
+# Earpiece volume is from 20 to 31
+# This corresponds to -2dB to +8dB
 # -----------------------------
 audio.earpiece.voice.0=20
 audio.earpiece.voice.1=21
@@ -112,8 +117,8 @@ audio.earpiece.voice.3=26
 audio.earpiece.voice.4=28
 audio.earpiece.voice.5=31
 # -----------------------------------
-# headset volume is from 9 to 14
-# this corresponds to -34dB to -19dB
+# Headset volume is from 9 to 14
+# This corresponds to -34dB to -19dB
 # ----------------------------------
 audio.headset.voice.0=16
 audio.headset.voice.1=19
@@ -122,34 +127,47 @@ audio.headset.voice.3=25
 audio.headset.voice.4=28
 audio.headset.voice.5=31
 
+persist.tegra.nvmmlite=1
+
+# Export for global effects
 htc.audio.global.state=0
 htc.audio.global.profile=0
+
+# Export for SoundHound
 persist.htc.audio.pcm.samplerate=48000
 persist.htc.audio.pcm.channels=2
+
+# Export for HTCAEC
 persist.audio.SupportHTCHWAEC=1
+
+# Export for CS/PS call switch
 persist.audio.AutoSwitchMic=1
 
-#NFC
+# NFC
 debug.nfc.fw_download=true
 debug.nfc.se=true
 
-#HDMI
-ro.hdmi.enable=true
-# temporary fix for HDMI output, for videos it works now in correct landscape with this set
-persist.demo.hdmirotation=portrait
+# For usb storage
+ro.usb_host=1
 
-#Internal Storage
+# Internal Storage
 ro.phone_fat=1
 
-#Fat Rsvd Sectors
+# Fat Rsvd Sectors
 ro.fat_rsvd=66
 
-#Support HW reset dialog
-ro.product.hwreset = 1
-ro.product.hwreset.timer1 = 5
-ro.product.hwreset.timer2 = 8
+# Release Bluetooth HW/SW information
+ro.bt.chipset=TI 1283
+ro.bt.stack=TI BlueZ
+ro.bt.stack.version=1.1.0.3
 
-#Relase Bluetooth HW/SW information
-ro.bt.chipset = TI 1283
-ro.bt.stack = TI BlueZ
-ro.bt.stack.version = 1.1.0.3
+# Support HW reset dialog
+ro.product.hwreset=1
+ro.product.hwreset.timer1=5
+ro.product.hwreset.timer2=8
+
+# HDMI
+ro.hdmi.enable=true
+
+# force gpu rendering(2d drawing) [Nvidia setting - libhtc-opt2.so]
+persist.sys.ui.hw=true
