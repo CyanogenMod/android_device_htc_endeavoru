@@ -122,6 +122,12 @@ on boot
     chown system system /sys/devices/system/cpu/cpufreq/interactive/sustain_load
     chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/sustain_load
 
+# settings EndeavoruParts
+    chmod 0666 /sys/devices/platform/htc_battery/fast_charge
+    chmod 0666 /sys/android_touch/s2w_allow_stroke
+    chmod 0666 /sys/android_touch/sweep2wake
+    chmod 0666 /sys/android_touch/s2w_min_distance
+    chmod 0666 /sys/android_touch/s2w_register_threshold
 
     # Preload app folder
     mkdir /data/preload 0771 system system

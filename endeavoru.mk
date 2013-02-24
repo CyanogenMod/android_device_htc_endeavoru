@@ -185,6 +185,10 @@ PRODUCT_PACKAGES += \
     pollyd \
     Polly
 
+PRODUCT_PACKAGES += \
+    EndeavoruParts
+
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     dhcpcd.conf \

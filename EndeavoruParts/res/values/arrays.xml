@@ -1,0 +1,12 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="s2w_stroke_entries">
+        <item>Any direction</item>
+        <item>Direction dependent</item>
+    </string-array>
+
+    <string-array name="s2w_stroke_entries_values" translatable="false">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
+</resources>

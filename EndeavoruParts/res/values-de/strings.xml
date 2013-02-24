@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">One X Einstellungen</string>
+
+    <string name="category_s2w_title">Sweep2Wake</string>
+    <string name="s2w_switch_title_head">Sweep2Wake</string>
+    <string name="s2w_switch_summary_head">Das Telefon durch Streichen über die kapazitiven Buttons ein- und auschalten</string>
+    <string name="s2w_stroke_title_head">Sweep2Wake Verhalten</string>
+    <string name="s2w_stroke_summary_head">Auf "Richtungsabhängig" setzten um jeweils eine Richtung für das Ein- und Ausschalten zu verwenden</string>
+
+    <string name="category_usb_title">USB</string>
+    <string name="fastcharge_title_head">Schnelles Laden</string>
+    <string name="fastcharge_summary_head">Telefon zieht mehr Strom beim Laden über einen PC USB Anschluss</string>
+
+</resources>
