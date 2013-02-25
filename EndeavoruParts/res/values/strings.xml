@@ -6,7 +6,7 @@
     <string name="s2w_switch_title_head">Sweep2Wake</string>
     <string name="s2w_switch_summary_head">Enable to switch phone screen on/off with a swipe over the capacitive buttons</string>
     <string name="s2w_stroke_title_head">Sweep2Wake Direction</string>
-    <string name="s2w_stroke_summary_head">Set to "Direction dependent" to allow only a left-to-right swite for turing on and a right-to-left swipe for tuning off</string>
+    <string name="s2w_stroke_summary_head">Set to "Direction dependent" to allow only a left-to-right swipe for turing on and a right-to-left swipe for tuning off</string>
 
     <string name="category_usb_title">USB</string>
     <string name="fastcharge_title_head">Fast Charge</string>
