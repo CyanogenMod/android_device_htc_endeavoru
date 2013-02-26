@@ -10,6 +10,7 @@ public class Startup extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent bootintent) {
         Sweep2WakeSwitch.restore(context);
         Sweep2WakeStroke.restore(context);
+        Sweep2WakeMinLength.restore(context);
         Fastcharge.restore(context);
     }
 }

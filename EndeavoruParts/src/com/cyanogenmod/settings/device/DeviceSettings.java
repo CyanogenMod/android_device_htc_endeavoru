@@ -16,10 +16,12 @@ public class DeviceSettings extends PreferenceActivity  {
 
     public static final String KEY_S2WSWITCH = "s2w_switch";
     public static final String KEY_S2WSTROKE = "s2w_stroke";
+    public static final String KEY_S2WLENGTH = "s2w_length";
     public static final String KEY_FASTCHARGE = "fastcharge";
 
     private TwoStatePreference mS2WSwitch;
     private ListPreference mS2WStroke;
+    private ListPreference mS2WLength;
     private TwoStatePreference mFastcharge;
 
 
@@ -35,6 +37,10 @@ public class DeviceSettings extends PreferenceActivity  {
         mS2WStroke = (ListPreference) findPreference(KEY_S2WSTROKE);
         mS2WStroke.setEnabled(Sweep2WakeStroke.isSupported());
         mS2WStroke.setOnPreferenceChangeListener(new Sweep2WakeStroke());
+
+        mS2WLength = (ListPreference) findPreference(KEY_S2WLENGTH);
+        mS2WLength.setEnabled(Sweep2WakeMinLength.isSupported());
+        mS2WLength.setOnPreferenceChangeListener(new Sweep2WakeMinLength());
 
         mFastcharge = (TwoStatePreference) findPreference(KEY_FASTCHARGE);
         mFastcharge.setEnabled(Fastcharge.isSupported());

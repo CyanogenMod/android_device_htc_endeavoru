@@ -7,6 +7,8 @@
     <string name="s2w_switch_summary_head">Enable to switch phone screen on/off with a swipe over the capacitive buttons</string>
     <string name="s2w_stroke_title_head">Sweep2Wake Direction</string>
     <string name="s2w_stroke_summary_head">Set to "Direction dependent" to allow only a left-to-right swipe for turning on and a right-to-left swipe for turning off</string>
+    <string name="s2w_length_title_head">Sweep2Wake Minimum Length</string>
+    <string name="s2w_length_summary_head">Set the number of buttons that are needed to be swiped over for switching screen on/off</string>
 
     <string name="category_usb_title">USB</string>
     <string name="fastcharge_title_head">Fast Charge</string>

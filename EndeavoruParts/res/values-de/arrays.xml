@@ -4,9 +4,20 @@
         <item>Richtungsabhängig</item>
     </string-array>
 
+    <string-array name="s2w_length_entries">
+        <item>1 Button</item>
+        <item>2 Buttons</item>
+        <item>3 Buttons</item>
+    </string-array>
+
     <string-array name="s2w_stroke_entries_values" translatable="false">
         <item>1</item>
         <item>0</item>
+    </string-array>
+    <string-array name="s2w_length_entries_values" translatable="false">
+        <item>325</item>
+        <item>500</item>
+        <item>850</item>
     </string-array>
 
 </resources>

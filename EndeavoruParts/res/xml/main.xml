@@ -19,6 +19,15 @@
 	        android:entries="@array/s2w_stroke_entries"
 	        android:entryValues="@array/s2w_stroke_entries_values"
 	        android:defaultValue="1" />
+`		<!-- s2w min length -->
+	    <ListPreference
+	        android:key="s2w_length"
+	        android:title="@string/s2w_length_title_head"
+	        android:summary="@string/s2w_length_summary_head"
+                android:dependency="s2w_switch"
+	        android:entries="@array/s2w_length_entries"
+	        android:entryValues="@array/s2w_length_entries_values"
+	        android:defaultValue="325" />
 	</PreferenceCategory>
 
 	<PreferenceCategory

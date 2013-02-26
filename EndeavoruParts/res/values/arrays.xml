@@ -4,9 +4,20 @@
         <item>Direction dependent</item>
     </string-array>
 
+    <string-array name="s2w_length_entries">
+        <item>1 button</item>
+        <item>2 buttons</item>
+        <item>3 buttons</item>
+    </string-array>
+
     <string-array name="s2w_stroke_entries_values" translatable="false">
         <item>1</item>
         <item>0</item>
+    </string-array>
+    <string-array name="s2w_length_entries_values" translatable="false">
+        <item>325</item>
+        <item>500</item>
+        <item>850</item>
     </string-array>
 
 </resources>

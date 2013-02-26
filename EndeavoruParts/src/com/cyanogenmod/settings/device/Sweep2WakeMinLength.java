@@ -6,16 +6,16 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-public class Sweep2WakeSwitch implements OnPreferenceChangeListener {
+public class Sweep2WakeMinLength implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/android_touch/sweep2wake";
+    private static final String FILE = "/sys/android_touch/s2w_min_distance";
 
     public static boolean isSupported() {
         return Utils.fileExists(FILE);
     }
 
     /**
-     * Restore Sweep2Wake setting from SharedPreferences. (Write to kernel.)
+     * Restore Sweep2Wake stroke setting from SharedPreferences. (Write to kernel.)
      * @param context       The context to read the SharedPreferences from
      */
     public static void restore(Context context) {
@@ -24,20 +24,12 @@ public class Sweep2WakeSwitch implements OnPreferenceChangeListener {
         }
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_S2WSWITCH, true);
-        if(enabled)
-            Utils.writeValue(FILE, "1");
-        else
-            Utils.writeValue(FILE, "0");
+        Utils.writeValue(FILE, sharedPrefs.getString(DeviceSettings.KEY_S2WLENGTH, "325"));
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Boolean enabled = (Boolean) newValue;
-        if(enabled)
-            Utils.writeValue(FILE, "1");
-        else
-            Utils.writeValue(FILE, "0");
+        Utils.writeValue(FILE, (String) newValue);
         return true;
     }
 
