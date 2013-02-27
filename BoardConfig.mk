@@ -102,14 +102,18 @@ TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
 
 # Building wifi modules
 TARGET_MODULES_SOURCE := "kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03"
+TARGET_MODULES_SOURCE_DIR := "compat-wireless_R5.SP2.03"
 
 WIFI_MODULES:
-	make -C $(TARGET_MODULES_SOURCE) KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)
-	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/compat/compat.ko $(KERNEL_MODULES_OUT)
-	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/net/mac80211/mac80211.ko $(KERNEL_MODULES_OUT)
-	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/net/wireless/cfg80211.ko $(KERNEL_MODULES_OUT)
-	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/drivers/net/wireless/wl12xx/wl12xx.ko $(KERNEL_MODULES_OUT)
-	mv kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03/drivers/net/wireless/wl12xx/wl12xx_sdio.ko $(KERNEL_MODULES_OUT)
+	rm -rf $(KERNEL_OUT)/COMPAT
+	mkdir $(KERNEL_OUT)/COMPAT
+	cp -rf $(TARGET_MODULES_SOURCE) $(KERNEL_OUT)/COMPAT
+	make -C $(KERNEL_OUT)/COMPAT/$(TARGET_MODULES_SOURCE_DIR) O=$(KERNEL_OUT)/COMPAT KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)
+	mv $(KERNEL_OUT)/COMPAT/$(TARGET_MODULES_SOURCE_DIR)/compat/compat.ko $(KERNEL_MODULES_OUT)
+	mv $(KERNEL_OUT)/COMPAT/$(TARGET_MODULES_SOURCE_DIR)/net/mac80211/mac80211.ko $(KERNEL_MODULES_OUT)
+	mv $(KERNEL_OUT)/COMPAT/$(TARGET_MODULES_SOURCE_DIR)/net/wireless/cfg80211.ko $(KERNEL_MODULES_OUT)
+	mv $(KERNEL_OUT)/COMPAT/$(TARGET_MODULES_SOURCE_DIR)/drivers/net/wireless/wl12xx/wl12xx.ko $(KERNEL_MODULES_OUT)
+	mv $(KERNEL_OUT)/COMPAT/$(TARGET_MODULES_SOURCE_DIR)/drivers/net/wireless/wl12xx/wl12xx_sdio.ko $(KERNEL_MODULES_OUT)
 
 TARGET_KERNEL_MODULES := WIFI_MODULES
 
