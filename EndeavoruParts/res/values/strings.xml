@@ -14,4 +14,8 @@
     <string name="fastcharge_title_head">Fast Charge</string>
     <string name="fastcharge_summary_head">Enable to draw more power when connected to a PC USB port</string>
 
+    <string name="category_backlightdisable_title">Backlight</string>
+    <string name="backlightdisable_title_head">Disable Button Backlight</string>
+    <string name="backlightdisable_summary_head">Select to disable the capacitive button backlight</string>
+
 </resources>

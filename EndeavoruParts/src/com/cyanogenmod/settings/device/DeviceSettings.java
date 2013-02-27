@@ -18,11 +18,13 @@ public class DeviceSettings extends PreferenceActivity  {
     public static final String KEY_S2WSTROKE = "s2w_stroke";
     public static final String KEY_S2WLENGTH = "s2w_length";
     public static final String KEY_FASTCHARGE = "fastcharge";
+    public static final String KEY_BACKLIGHTDISABLE = "backlight_disable";
 
     private TwoStatePreference mS2WSwitch;
     private ListPreference mS2WStroke;
     private ListPreference mS2WLength;
     private TwoStatePreference mFastcharge;
+    private TwoStatePreference mBacklightDisable;
 
 
     @Override
@@ -45,6 +47,9 @@ public class DeviceSettings extends PreferenceActivity  {
         mFastcharge = (TwoStatePreference) findPreference(KEY_FASTCHARGE);
         mFastcharge.setEnabled(Fastcharge.isSupported());
         mFastcharge.setOnPreferenceChangeListener(new Fastcharge());
+        mBacklightDisable = (TwoStatePreference) findPreference(KEY_BACKLIGHTDISABLE);
+        mBacklightDisable.setEnabled(BacklightDisable.isSupported());
+        mBacklightDisable.setOnPreferenceChangeListener(new BacklightDisable());
     }
 
     @Override
