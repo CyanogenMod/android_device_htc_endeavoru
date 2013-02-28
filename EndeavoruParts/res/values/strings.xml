@@ -18,4 +18,8 @@
     <string name="backlightdisable_title_head">Disable Button Backlight</string>
     <string name="backlightdisable_summary_head">Select to disable the capacitive button backlight</string>
 
+    <string name="category_smartdimmer_title">nVidia SmartDimmer</string>
+    <string name="smartdimmer_switch_title_head">Enable</string>
+    <string name="smartdimmer_switch_summary_head">Switch nVidia SmartDimmer on/off (switching on saves battery life with less backlight and more contrast/colors, switching off should give brighter LCD backlight)</string>
+
 </resources>
