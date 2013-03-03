@@ -57,19 +57,21 @@ enum {
 };
 
 enum {
-  PULSE_LENGTH_VERY_SHORT = 1,
-  PULSE_LENGTH_SHORT = 2,
-  PULSE_LENGTH_NORMAL= 3,
-  PULSE_LENGTH_LONG= 4,
-  PULSE_LENGTH_ALWAYS_ON = 5,
+  PULSE_LENGTH_VERY_SHORT = 250,
+  PULSE_LENGTH_SHORT = 500,
+  PULSE_LENGTH_NORMAL = 1000,
+  PULSE_LENGTH_LONG = 2500,
+  PULSE_LENGTH_VERY_LONG = 5000,
+  PULSE_LENGTH_ALWAYS_ON = 1,
 };
 
 enum {
-  BLINK_MODE_OFF,
-  BLINK_MODE_VERY_SHORT,
-  BLINK_MODE_SHORT,
-  BLINK_MODE_NORMAL,
-  BLINK_MODE_LONG,
+  BLINK_MODE_OFF = 0,
+  BLINK_MODE_VERY_SHORT = 250,
+  BLINK_MODE_SHORT = 500,
+  BLINK_MODE_NORMAL =  1000,
+  BLINK_MODE_LONG = 2500,
+  BLINK_MODE_VERY_LONG = 5000,
 };
 
 static int write_int(const char* path, int value) {
@@ -112,29 +114,24 @@ static void set_speaker_light_locked(struct light_device_t *dev,
   if ((colorRGB >> 16) & 0xFF) color = LED_AMBER;
   if (((colorRGB >> 8) & 0xFF) > ((colorRGB >> 16) & 0xFF)) color = LED_GREEN;
 
-  switch (state->flashOnMS) {
-    case PULSE_LENGTH_VERY_SHORT:
-      blinkMode = BLINK_MODE_VERY_SHORT;
-      break;
-    case PULSE_LENGTH_SHORT:
-      blinkMode = BLINK_MODE_SHORT;
-      break;
-    case PULSE_LENGTH_NORMAL:
-      blinkMode = BLINK_MODE_NORMAL;
-      break;
-    case PULSE_LENGTH_LONG:
+  if(state->flashOnMS >= PULSE_LENGTH_LONG || state->flashOffMS >= BLINK_MODE_LONG) {
       blinkMode = BLINK_MODE_LONG;
-      break;
-    case PULSE_LENGTH_ALWAYS_ON:
+  }
+
+  if(state->flashOnMS == PULSE_LENGTH_ALWAYS_ON) {
       state->flashMode = LIGHT_FLASH_NONE;
-      break;
   }
 
   switch (state->flashMode) {
     case LIGHT_FLASH_TIMED:
       switch (color) {
         case LED_AMBER:
-          write_int(AMBER_BLINK_FILE, 1);
+          if(blinkMode == BLINK_MODE_LONG) {
+            // Kernel driver only supports long blink for amber
+            write_int(AMBER_BLINK_FILE, 4);
+          } else {
+            write_int(AMBER_BLINK_FILE, 1);
+          }
           write_int(GREEN_LED_FILE, 0);
           break;
         case LED_GREEN:
@@ -186,16 +183,18 @@ static void set_speaker_light_locked_dual(struct light_device_t *dev,
   if ((bcolorRGB >> 8) & 0xFF) bcolor = LED_GREEN;
   if ((bcolorRGB >> 16) & 0xFF) bcolor = LED_AMBER;
 
+  /* The kernel driver only supports one dual blink mode and does not distinct
+     between background colors. It is activated by writing a 1 to the amber
+     blink file and then a 3 to the amber blink file.
+  */
+
   switch (bcolor) {
     case LED_AMBER:
-      write_int (AMBER_BLINK_FILE, 1);
-      write_int (GREEN_LED_FILE, 1);
-      write_int (AMBER_BLINK_FILE, 4);
-      break;
     case LED_GREEN:
-      write_int (GREEN_BLINK_FILE, 1);
-      write_int (AMBER_LED_FILE, 1);
-      write_int (GREEN_BLINK_FILE, 4);
+      write_int (AMBER_BLINK_FILE, 1);
+      write_int (GREEN_BLINK_FILE, 3);
+      write_int (AMBER_LED_FILE, 0);
+      write_int (GREEN_LED_FILE, 0);
       break;
     default:
       ALOGE("set_led_state (dual) unexpected color: bcolorRGB=%08x\n", bcolorRGB);
