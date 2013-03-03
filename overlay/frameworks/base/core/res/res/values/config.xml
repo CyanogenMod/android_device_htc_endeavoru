@@ -203,4 +203,10 @@
     <!-- Disable search/ assist button menu entry in rebinding section. -->
     <integer name="config_deviceHardwareKeys">7</integer>
 
+     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
+     <bool name="config_intrusiveNotificationLed">true</bool>
+ 
+     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
+     <bool name="config_intrusiveBatteryLed">true</bool>
+
 </resources>
