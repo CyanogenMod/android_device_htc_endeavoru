@@ -17,6 +17,8 @@
     <string name="category_backlightdisable_title">Backlight</string>
     <string name="backlightdisable_title_head">Disable Button Backlight</string>
     <string name="backlightdisable_summary_head">Select to disable the capacitive button backlight</string>
+    <string name="backlightnotification_title_head">Button Backlight Notification</string>
+    <string name="backlightnotification_summary_head">Select to enable the capacitive button backlight for Notification events</string>
 
     <string name="category_smartdimmer_title">nVidia SmartDimmer</string>
     <string name="smartdimmer_switch_title_head">Enable</string>

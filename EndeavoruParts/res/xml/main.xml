@@ -48,6 +48,12 @@
 	        android:title="@string/backlightdisable_title_head"
 	        android:summary="@string/backlightdisable_summary_head"
 	        android:defaultValue="0" />
+	    <!-- Backlight Notification Option -->
+	    <CheckBoxPreference
+	        android:key="backlight_notification"
+	        android:title="@string/backlightnotification_title_head"
+	        android:summary="@string/backlightnotification_summary_head"
+	        android:defaultValue="0" />
 	</PreferenceCategory>
 
 	<PreferenceCategory

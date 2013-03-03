@@ -14,9 +14,11 @@
     <string name="fastcharge_title_head">Schnelles Laden</string>
     <string name="fastcharge_summary_head">Telefon zieht mehr Strom beim Laden über einen PC USB Anschluss</string>
 
-    <string name="category_backlightdisable_title">Hintergrundlicht</string>
-    <string name="backlightdisable_title_head">Tasten-Hintergrundlicht deaktivieren</string>
+    <string name="category_backlightdisable_title">Tasten-Hintergrundlicht</string>
+    <string name="backlightdisable_title_head">Deaktivieren</string>
     <string name="backlightdisable_summary_head">Deaktiviert das Hintergrundlicht der kapazitiven Tastenleiste</string>
+    <string name="backlightnotification_title_head">Benachrichtigungslicht</string>
+    <string name="backlightnotification_summary_head">Kapazitive Tastenleiste blinkt bei Benachrichtigungen</string>
 
     <string name="smartdimmer_switch_title_head">Einschalten</string>
     <string name="smartdimmer_switch_summary_head">nVidia SmartDimmer EIN/AUS (EIN kann durch weniger Beleuchtung und erhöhtem/n Kontrast/Farben batteriefreundlicher sein, AUS sollte in hellerem Display resultieren.</string>
