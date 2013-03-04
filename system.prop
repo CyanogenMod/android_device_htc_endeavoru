@@ -173,3 +173,6 @@ ro.hdmi.enable=true
 persist.sys.ui.hw=true
 
 windowsmgr.max_events_per_sec = 240
+
+# ums speed
+ro.vold.umsdirtyratio=50
