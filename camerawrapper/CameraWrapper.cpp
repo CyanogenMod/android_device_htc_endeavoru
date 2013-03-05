@@ -91,7 +91,7 @@ static int check_vendor_module()
     return rv;
 }
 
-const static char * scene_mode_values[] = {"auto,action,portrait,landscape,beach,fireworks,night,night-portrait,snow,sports,steadyphoto,sunset,theatre,barcode,candlelight,hdr,text,closeup,back-light","auto"};
+const static char * scene_mode_values[] = {"auto,action,portrait,landscape,beach,fireworks,night,night-portrait,snow,sports,steadyphoto,sunset,theatre,barcode,candlelight,hdr,text,closeup,back-light,backlight_portrait,beauty-mode,flowers,white-board,background-blur","auto"};
 
 static char * camera_fixup_getparams(int id, const char * settings)
 {
