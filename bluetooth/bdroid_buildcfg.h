@@ -20,6 +20,8 @@
 #define BTM_DEF_LOCAL_NAME "HTC One X"
 #define BTHC_USERIAL_READ_MEM_SIZE 1034
 
-#define A2DP_ENFORCE_MIN_FREQ "204000"
+#define A2DP_HW_SYSFS_TUNER "/sys/devices/platform/tegra_uart.2/a2dp_tuning"
+#define A2DP_HW_SYSFS_TUNER_OFF "0"
+#define A2DP_HW_SYSFS_TUNER_ON "1"
 
 #endif
