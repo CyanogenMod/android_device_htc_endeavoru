@@ -5,9 +5,9 @@
     </string-array>
 
     <string-array name="s2w_length_entries">
-        <item>1 bouton</item>
-        <item>2 boutons</item>
-        <item>3 boutons</item>
+        <item>1 touche</item>
+        <item>2 touches</item>
+        <item>3 touches</item>
     </string-array>
 
 </resources>
