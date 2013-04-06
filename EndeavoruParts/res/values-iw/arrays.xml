@@ -1,13 +1,13 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string-array name="s2w_stroke_entries">
-        <item>λμ λιεεο</item>
-        <item>ϊμει λιεεο</item>
+        <item>Χ›Χ Χ›Χ™Χ•Χ•Χ</item>
+        <item>ΧªΧΧ•Χ™ Χ›Χ™Χ•Χ•Χ</item>
     </string-array>
 
     <string-array name="s2w_length_entries">
-        <item>λτϊεψ ΰηγ</item>
-        <item>ωπι λτϊεψιν</item>
-        <item>ωμεωδ λτϊεψιν</item>
+        <item>Χ›Χ¤ΧªΧ•Χ¨ ΧΧ—Χ“</item>
+        <item>Χ©Χ Χ™ Χ›Χ¤ΧªΧ•Χ¨Χ™Χ</item>
+        <item>Χ©ΧΧ•Χ©Χ” Χ›Χ¤ΧªΧ•Χ¨Χ™Χ</item>
     </string-array>
 
     <string-array name="s2w_stroke_entries_values" translatable="false">
