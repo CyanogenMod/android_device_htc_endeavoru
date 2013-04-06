@@ -1,0 +1,23 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="s2w_stroke_entries">
+        <item>כל כיוון</item>
+        <item>תלוי כיוון</item>
+    </string-array>
+
+    <string-array name="s2w_length_entries">
+        <item>כפתור אחד</item>
+        <item>שני כפתורים</item>
+        <item>שלושה כפתורים</item>
+    </string-array>
+
+    <string-array name="s2w_stroke_entries_values" translatable="false">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="s2w_length_entries_values" translatable="false">
+        <item>325</item>
+        <item>500</item>
+        <item>850</item>
+    </string-array>
+
+</resources>
