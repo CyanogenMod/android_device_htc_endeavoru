@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">One X Settings</string>
+    <string name="app_name">Advanced settings</string>
 
     <string name="category_s2w_title">Sweep2Wake</string>
     <string name="s2w_switch_title_head">Enable</string>
