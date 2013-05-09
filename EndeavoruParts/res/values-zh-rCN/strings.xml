@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">高级设置</string>
+
+    <string name="category_s2w_title">滑动唤醒</string>
+    <string name="s2w_switch_title_head">启用</string>
+    <string name="s2w_switch_summary_head">在电容触摸键上滑动将开启/关闭屏幕</string>
+    <string name="s2w_stroke_title_head">方向</string>
+    <string name="s2w_stroke_summary_head">如设为 "指定方向"，左到右的滑动将开启屏幕，右到左的滑行将关闭屏幕</string>
+    <string name="s2w_length_title_head">最低长度</string>
+    <string name="s2w_length_summary_head">设定开启/关闭屏幕所需滑动的按钮数量</string>
+
+    <string name="category_usb_title">USB</string>
+    <string name="fastcharge_title_head">快速充电</string>
+    <string name="fastcharge_summary_head">连接电脑时从 USB 口拉取更多的电流</string>
+
+    <string name="category_backlightdisable_title">背光灯</string>
+    <string name="backlightdisable_title_head">禁用按键背光灯</string>
+    <string name="backlightdisable_summary_head">禁用电容触摸键的背光灯</string>
+    <string name="backlightnotification_title_head">按键背光灯通知</string>
+    <string name="backlightnotification_summary_head">将电容触摸键的背光灯作为通知灯使用</string>
+
+    <string name="category_smartdimmer_title">Nvidia SmartDimmer</string>
+    <string name="smartdimmer_switch_title_head">启用</string>
+    <string name="smartdimmer_switch_summary_head">开启/关闭 Nvidia SmartDimmer (开启将降低电量使用与 LCD 背光并加强对比度/色彩；关闭将导致更亮的 LCD 背光)</string>
+
+</resources>
