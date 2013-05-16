@@ -16,12 +16,13 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string-array name="s2w_stroke_entries">
-        <item>Cualquier dirección</item>
-        <item>Dirección específica</item>
+        <item>Jakýkoliv směr</item>
+        <item>Konkrétní směr</item>
     </string-array>
+
     <string-array name="s2w_length_entries">
-        <item>1 botón</item>
-        <item>2 botones</item>
-        <item>3 botones</item>
+        <item>1 tlačítko</item>
+        <item>2 tlačítka</item>
+        <item>3 tlačítka</item>
     </string-array>
 </resources>
