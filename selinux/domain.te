@@ -1,0 +1,8 @@
+allow { surfaceflinger system system_app } { knv_device nvhost_writable_device }:chr_file rw_file_perms;
+
+allow surfaceflinger { sysfs_devices_tegradc }:file w_file_perms;
+allow surfaceflinger tee_device:chr_file rw_file_perms;
+
+allow mediaserver { nvhost_writable_device nv_device nvhost_device }:chr_file rw_file_perms;
+
+allow appdomain { nvhost_writable_device nv_device }:chr_file rw_file_perms;

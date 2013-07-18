@@ -147,3 +147,13 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/endeavoru
+
+# SE Linux policies
+BOARD_SEPOLICY_DIRS := \
+    device/htc/endeavoru/selinux
+
+BOARD_SEPOLICY_UNION := \
+    file_contexts \
+    file.te \
+    device.te \
+    domain.te

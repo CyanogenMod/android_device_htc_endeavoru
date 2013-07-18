@@ -1,0 +1,1 @@
+type sysfs_devices_tegradc, fs_type, sysfs_type;
