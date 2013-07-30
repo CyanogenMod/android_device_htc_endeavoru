@@ -152,9 +152,6 @@
          point on the move. A value of 0 means no periodic scans will be used in the framework. -->
     <integer translatable="false" name="config_wifi_framework_scan_interval">0</integer>
 
-    <!-- Boolean indicating whether the wifi chipset has p2p support -->
-    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
-
     <!-- This string array should be overridden by the device to present a list of network
          attributes.  This is used by the connectivity manager to decide which networks can coexist
          based on the hardware -->
