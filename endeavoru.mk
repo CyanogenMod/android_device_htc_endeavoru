@@ -39,7 +39,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # Init files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/fstab.endeavoru:root/fstab.endeavoru \
-    $(LOCAL_PATH)/ramdisk/init:root/init \
     $(LOCAL_PATH)/ramdisk/init.endeavoru.rc:root/init.endeavoru.rc \
     $(LOCAL_PATH)/ramdisk/init.endeavoru.usb.rc:root/init.endeavoru.usb.rc \
     $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
