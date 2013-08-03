@@ -192,7 +192,8 @@ PRODUCT_PACKAGES += \
     TQS_D_1.7.ini \
     crda \
     regulatory.bin \
-    calibrator \
-    wlconf
+    calibrator
+
+#    wlconf
 
 $(call inherit-product-if-exists, vendor/htc/endeavoru/endeavoru-vendor.mk)
