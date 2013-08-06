@@ -144,6 +144,8 @@ TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/endeavoru/prebuilt/recovery_kernel
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_UMS_LUNFILE := "/sys/devices/platform/fsl-tegra-udc/gadget/lun0/file"
 BOARD_HAS_NO_SELECT_BUTTON := true
+TARGET_RECOVERY_FSTAB := device/htc/endeavoru/ramdisk/fstab.endeavoru
+RECOVERY_FSTAB_VERSION := 2
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/endeavoru
