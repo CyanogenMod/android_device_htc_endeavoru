@@ -176,3 +176,6 @@ windowsmgr.max_events_per_sec = 240
 
 # ums speed
 ro.vold.umsdirtyratio=50
+
+# Enable legacy screenshot code for older Tegra 3 EGL libs
+ro.bq.gpu_to_cpu_unsupported=1
