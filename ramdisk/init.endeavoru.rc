@@ -245,7 +245,7 @@ on boot
     chown system system /sys/camera_led_status/led_wimax_status
     chown system system /sys/camera_led_status/led_hotspot_status
     chown system camera /sys/class/leds/flashlight/brightness
-    chmod 0660 /sys/class/leds/flashlight/brightness
+    chmod 0666 /sys/class/leds/flashlight/brightness
 # HTC_END
 
 # pollyd (respect & thanks to Adrian Ulrich <adrian@blinkenlights.ch> )
