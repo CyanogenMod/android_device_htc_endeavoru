@@ -17,12 +17,11 @@
 <!-- Camera app resources that may need to be customized
      for different hardware or product builds. -->
 <resources>
-    <!-- HTC Camcorder Mode -->
-    <bool name="needsHTCCamMode">true</bool>
-    <!-- Allows setting video size before recording starts -->
-    <bool name="needsEarlyVideoSize">true</bool>
     <!-- The camera removes the focus modes by default when touch-to-focus
          exists. Use this option to change that behavior -->
     <bool name="wantsFocusModes">true</bool>
-    <bool name="disableSoftwareHDR">true</bool>
+    <!-- Allows setting video size before recording starts -->
+    <bool name="needsEarlyVideoSize">true</bool>
+    <!-- HTC Camcorder Mode -->
+    <bool name="needsHTCCamMode">true</bool>
 </resources>
