@@ -159,3 +159,6 @@ BOARD_SEPOLICY_UNION := \
     file.te \
     device.te \
     domain.te
+
+# CM Hardware
+BOARD_HARDWARE_CLASS := device/htc/endeavoru/cmhw/
