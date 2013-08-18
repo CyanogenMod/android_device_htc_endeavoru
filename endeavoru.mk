@@ -44,26 +44,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc
 
-# These are the hardware-specific features
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
-
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml)
 
@@ -143,14 +123,6 @@ PRODUCT_PACKAGES += \
     setup_fs \
     com.android.future.usb.accessory
 
-# lights
-PRODUCT_PACKAGES += \
-    lights.tegra
-
-# Camera wrapper
-PRODUCT_PACKAGES += \
-    camera.tegra
-
 # Bluetooth tools
 PRODUCT_PACKAGES += \
     l2ping \
@@ -175,14 +147,6 @@ PRODUCT_PACKAGES += \
     tinyplay \
     tinycap
 
-# pollyd (respect & thanks to Adrian Ulrich <adrian@blinkenlights.ch> )
-PRODUCT_PACKAGES += \
-    pollyd \
-    Polly
-
-PRODUCT_PACKAGES += \
-    EndeavoruParts
-
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
@@ -192,7 +156,9 @@ PRODUCT_PACKAGES += \
     TQS_D_1.7.ini \
     crda \
     regulatory.bin \
-    calibrator \
     wlconf
 
 $(call inherit-product-if-exists, vendor/htc/endeavoru/endeavoru-vendor.mk)
+
+# common tegra3-HOX+ configs
+$(call inherit-product, device/htc/tegra3-common/tegra3.mk)

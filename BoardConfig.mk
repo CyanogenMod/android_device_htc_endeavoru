@@ -20,35 +20,13 @@
 # definition file).
 #
 
-# This variable is set first, so it can be overridden
-# by BoardConfigVendor.mk
-USE_CAMERA_STUB := true
-BOARD_USES_GENERIC_AUDIO := true
-
-# inherit from the proprietary version
--include vendor/htc/endeavoru/BoardConfigVendor.mk
-
-TARGET_BOARD_PLATFORM := tegra
+# inherit from tegra3-common
+-include device/htc/tegra3-common/BoardConfigCommon.mk
 
 #custom init rc
 TARGET_PROVIDES_INIT_RC := true
 
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := cortex-a9
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_ARCH_VARIANT_CPU := cortex-a9
-ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
-
-TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := 
-
-USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/htc/endeavoru/config/egl.cfg
-BOARD_EGL_NEEDS_LEGACY_FB := true
-
+# Boot/Recovery image settings
 BOARD_KERNEL_CMDLINE := 
 BOARD_KERNEL_PAGESIZE := 2048
 
@@ -76,10 +54,6 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 8388608
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1342177280
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2302672896
 BOARD_FLASH_BLOCK_SIZE := 4096
-
-BOARD_VOLD_MAX_PARTITIONS := 20
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/tegra-udc.0/gadget/lun0/file"
 
 # Wifi related defines
 USES_TI_MAC80211 := true
@@ -119,24 +93,10 @@ TARGET_KERNEL_MODULES := WIFI_MODULES
 # Avoid the generation of ldrcc instructions
 NEED_WORKAROUND_CORTEX_A9_745320 := true
 
-# Audio(prebuilt)
-COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB
-
-# HTC specific
-BOARD_USE_NEW_LIBRIL_HTC := true
-COMMON_GLOBAL_CFLAGS += -DHTCLOG
-
 # Sensors invensense
 BOARD_USES_GENERIC_INVENSENSE := false
 
-# Camera
-BOARD_CAMERA_HAVE_ISO := true
-COMMON_GLOBAL_CFLAGS += -DHAVE_ISO
-COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
-COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
-
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
 
 # Recovery
