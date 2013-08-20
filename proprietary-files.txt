@@ -3,9 +3,11 @@ bin/uim-sysfs
 
 #RIL stuff
 bin/nvm_server
+bin/nvm_client
 bin/mknod
 bin/make_sec_bin
 bin/IMCdownload
+etc/Flash_Loader.conf
 bin/InjectionTool
 bin/rild
 bin/gsm0710muxd
@@ -13,6 +15,8 @@ bin/poweroff_modem.sh
 bin/poweron_modem_fls.sh
 lib/libhtc_ril.so
 lib/libhtc_rilhook.so
+lib/libril-icera.so
+lib/libril.so
 
 #Wifi stuff
 bin/initial_regdom.sh
@@ -27,8 +31,12 @@ lib/libmllite.so
 lib/libinvensense_hal.so
 
 #Nvidia
-bin/nvcpud
+bin/nvcap_test
+bin/nvtest
+bin/nv_hciattach
+bin/getnvm.sh
 bin/tf_daemon
+bin/tegrastats
 lib/libcgdrv.so
 lib/libardrv_dynamic.so
 lib/libnvapputil.so
@@ -41,8 +49,8 @@ lib/libnvcam_imageencoder.so
 lib/libnvcapclk.so
 lib/libnvcap.so
 lib/libnvcap_video.so
+lib/libnvcpl.so
 lib/libnvcontrol_jni.so
-lib/libnvcpud.so
 lib/libnvddk_2d.so
 lib/libnvddk_2d_v2.so
 lib/libnvglsi.so
@@ -77,9 +85,6 @@ lib/libnvomxilclient.so
 lib/libnvomx.so
 lib/libnvos.so
 lib/libnvparser.so
-lib/libnvremoteevtmgr.so
-lib/libnvremotell.so
-lib/libnvremoteprotocol.so
 lib/libnvrm_graphics.so
 lib/libnvrm.so
 lib/libnvsm.so
@@ -90,6 +95,10 @@ lib/libnvwinsys.so
 lib/libnvwsi.so
 lib/libstagefrighthw.so
 lib/libtf_crypto_sst.so
+
+# OMX
+#lib/libstagefright_omx.so
+#lib/libaricentomxplugin.so
 
 #Modem
 etc/QUO_6260.fls.clean
@@ -114,8 +123,9 @@ etc/firmware/ti-connectivity/wl1271-nvs.bin
 etc/firmware/ti-connectivity/wl128x-fw-4-mr.bin
 etc/firmware/ti-connectivity/wl128x-fw-4-plt.bin
 etc/firmware/ti-connectivity/wl128x-fw-4-sr.bin
+etc/wifi/TQS_D_1.7.ini
 
-#Audio - ICS blobs
+# Audio
 etc/AIC3008_REG_DualMic.csv
 etc/AIC3008_REG_DualMic_XC.csv
 etc/DSP_number.txt
@@ -157,10 +167,14 @@ etc/soundimage/srsfx_trumedia_music.cfg
 etc/soundimage/srsfx_trumedia_voice.cfg
 etc/soundimage/srs_geq10.cfg
 etc/soundimage/srs_global.cfg
-lib/hw/audio_policy.tegra.so
+# We don't use the MR1 audio policy at the moment because it crashes
+#lib/hw/audio_policy.tegra.so
 lib/hw/audio.primary.tegra.so
-lib/libasound.so
 lib/libcall_volume.so
+lib/libaudioavp.so
+lib/libnvaudioservice.so
+lib/libsrsprocessing.so
+lib/soundfx/libsrsfx.so
 
 #GPS/AGPS
 app/PGPSDownloader.apk
@@ -185,6 +199,7 @@ lib/libgps.so
 lib/libgpsservices.so
 lib/librilpos.so
 lib/libsupllocationprovider.so
+lib/libpos.so
 
 #FM(TI)
 lib/libmcphal.so
@@ -194,9 +209,16 @@ lib/hw/gralloc.tegra.so
 
 #HWComposer
 lib/hw/hwcomposer.tegra.so
+#etc/priorityd.sh
 
 #Battery
 bin/htcbatt
+
+# HTC logging masks or something like that.
+# Read by htcbatt but probably works without it.
+etc/hldm.bin
+etc/hltof.bin
+etc/hltrd.bin
 
 #Sensors
 bin/ewtzmud
@@ -205,6 +227,9 @@ lib/hw/sensors.endeavoru.so
 lib/libsensors_mpl.so
 lib/libmpl.so
 lib/libmlplatform.so
+lib/libakmd.so
+lib/libinvensense_hal.so
+lib/libewtzmu2cali.so
 
 #EGL
 lib/egl/libEGL_perfhud.so
@@ -223,13 +248,14 @@ vendor/firmware/libpn544_fw.so
 
 #Widevine DRM
 lib/libdrmdecrypt.so
+lib/libWVphoneAPI.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/libwvm.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/drm/libdrmwvmplugin.so
 
 #Camera
-lib/hw/vendor-camera.tegra.so
+lib/hw/camera.tegra.so
 lib/libBeautyChat.so
 lib/libcamerapp.so
 lib/libcameraasd.so
@@ -240,4 +266,145 @@ lib/libposteffect.so
 lib/libOlaEngineNew.so
 lib/libhtc_dis.so
 
-etc/Flash_Loader.conf
+# Referenced by libposteffect.so and camera.tegra.so
+media/GPU/ContrastCurveSet.bmp
+media/GPU/CurveCold.bmp
+media/GPU/CurveCross.bmp
+media/GPU/CurveSepia.bmp
+media/GPU/CurveWarm.bmp
+media/GPU/dot_mask_0.bmp
+media/GPU/dot_mask_1.bmp
+media/GPU/dot_mask_2.bmp
+media/GPU/dot_mask_3.bmp
+media/GPU/mask_vignette_legacy.bmp
+media/GPU/mask_vignette_wide.bmp
+media/GPU/stylizeColorRamp.bmp
+media/GPU/stylizeContrastRamp.bmp
+media/GPU/twoToneMaskH.bmp
+
+#
+# Files below here appear on the newest HTC endeavoru RUU.
+# Their purpose or benefit to us is unclear and therefore they are not used
+# currently.
+# Not all files were added.
+#
+
+# Cable Notify Daemon?! For MHL?
+#bin/cand
+#etc/hsml.key
+
+# HTC PnPMgr
+#bin/pnpmgr
+#etc/pnp.xml
+
+# Assisted GPS
+#bin/agpsd
+
+# TI FM radio
+#lib/libfmchr.so
+#lib/libfmradio.so
+#lib/libfmstack.so
+
+# SUPL (Secure User Plane Location)
+#framework/android.supl.jar
+#framework/android.supl.odex
+#bin/SuplConfig.spl
+#bin/client_keystore.bks
+#bin/auto_hslp_keystore.bks
+#lib/libsuplhelperservicejni.so
+
+# Dx DRM Server
+#bin/DxDrmServerIpc
+#lib/libDxAndroidSpecific.so
+#lib/libDxDrmCAPI.so
+#lib/libDxDrmJava.so
+#lib/libDxDtcpClient.so
+#lib/libjDTCPServer.so
+#lib/libjUPnPCP.so.
+#lib/libawDTCP.so
+
+#lib/libhtc-opt2.so
+
+#bin/abcc
+#bin/clockd
+#bin/qb_offmode_alarm
+#bin/settings
+#lib/drm/libhtcomaplugin.so
+
+#bin/bluetoothd
+#bin/bma150_usr
+#bin/brcmapd
+#bin/charging
+#bin/cluster
+#bin/cluster_get.sh
+#bin/cluster_set.sh
+#bin/RescueServer
+#bin/RescueStarter
+#bin/bugmailer.sh
+#bin/dalvik_coredump.sh
+#bin/dbus-daemon
+#bin/dcc
+#bin/downloader
+#bin/fild
+#bin/fscd_msdos
+#bin/hdcp_test
+#bin/hotplug
+#bin/htc_ebdlogd
+#bin/ipv6tether
+#bin/logcat2
+#bin/mount_debugfs.sh
+#bin/netsharing
+#bin/pand
+#bin/poweron_modem_hboot.sh
+#bin/atpipe_plain
+#bin/python
+#bin/radvd
+# crda regulatory db dumper
+#bin/regdbdump
+#bin/sdptool
+#bin/send_bug
+#bin/shutdown
+#bin/test-wvdrmplugin
+#bin/ttytestapp
+#bin/udhcpd
+#bin/xaplay
+
+#xbin/reboot-monitor.sh
+
+#etc/AlarmGroupQueueList.xml
+#etc/PCTOOL.ISO
+#etc/agps_rm
+#etc/dbus.conf
+#etc/image_beats_wireless_bt.bin
+#etc/image_gec.bin
+#etc/image_gec_bt.bin
+#etc/image_htc_earbud.bin
+#etc/image_htc_midtier.bin
+#etc/image_ibeats.bin
+#etc/image_ibeats_solo.bin
+#etc/image_ibeats_solo_v2.bin
+#etc/image_ibeats_v2.bin
+#etc/libdvhwrc.so
+#etc/libpmhwrl.so
+#etc/post_boot.sh
+#etc/res_ctrl.conf
+#etc/searchabledb.conf
+#etc/uilock.yuv
+#etc/voicemail-conf.xml
+#etc/wifioffloadpkg.xml
+
+# Some face detection stuff
+#lib/libfilterpack_facedetect.so
+#lib/libfrsdk.so.
+#media/LMprec_508.emd
+#media/PFFprec_600.emd
+
+# Facedetection referenced by libfacelock_jni.so
+#vendor/pittpatt/models/recognition/face.face.y0-y0-22-b-N/full_model.bin
+#vendor/pittpatt/models/detection/yaw_roll_face_detectors.6/head-y0-yi45-p0-pi45-rp30-ri30.5-v24/full_model.bin
+#vendor/pittpatt/models/detection/yaw_roll_face_detectors.6/head-y0-yi45-p0-pi45-rn30-ri30.5-v24/full_model.bin
+#vendor/pittpatt/models/detection/yaw_roll_face_detectors.6/head-y0-yi45-p0-pi45-r0-ri30.4a-v24/full_model.bin
+#vendor/pittpatt/models/detection/multi_pose_face_landmark_detectors.7/nose_base-y0-yi45-p0-pi45-r0-ri20.lg_32/full_model.bin
+#vendor/pittpatt/models/detection/multi_pose_face_landmark_detectors.7/left_eye-y0-yi45-p0-pi45-r0-ri20.lg_32/full_model.bin
+#vendor/pittpatt/models/detection/multi_pose_face_landmark_detectors.7/right_eye-y0-yi45-p0-pi45-r0-ri20.lg_32-2/full_model.bin
+
