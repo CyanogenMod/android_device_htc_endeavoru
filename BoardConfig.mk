@@ -115,6 +115,3 @@ BOARD_SEPOLICY_DIRS += \
     device/htc/endeavoru/selinux
 
 #BOARD_SEPOLICY_UNION +=
-
-# CM Hardware
-BOARD_HARDWARE_CLASS := device/htc/endeavoru/cmhw/
