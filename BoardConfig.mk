@@ -110,15 +110,11 @@ RECOVERY_FSTAB_VERSION := 2
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/endeavoru
 
-# SE Linux policies
-BOARD_SEPOLICY_DIRS := \
+# Device specific SELinux policies
+BOARD_SEPOLICY_DIRS += \
     device/htc/endeavoru/selinux
 
-BOARD_SEPOLICY_UNION := \
-    file_contexts \
-    file.te \
-    device.te \
-    domain.te
+#BOARD_SEPOLICY_UNION +=
 
 # CM Hardware
 BOARD_HARDWARE_CLASS := device/htc/endeavoru/cmhw/
