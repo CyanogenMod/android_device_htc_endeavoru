@@ -41,35 +41,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml)
 
-# media config xml file
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml
-
-# media codec config xml file
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml
-
 # bluetooth config
 PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
 
 # configs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/config/gps.conf:system/etc/gps.conf \
-    $(LOCAL_PATH)/config/nvram_4329.txt:system/etc/nvram_4329.txt \
-    $(LOCAL_PATH)/config/nvram_4330.txt:system/etc/nvram_4330.txt
-
-# audio
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/audio/audio_effects.conf:system/etc/audio_effects.conf
-
-# misc
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/model_frontal.xml:system/etc/model_frontal.xml
+    $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf
 
 # nfc
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/nfcee_access.xml:system/etc/nfcee_access.xml
+    $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml
 
 # Other extra packages
 PRODUCT_PACKAGES += \
