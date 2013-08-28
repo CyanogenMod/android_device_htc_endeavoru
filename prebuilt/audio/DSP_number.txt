@@ -1,4 +1,0 @@
-record_codec 10
-n_main_mic 8
-n_handset_mic 37
-n_headset_mic 9

@@ -116,6 +116,9 @@ etc/firmware/ti-connectivity/wl128x-fw-4-plt.bin
 etc/firmware/ti-connectivity/wl128x-fw-4-sr.bin
 
 #Audio - ICS blobs
+etc/AIC3008_REG_DualMic.csv
+etc/AIC3008_REG_DualMic_XC.csv
+etc/DSP_number.txt
 etc/soundimage/CodecDSPID.txt
 etc/soundimage/CodecDSPID_XC.txt
 etc/soundimage/Sound_BT_CarMode.txt
@@ -235,3 +238,5 @@ lib/libhtcsurfaces.so
 lib/libposteffect.so
 lib/libOlaEngineNew.so
 lib/libhtc_dis.so
+
+etc/Flash_Loader.conf
