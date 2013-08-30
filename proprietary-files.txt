@@ -119,6 +119,7 @@ etc/firmware/ti-connectivity/wl128x-fw-4-sr.bin
 etc/AIC3008_REG_DualMic.csv
 etc/AIC3008_REG_DualMic_XC.csv
 etc/DSP_number.txt
+etc/soundimage/board_version.txt
 etc/soundimage/CodecDSPID.txt
 etc/soundimage/CodecDSPID_XC.txt
 etc/soundimage/Sound_BT_CarMode.txt
