@@ -125,10 +125,15 @@ on boot
 
 # settings EndeavoruParts
     chmod 0666 /sys/devices/platform/htc_battery/fast_charge
+    chmod 0666 /sys/android_touch/calibration_control
+    chmod 0666 /sys/android_touch/s2w_allow_double_tap
     chmod 0666 /sys/android_touch/s2w_allow_stroke
-    chmod 0666 /sys/android_touch/sweep2wake
+    chmod 0666 /sys/android_touch/s2w_double_tap_barrier_y
+    chmod 0666 /sys/android_touch/s2w_double_tap_duration
+    chmod 0666 /sys/android_touch/s2w_double_tap_threshold
     chmod 0666 /sys/android_touch/s2w_min_distance
     chmod 0666 /sys/android_touch/s2w_register_threshold
+    chmod 0666 /sys/android_touch/sweep2wake
 
     # Preload app folder
     mkdir /data/preload 0771 system system
