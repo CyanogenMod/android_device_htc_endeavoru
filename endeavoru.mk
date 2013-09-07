@@ -80,7 +80,7 @@ PRODUCT_PACKAGES += \
     regulatory.bin \
     wlconf
 
-$(call inherit-product-if-exists, vendor/htc/endeavoru/endeavoru-vendor.mk)
+$(call inherit-product, vendor/htc/endeavoru/endeavoru-vendor.mk)
 
 # common tegra3-HOX+ configs
 $(call inherit-product, device/htc/tegra3-common/tegra3.mk)
