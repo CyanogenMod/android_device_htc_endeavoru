@@ -13,7 +13,7 @@ for FILENAME in `egrep -v '(^#|^$)' proprietary-files.txt`; do
     if [ ! -d $BASE/$DIR ]; then
         mkdir -p $BASE/$DIR
     fi
-    cp $SYSDIR/$FILENAME $BASE/$FILENAME
+    cp "$SYSDIR/$FILENAME" "$BASE/$FILENAME"
 done
 
 VENDOR=htc
