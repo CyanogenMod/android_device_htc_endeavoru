@@ -76,6 +76,7 @@ PRODUCT_PACKAGES += \
     hostapd.conf \
     wifical.sh \
     TQS_D_1.7.ini \
+    calibrator \
     crda \
     regulatory.bin \
     wlconf
