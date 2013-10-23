@@ -76,7 +76,11 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf \
     wifical.sh \
-    TQS_D_1.7.ini \
+    128x_TQS_D_1.7.ini \
+    wl1271-nvs.bin \
+    wl128x-fw-4-mr.bin \
+    wl128x-fw-4-plt.bin \
+    wl128x-fw-4-sr.bin \
     calibrator \
     crda \
     regulatory.bin \
