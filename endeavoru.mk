@@ -27,6 +27,29 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-data-only=1
 
+# Increase UMS speed
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.umsdirtyratio=50
+
+# Enable legacy screenshot code for older Tegra 3 EGL libs
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bq.gpu_to_cpu_unsupported=1
+
+# Override phone-xhdpi-1024-dalvik-heap.mk setting
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapgrowthlimit=96m
+
+# Smoother window manager experience.
+PRODUCT_PROPERTY_OVERRIDES += \
+    windowsmgr.max_events_per_sec = 240 #300
+
+# RIL hack
+#ro.telephony.ril.v3=signalstrength,skipbrokendatacall
+
+# force gpu rendering(2d drawing) [Nvidia setting - libhtc-opt2.so]
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.ui.hw=true
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 

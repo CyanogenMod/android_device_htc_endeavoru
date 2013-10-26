@@ -1,9 +1,3 @@
-#
-# system.prop for endeavoru
-#
-#
-tf.enable=y
-
 ro.ril.ecc.VODA-Africa-South=112,911,999
 ro.ril.ecc.HTC-GCC=999,112,997
 ro.ril.ecc.HTC-WWE=999
@@ -14,6 +8,10 @@ ro.ril.ecc.HTC-ITA=112,911
 ro.ril.ecc.HTC-EastEurope=112
 ro.ril.enable.a52.HTC-ITA=1
 ro.ril.enable.a53.HTC-ITA=1
+ro.phone.min_match.HTC__Y13=8
+ro.phone.min_match.HTC__001=8
+ro.phone.min_match.HTC__J15=8
+ro.phone.min_match.HTC__016=8
 ro.ril.enable.a52=0
 ro.ril.enable.a53=1
 ro.ril.enable.dtm=0
@@ -22,12 +20,14 @@ ro.ril.hsupa.category=6
 ro.ril.hsxpa=4
 ro.ril.fast.dormancy.rule=1
 ro.ril.radio.svn=1
-ro.ril.disable.fd.plmn.prefix=23402,23410,23411,23420,27202
+ro.ril.disable.fd.plmn.prefix=23402,23410,23411,23420,23594,27202,27205
 ro.ril.enable.managed.roaming=1
 ro.ril.enable.sdr=1
+ro.ril.n-roaming.mcclist=219,204
 ro.ril.enable.amr.wideband=1
 ro.ril.enable.r8fd=0
 ro.ril.disable.cpc=1
+ro.com.google.clientidbase=android-htc-rev
 ro.ril.vmail.23415=1571,BT,121,VDF UK
 ro.ril.vmail.27203=171
 ro.ril.vmail.65502=181
@@ -41,11 +41,16 @@ ro.ril.vmail.22288=4200,I WIND
 ro.ril.vmail.20801=888
 ro.ril.vmail.20810=123
 ro.ril.vmail.20826=777
+ro.product.model=HTC One X
+ro.config.htc.enableCOTA=1
+ro.watch.appid=com.sdgtl.watch.enru_50_jb_s
 ro.ril.enable.pre_r8fd=1
 ro.ril.fd.pre_r8_tout.scr_off=2
 ro.ril.fd.pre_r8_tout.scr_on=3
 ro.ril.fd.r8_tout.scr_off=0
 ro.ril.fd.r8_tout.scr_on=0
+ro.ril.enable.enhance.search=1
+dev.defaultwallpaper=/system/customize/resource/wallpapers_a_00.jpg
 ro.ril.imc.fdn=0
 ro.ril.imc.dtmclass=0
 ro.ril.imc.band=900,1800,1900,850
@@ -59,23 +64,37 @@ ro.ril.imc.uea2=0
 ro.ril.imc.uia2=0
 ro.ril.edpcch.pwr.boost=1
 ro.ril.hspa.mac.ehs=1
+ro.sys.miracast=false
 
+dalvik.vm.heapsize=256m
+dalvik.vm.heapgrowthlimit=96m
 ro.opengles.version=131072
-
 wifi.interface=wlan0
-
-# RIL hack
-ro.telephony.ril.v3=signalstrength,skipbrokendatacall
-
+# CM: Use wlan0
+wifi.softap.interface=wlan0
+wifi.softapconcurrent.interface=wlan0
 rild.libpath=/system/lib/libhtc_ril.so
+# RilLibPath for Ganlite by William_Lai
+rild.libpath.ganlite=/system/lib/librilswitch.so
 rilswitch.vendorlibpath=/system/lib/libhtc_ril.so
+rilswitch.ganlibpath=/system/lib/libganril.so
+
 rild.libargs=-e wwan0
 ro.sf.lcd_density=320
 ro.hwui.text_cache_width=2048
 ro.hwui.text_cache_height=256
+ro.hwui.renderer.disable_opaque=true
 
-# Default network type : 0 => WCDMA preferred
+# Default network type.
+# 0 => WCDMA preferred.
 ro.telephony.default_network=0
+
+# RIL, for ATT feature
+# ro.ril.att.feature=1
+# ro.ril.enable.ucsq=2
+
+# RIL, for BLUE feature
+# ro.ril.ble.feature=1
 
 # RIL, for IMC modem feature
 ro.ril.enable.imc.feature=1
@@ -83,7 +102,7 @@ ro.ril.enable.imc.feature=1
 ro.ril.projectname=endeavoru
 
 # RIL, parameters for register BLUE stk feature to modem
-ro.ril.stkprof.param=FFFFFFFF7F0000DF9703021F2200000000000000000040100000000000000000
+ro.ril.stkprof.param=FFFFFFFF7F1D00DFB703021F2200000083000000000040100000000000000000
 
 # Icera fild
 modem.fild.rootdir=/data/rfs
@@ -97,8 +116,8 @@ ro.ril.devicename=/dev/ttyACM1
 modem.powercontrol=disabled
 
 # -----------------------------
-# Speaker volume is from 20 to 31
-# This corresponds to -2dB to +8dB
+# speaker volume is from 20 to 31
+# this corresponds to -2dB to +8dB
 # -----------------------------
 audio.speaker.voice.0=20
 audio.speaker.voice.1=21
@@ -107,8 +126,8 @@ audio.speaker.voice.3=26
 audio.speaker.voice.4=28
 audio.speaker.voice.5=31
 # -----------------------------
-# Earpiece volume is from 20 to 31
-# This corresponds to -2dB to +8dB
+# earpiece volume is from 20 to 31
+# this corresponds to -2dB to +8dB
 # -----------------------------
 audio.earpiece.voice.0=20
 audio.earpiece.voice.1=21
@@ -117,8 +136,8 @@ audio.earpiece.voice.3=26
 audio.earpiece.voice.4=28
 audio.earpiece.voice.5=31
 # -----------------------------------
-# Headset volume is from 9 to 14
-# This corresponds to -34dB to -19dB
+# headset volume is from 9 to 14
+# this corresponds to -34dB to -19dB
 # ----------------------------------
 audio.headset.voice.0=16
 audio.headset.voice.1=19
@@ -126,22 +145,20 @@ audio.headset.voice.2=22
 audio.headset.voice.3=25
 audio.headset.voice.4=28
 audio.headset.voice.5=31
-
 persist.tegra.nvmmlite=1
-
-# Export for global effects
+#export for global effects
 htc.audio.global.state=0
 htc.audio.global.profile=0
-
-# Export for SoundHound
+#export for SoundHound
 persist.htc.audio.pcm.samplerate=48000
 persist.htc.audio.pcm.channels=2
-
-# Export for HTCAEC
+#export for HTCAEC
 persist.audio.SupportHTCHWAEC=1
-
-# Export for CS/PS call switch
+#export for CS/PS call switch
 persist.audio.AutoSwitchMic=1
+#export for ALT
+htc.audio.swalt.enable=1
+htc.audio.swalt.mingain=14512
 
 # NFC
 debug.nfc.fw_download=true
@@ -152,30 +169,79 @@ ro.usb_host=1
 
 # Internal Storage
 ro.phone_fat=1
+# for erase_dirty_fat tool
+ro.clean_free_cluster_threshold = 8
 
-# Fat Rsvd Sectors
-ro.fat_rsvd=66
+# ro.storage_structure: define the storage structure of this project
+# FUSE: 0x8, FAT: 0x4, SD: 0x2, INS: 0x1
+# Example: If the project has FUSE with SD card, the value should be defined as 10 (dec)
+ro.storage_structure = 4
 
-# Release Bluetooth HW/SW information
+#Relase Bluetooth HW/SW information
 ro.bt.chipset=TI 1283
 ro.bt.stack=TI BlueZ
 ro.bt.stack.version=1.1.0.3
+
+#Wireless setting
+ro.product.bluetooth = 4.0
+ro.product.wifi = 802.11 a/b/g/n
+
+init.svc.wpa_supplicant=
+init.svc.dhcpcd_wlan0=
+dhcp.wlan0.autoip=
+dhcp.wlan0.dns1=
+dhcp.wlan0.dns2=
+dhcp.wlan0.dns3=
+dhcp.wlan0.dns4=
+dhcp.wlan0.gateway=
+dhcp.wlan0.ipaddress=
+dhcp.wlan0.leasetime=
+dhcp.wlan0.mask=
+dhcp.wlan0.ooxx=
+dhcp.wlan0.pid=
+dhcp.wlan0.reason=
+dhcp.wlan0.result=
+dhcp.wlan0.server=
+net.wlan0.dns1=
+net.wlan0.dns2=
+wifi.wpa_supp_ready=
+wlan.driver.status=
+
+wifi.HostapdStarted=0
+
+#display
+ro.product.display_resolution = 4.7 inch 720p resolution
+
+#camera
+ro.product.main_camera = 8M
+ro.product.front_camera = 1.3M
 
 # Support HW reset dialog
 ro.product.hwreset=1
 ro.product.hwreset.timer1=5
 ro.product.hwreset.timer2=8
 
-# HDMI
+#Autobot car pc
+ro.htc.htcmode.data.path = /dev/ttyHSUSB3
+
+#hdmi
 ro.hdmi.enable=true
 
-# force gpu rendering(2d drawing) [Nvidia setting - libhtc-opt2.so]
-persist.sys.ui.hw=true
+#CPU / MEM info
+ro.product.processor = Quadcore
+ro.product.ram = 1GB
 
-windowsmgr.max_events_per_sec = 240
-
-# ums speed
-ro.vold.umsdirtyratio=50
-
-# Enable legacy screenshot code for older Tegra 3 EGL libs
-ro.bq.gpu_to_cpu_unsupported=1
+#
+# ADDITIONAL_BUILD_PROPERTIES
+#
+ro.config.notification_sound=OnTheHunt.ogg
+ro.config.alarm_alert=Alarm_Classic.ogg
+drm.service.enabled=true
+ro.setupwizard.mode=OPTIONAL
+ro.com.google.gmsversion=4.2_r2
+ro.service.dpsvr.enabled=true
+ro.vendor.extension_library=/system/lib/libhtc-opt2.so
+persist.preload.common=0
+net.bt.name=Android
+dalvik.vm.stack-trace-file=/data/anr/traces.txt
+tf.enable=y
