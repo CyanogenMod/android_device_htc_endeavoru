@@ -1,0 +1,220 @@
+# Copyright (C) 2012 The Android Open Source Project
+#
+# IMPORTANT: Do not create world writable files or directories.
+# This is a common source of Android security bugs.
+#
+
+on init
+# NETWORK: NAT setting
+# To prevent out of WINDOW ACK from making
+# connection tracking to treat them as INVALID packet
+    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
+
+# Wifi: Disable the IPv6 of p2p0 interface
+    write /proc/sys/net/ipv6/conf/p2p0/disable_ipv6 1
+
+# change mode & owner of HTC Debug Driver node
+    chmod 0664 /proc/driver/hdf
+    chown root system /proc/driver/hdf
+
+#BOARD_HAVE_BLUETOOTH_BLUEZ    mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
+mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth #BOARD_HAVE_BLUETOOTH_BLUEZ
+
+    # HTC add: temp change settings db file access right while boot-up for bootanimation to access
+    chmod 0660 /data/data/com.android.providers.settings/databases/settings.db-wal
+    chmod 0660 /data/data/com.android.providers.settings/databases/settings.db-shm
+    chmod 0660 /data/data/com.android.providers.settings/databases/settings.db-journal
+    # HTC add: for customization wizard folder#
+    mkdir /data/data/cw 0770 root cw_access
+    mkdir /data/data/cwtemp 0770 root cw_access
+
+    # HTC add: make bootanimation can access settings.db during boot-up
+    chown system system /data/data
+    chmod 0771 /data/data
+    chmod 0660 /data/data/com.android.providers.settings/databases/settings.db-wal
+    chmod 0660 /data/data/com.android.providers.settings/databases/settings.db-shm
+    chmod 0660 /data/data/com.android.providers.settings/databases/settings.db-journal
+
+    # HTC add: double check the perms of /data/data/recovery for already existed case
+    chown root recvy_access /data/data/recovery
+    chmod 0775 /data/data/recovery
+
+#+SSD_RIL: from Qualcomm socket path
+    mkdir /dev/socket/qmux_radio 0770 radio radio
+    mkdir /dev/socket/qmux_audio 0770 audio audio
+    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
+    mkdir /dev/socket/qmux_gps 0770 gps gps
+#-SSD_RIL: from Qualcomm socket path
+
+#+SSD_AUD: soundhound dump pcm
+    mkdir /data/audio 0775 media audio
+    chmod 2775 /data/audio
+#-SSD_AUD: soundhound dump pcm
+
+    # CM: We use our own ril-daemon service definition, see htc-ril-daemon
+    stop ril-daemon
+
+on boot
+
+# [framework] begin:  create core file directory and set core files handler by setting core_pattern.
+# The handler will compress core files and try to limit the max set number of core files to 3.
+chmod 0755 /system/bin/dalvik_coredump.sh
+write /proc/sys/kernel/core_pattern |/system/bin/dalvik_coredump.sh\ %p\ %u\ %t
+# [framwrok] :end
+
+    write /proc/sys/vm/highmem_is_dirtyable 1
+
+    write /proc/sys/vm/lowmem_reserve_ratio 16\ 16
+    write /proc/sys/vm/min_free_kbytes 4096
+
+    chown system system /sys/class/leds/amber/brightness
+    chown system system /sys/class/leds/amber/blink
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/button-backlight/blink
+    chown system system /sys/class/leds/amber/off_timer
+    chown system system /sys/class/leds/green/off_timer
+    chown system system /sys/class/leds/button-backlight/off_timer
+    chown system system /sys/class/leds/flashlight/brightness
+
+# HTC SSD USB
+    chown system system /sys/class/android_usb/f_modem/on
+    chown system system /sys/class/android_usb/f_diag/on
+    chown system system /sys/class/android_usb/f_rmnet/on
+    chown system system /sys/devices/platform/android_usb/usb_disable
+
+#set diag permissions
+    chown radio radio /dev/diag
+    chown radio radio /dev/diag_mdm
+    chown radio radio /dev/htcdiag
+    chown radio radio /dev/diag_arm9
+    chown radio radio /dev/btdiag
+    chmod 0660 /dev/diag
+    chmod 0660 /dev/diag_mdm
+    chmod 0660 /dev/htcdiag
+    chmod 0660 /dev/diag_arm9
+    chmod 0660 /dev/btdiag
+
+# This will grant permission for LMI Rescue Start Server
+    chown graphics /system/bin/RescueStarter
+    chmod 755 /system/bin/RescueStarter
+    chown graphics /system/bin/RescueServer
+    chmod 755 /system/bin/RescueServer
+
+# This will start LMI Rescue Start Server
+    service RescueStarter /system/bin/RescueStarter
+    class core
+    user graphics
+    group input graphics
+
+service sfc /sbin/sfc
+    class core
+    oneshot
+
+service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
+    class core
+    user radio
+    group radio cache inet misc
+#    oneshot
+    disabled
+
+service nvm-server /system/bin/nvm_server
+    class core
+    cgroup bg
+    socket nvm-ctl stream 660 radio radio
+    user root
+    group root
+    oneshot
+
+#service poweron_modem /system/bin/poweron_modem.sh /data/modem_work/
+##    class late_start
+#    user root
+#    group root
+#    oneshot
+##    start gsm0710mux
+
+service modem-daemon /system/bin/modemd
+
+#Sophia-0410
+service kickstart /system/bin/qcks -1 modem_st1 -2 modem_st2 -3 mdm9k_config -i /firmware/mdm/image/ -u
+    class core
+    oneshot
+
+# CM: Change name so it doesn't clash with ril-daemon defined in init.rc
+service htc-ril-daemon /system/bin/rild
+    class core
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    socket rild-audio-gsm stream 660 radio system
+    socket rild-htc-coredump stream 660 radio system
+    socket rild-agps stream 660 radio system
+    socket rild-audio stream 660 radio audio
+## +++ for ganlite ril
+    socket ganat stream 660 radio ganlite_access
+    socket ganpsat stream 660 radio ganlite_access
+    socket kipc stream 660 radio ganlite_access
+## --- for ganlite ril
+    user root
+    group radio cache inet misc audio log
+
+service hdmid /system/bin/hdmid
+    socket displayd stream 0660 root system graphics
+    disabled
+
+on property:ro.hdmi.enable=true
+    start hdmid
+
+#BOARD_HAVE_BLUETOOTH_BLUEZ start
+service dbus /system/bin/dbus-daemon --system --nofork
+    class main
+    socket dbus stream 660 bluetooth bluetooth
+    user bluetooth
+    group bluetooth net_bt_admin
+
+service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n -d
+    class main
+    socket bluetooth stream 660 bluetooth bluetooth
+    socket dbus_bluetooth stream 660 bluetooth bluetooth
+    # init.rc does not yet support applying capabilities, so run as root and
+    # let bluetoothd drop uid to bluetooth with the right linux capabilities
+    group bluetooth net_bt_admin misc net_bt_stack
+    disabled
+#BOARD_HAVE_BLUETOOTH_BLUEZ end
+
+service flash_recovery /system/etc/install-recovery.sh
+    class main
+    oneshot
+
+service htc_dk /system/bin/dumpstate -s -k -a
+    class main
+    socket htc_dk stream 0660 shell log
+    disabled # CM: Disabled because constant calling dumpstate is stupid
+
+service htc_dlk /system/bin/dumpstate -s -l -a
+    class main
+    socket htc_dlk stream 0660 shell log
+    disabled # CM: Disabled because constant calling dumpstate is stupid
+
+# hs_uart
+service hs_uart /system/bin/hs_uart
+    class main
+    user root
+    group system misc input
+    oneshot
+
+#HTC_WIFI_START
+service L2PE /system/bin/l2_profile_exchange handset wlan1
+    user root
+    group root
+    disabled
+    oneshot
+#HTC_WIFI_END
+
+service priorityd /system/bin/sh /system/etc/priorityd.sh
+    user root
+    disabled
+    oneshot
+
+service reboot-monitor /system/bin/sh /system/xbin/reboot-monitor.sh
+    user root
+    disabled
+    oneshot

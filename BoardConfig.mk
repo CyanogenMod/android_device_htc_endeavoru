@@ -23,9 +23,6 @@
 # inherit from tegra3-common
 -include device/htc/tegra3-common/BoardConfigCommon.mk
 
-#custom init rc
-TARGET_PROVIDES_INIT_RC := true
-
 # Boot/Recovery image settings
 BOARD_KERNEL_CMDLINE := 
 BOARD_KERNEL_PAGESIZE := 2048
