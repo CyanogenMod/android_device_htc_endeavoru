@@ -27,7 +27,7 @@ ro.ril.n-roaming.mcclist=219,204
 ro.ril.enable.amr.wideband=1
 ro.ril.enable.r8fd=0
 ro.ril.disable.cpc=1
-ro.com.google.clientidbase=android-htc-rev
+#ro.com.google.clientidbase=android-htc-rev
 ro.ril.vmail.23415=1571,BT,121,VDF UK
 ro.ril.vmail.27203=171
 ro.ril.vmail.65502=181
@@ -41,7 +41,7 @@ ro.ril.vmail.22288=4200,I WIND
 ro.ril.vmail.20801=888
 ro.ril.vmail.20810=123
 ro.ril.vmail.20826=777
-ro.product.model=HTC One X
+#ro.product.model=HTC One X
 ro.config.htc.enableCOTA=1
 ro.watch.appid=com.sdgtl.watch.enru_50_jb_s
 ro.ril.enable.pre_r8fd=1
@@ -66,8 +66,8 @@ ro.ril.edpcch.pwr.boost=1
 ro.ril.hspa.mac.ehs=1
 ro.sys.miracast=false
 
-dalvik.vm.heapsize=256m
-dalvik.vm.heapgrowthlimit=96m
+#dalvik.vm.heapsize=256m
+#dalvik.vm.heapgrowthlimit=96m
 ro.opengles.version=131072
 wifi.interface=wlan0
 # CM: Use wlan0
@@ -234,14 +234,14 @@ ro.product.ram = 1GB
 #
 # ADDITIONAL_BUILD_PROPERTIES
 #
-ro.config.notification_sound=OnTheHunt.ogg
-ro.config.alarm_alert=Alarm_Classic.ogg
+#ro.config.notification_sound=OnTheHunt.ogg
+#ro.config.alarm_alert=Alarm_Classic.ogg
 drm.service.enabled=true
 ro.setupwizard.mode=OPTIONAL
 ro.com.google.gmsversion=4.2_r2
 ro.service.dpsvr.enabled=true
 ro.vendor.extension_library=/system/lib/libhtc-opt2.so
 persist.preload.common=0
-net.bt.name=Android
-dalvik.vm.stack-trace-file=/data/anr/traces.txt
+#net.bt.name=Android
+#dalvik.vm.stack-trace-file=/data/anr/traces.txt
 tf.enable=y
