@@ -43,8 +43,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     windowsmgr.max_events_per_sec = 240 #300
 
-# RIL hack
-#ro.telephony.ril.v3=signalstrength,skipbrokendatacall
+# Old RIL features
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril.v3=signalstrength,skipbrokendatacall
 
 # force gpu rendering(2d drawing) [Nvidia setting - libhtc-opt2.so]
 PRODUCT_PROPERTY_OVERRIDES += \
