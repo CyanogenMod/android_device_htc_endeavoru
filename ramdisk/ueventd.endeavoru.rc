@@ -65,3 +65,7 @@
 
 # autobot
 /dev/ttyHSUSB3                                 0660    autobot_access  autobot_access
+
+# Bluetooth
+/dev/hci_tty              0600   bluetooth  bluetooth
+/dev/tihci                0600   bluetooth  bluetooth

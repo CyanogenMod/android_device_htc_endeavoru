@@ -14,14 +14,7 @@
 # limitations under the License.
 #
 
-on boot
-
-# bluetooth
-    insmod /system/lib/modules/ti_hci_drv.ko
-    chmod 0666 /dev/tihci
-    chown system bluetooth /dev/tihci
-    insmod /system/lib/modules/uhid.ko
-
+on early-init
     chown system /sys/kernel/tegra_cap/core_cap_level
     chown system /sys/kernel/tegra_cap/core_cap_state
     chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -54,6 +47,15 @@ on boot
 # Mediaserver: camera calibration
     chown system system /dev/block/mmcblk0p2
     chmod 0664 /dev/block/mmcblk0p2
+
+on boot
+    # bluetooth
+    insmod /system/lib/modules/hci_if_drv.ko
+    insmod /system/lib/modules/uhid.ko
+    # Stock libbt-vendor wants /dev/hci_tty
+    exec /system/bin/mknod /dev/hci_tty c 239 0
+    chown bluetooth bluetooth /dev/hci_tty
+    chmod 0600 /dev/hci_tty
 
 # Replaces HTC's upd_nvs_wlan0 solution with our own
 service wifi_calib /system/bin/wifi_calibration.sh

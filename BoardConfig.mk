@@ -94,6 +94,7 @@ NEED_WORKAROUND_CORTEX_A9_745320 := true
 BOARD_USES_GENERIC_INVENSENSE := false
 
 # Bluetooth
+BOARD_WPAN_DEVICE := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
 
 # Recovery
