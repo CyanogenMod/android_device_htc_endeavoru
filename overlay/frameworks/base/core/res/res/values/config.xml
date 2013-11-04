@@ -220,4 +220,8 @@
 
     <!-- Device supports LED flashlight -->
     <bool name="config_enableTorch">true</bool>
+
+    <!-- Allow changing button backlight brightness in Settings -->
+    <integer name="config_buttonBrightnessSettingDefault">140</integer>
+    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
 </resources>
