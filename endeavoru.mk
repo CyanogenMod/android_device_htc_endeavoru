@@ -102,11 +102,13 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf \
     wifical.sh \
-    TQS_D_1.7.ini \
+    128x_TQS_D_1.7.ini \
     calibrator \
     crda \
     regulatory.bin \
     wlconf
+
+$(call inherit-product, hardware/ti/wlan/mac80211/wl128x-wlan-products.mk)
 
 $(call inherit-product, vendor/htc/endeavoru/endeavoru-vendor.mk)
 
