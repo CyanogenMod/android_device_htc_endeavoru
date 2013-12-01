@@ -50,12 +50,8 @@ on early-init
 
 on boot
     # bluetooth
-    insmod /system/lib/modules/hci_if_drv.ko
+    exec /system/bin/logwrapper /system/bin/load-bt.sh
     insmod /system/lib/modules/uhid.ko
-    # Stock libbt-vendor wants /dev/hci_tty
-    exec /system/bin/mknod /dev/hci_tty c 239 0
-    chown bluetooth bluetooth /dev/hci_tty
-    chmod 0600 /dev/hci_tty
 
 # Replaces HTC's upd_nvs_wlan0 solution with our own
 service wifi_calib /system/bin/wifi_calibration.sh

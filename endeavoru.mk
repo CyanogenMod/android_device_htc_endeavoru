@@ -84,6 +84,7 @@ PRODUCT_PACKAGES += \
     librs_jni
 
 # Bluetooth tools
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/bin/load-bt.sh:system/bin/load-bt.sh
 PRODUCT_PACKAGES += \
     l2ping \
     hciconfig \
