@@ -21,7 +21,7 @@ $(call inherit-product, device/htc/endeavoru/full_endeavoru.mk)
 PRODUCT_DEVICE := endeavoru
 PRODUCT_NAME := cm_endeavoru
 PRODUCT_BRAND := htc
-PRODUCT_MODEL := EndeavorU
+PRODUCT_MODEL := HTC One X
 PRODUCT_MANUFACTURER := HTC
 
 #Set build fingerprint / ID / Product Name ect.
