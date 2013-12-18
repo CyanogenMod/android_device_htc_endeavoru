@@ -1,19 +1,33 @@
+on init
+    mount ext4 /dev/block/mmcblk0p13 /cache wait nosuid nodev
+    chown system cache /cache
+    chmod 0770 /cache
+
 on boot
-# leds
     chown system system /sys/class/leds/amber/brightness
     chown system system /sys/class/leds/amber/blink
     chown system system /sys/class/leds/green/brightness
     chown system system /sys/class/leds/green/blink
 
+# Power management settings from init.endeavoru.common.rc
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min 10000
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
+    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
+    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
+    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
+    write /sys/module/cpuidle/parameters/lp2_in_idle 1
+
+# Always start adbd on userdebug and eng builds
+on property:ro.debuggable=1
+    setprop service.adb.root 1
+    start adbd
 
 service choice_fn /sbin/choice_fn
-    oneshot
-
-service mfgsrv /sbin/mfgsrv -i -t /dev/ttyS0
-    disabled
-
-# uh, this doesn't actually exist?
-service power_test /sbin/power_test
     oneshot
 
 service htcbatt /sbin/htcbatt
@@ -28,16 +42,5 @@ service detect_key /sbin/detect_key
     oneshot
 
 on property:persist.service.zcharge.enable=1
-# backlight
+   # backlight
     write /sys/class/backlight/tegra-pwm-bl/brightness 0
-
-# Power management settings
-    write /sys/module/cpu_tegra3/parameters/no_lp 0
-    write /sys/devices/system/cpu/cpu1/online 0
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 340000
-    write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
-    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-    write /sys/module/cpu_tegra3/parameters/auto_hotplug 0
-    write /sys/module/cpuidle/parameters/lp2_in_idle 1
