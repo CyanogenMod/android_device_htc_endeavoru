@@ -18,19 +18,20 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     write /sys/class/firmware/timeout 5
 
-    # for backwards compatibility
+on init
+    # internal sdcard
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /storage/sdcard0 0700 root root
     export EXTERNAL_STORAGE /storage/sdcard0
-    mkdir /storage 0050 system sdcard_r
-    mkdir /storage/sdcard0 0000 system system
+
+    # USB OTG
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+    mkdir /storage/usbdisk 0700 root root
+    export SECONDARY_STORAGE /storage/usbdisk
+
+    # Backwards compatibility
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
-    mkdir /storage/usb 0000 system system
-
-    export EXTERNAL_STORAGE4 /storage/usb
-    export EXTERNAL_STORAGE5 /storage/usb
-
-    # create mountpoints
-    symlink /storage/usb /mnt/usb
 
 on fs
     mkdir /rca 0775 radio radio
@@ -40,6 +41,8 @@ on fs
     chmod 0660 /rca/calib.nvm
     chmod 0660 /rca
     chmod 0660 /rfs
+
+    setprop ro.crypto.fuse_sdcard true
 
 on post-fs-data
     # Set indication (checked by vold) that we have finished this action
