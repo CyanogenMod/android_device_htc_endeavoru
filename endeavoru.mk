@@ -87,7 +87,12 @@ PRODUCT_PACKAGES += \
     tinycap
 
 # Wi-Fi
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/bin/wifi_calibration.sh:system/bin/wifi_calibration.sh
+$(call inherit-product, hardware/ti/wlan/mac80211/wl128x-wlan-products.mk)
+PRODUCT_COPY_FILES +=
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/prebuilt/bin/wifi_calibration.sh:system/bin/wifi_calibration.sh \
+     $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+     $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf \
@@ -97,9 +102,8 @@ PRODUCT_PACKAGES += \
     crda \
     regulatory.bin \
     wlconf
-
-$(call inherit-product, hardware/ti/wlan/mac80211/wl128x-wlan-products.mk)
-
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
 $(call inherit-product, vendor/htc/endeavoru/endeavoru-vendor.mk)
 
 # common tegra3-HOX+ configs

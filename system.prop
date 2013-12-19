@@ -69,7 +69,6 @@ ro.sys.miracast=false
 #dalvik.vm.heapsize=256m
 #dalvik.vm.heapgrowthlimit=96m
 ro.opengles.version=131072
-wifi.interface=wlan0
 # CM: Use wlan0
 wifi.softap.interface=wlan0
 wifi.softapconcurrent.interface=wlan0
