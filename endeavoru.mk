@@ -73,12 +73,12 @@ PRODUCT_PACKAGES += \
     librs_jni
 
 # Bluetooth tools
+$(call inherit-product, hardware/ti/wpan/ti-wpan-products.mk)
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/bin/load-bt.sh:system/bin/load-bt.sh
 PRODUCT_PACKAGES += \
     l2ping \
     hciconfig \
     hcitool \
-    libbt-vendor
 
 # audio packages
 PRODUCT_PACKAGES += \
