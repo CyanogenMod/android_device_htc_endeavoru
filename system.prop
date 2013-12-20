@@ -240,7 +240,6 @@ drm.service.enabled=true
 ro.setupwizard.mode=OPTIONAL
 ro.com.google.gmsversion=4.2_r2
 ro.service.dpsvr.enabled=true
-ro.vendor.extension_library=/system/lib/libhtc-opt2.so
 persist.preload.common=0
 #net.bt.name=Android
 #dalvik.vm.stack-trace-file=/data/anr/traces.txt
