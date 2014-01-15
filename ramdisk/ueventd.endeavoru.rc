@@ -58,7 +58,7 @@
 /dev/block/mmcblk0p17     0660   root     system
 
 # for camera to read wdm
-/dev/block/mmcblk0p2	0640	root	system
+/dev/block/mmcblk0p2	0640	media	system
 
 # HtcCarGPS
 /dev/ttyHSUSB1                                 0600    system  system
