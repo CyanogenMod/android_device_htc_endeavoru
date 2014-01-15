@@ -15,8 +15,6 @@ bin/poweroff_modem.sh
 bin/poweron_modem_fls.sh
 lib/libhtc_ril.so
 lib/libhtc_rilhook.so
-lib/libril-icera.so
-lib/libril.so
 
 #Wifi stuff
 bin/initial_regdom.sh
@@ -255,7 +253,7 @@ vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/drm/libdrmwvmplugin.so
 
 #Camera
-lib/hw/camera.tegra.so
+lib/hw/vendor-camera.tegra.so
 lib/libBeautyChat.so
 lib/libcamerapp.so
 lib/libcameraasd.so
