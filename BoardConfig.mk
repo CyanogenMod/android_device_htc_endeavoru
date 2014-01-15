@@ -54,6 +54,9 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Wifi related defines
 USES_TI_MAC80211 := true
+# Required for newer wpa_supplicant_8_ti versions to fix tethering
+BOARD_WIFI_SKIP_CAPABILITIES := true
+
 ifdef USES_TI_MAC80211
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 WPA_SUPPLICANT_VERSION           := VER_0_8_X_TI
