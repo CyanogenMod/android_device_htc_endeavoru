@@ -13,6 +13,7 @@ bin/rild
 bin/gsm0710muxd
 bin/poweroff_modem.sh
 bin/poweron_modem_fls.sh
+lib/libril.so
 lib/libhtc_ril.so
 lib/libhtc_rilhook.so
 
@@ -117,11 +118,12 @@ etc/firmware/TIInit_10.5.20.bts
 etc/firmware/TIInit_10.6.15.bts
 etc/firmware/vac_config.ini
 etc/firmware/WL128x_2.21_1.1.bts
-etc/firmware/ti-connectivity/wl1271-nvs.bin
-etc/firmware/ti-connectivity/wl128x-fw-4-mr.bin
-etc/firmware/ti-connectivity/wl128x-fw-4-plt.bin
-etc/firmware/ti-connectivity/wl128x-fw-4-sr.bin
-etc/wifi/TQS_D_1.7.ini
+# Wifi firmware is coming from hardware/ti/wlan
+#etc/firmware/ti-connectivity/wl1271-nvs.bin
+#etc/firmware/ti-connectivity/wl128x-fw-4-mr.bin
+#etc/firmware/ti-connectivity/wl128x-fw-4-plt.bin
+#etc/firmware/ti-connectivity/wl128x-fw-4-sr.bin
+#etc/wifi/TQS_D_1.7.ini
 
 # Audio
 etc/AIC3008_REG_DualMic.csv
@@ -230,15 +232,16 @@ lib/libinvensense_hal.so
 lib/libewtzmu2cali.so
 
 #EGL
-lib/egl/libEGL_perfhud.so
 lib/egl/libEGL_tegra_impl.so
 lib/egl/libEGL_tegra.so
-lib/egl/libGLESv1_CM_perfhud.so
 lib/egl/libGLESv1_CM_tegra_impl.so
 lib/egl/libGLESv1_CM_tegra.so
-lib/egl/libGLESv2_perfhud.so
 lib/egl/libGLESv2_tegra_impl.so
 lib/egl/libGLESv2_tegra.so
+# They just cause logspam
+#lib/egl/libEGL_perfhud.so
+#lib/egl/libGLESv1_CM_perfhud.so
+#lib/egl/libGLESv2_perfhud.so
 
 #NFC
 lib/hw/nfc.endeavoru.so
