@@ -2,16 +2,19 @@
 # Script to support kernels with old and updated ti-st driver together with the
 # TI libbt-vendor library.
 
-# Device created by the stock HTC kernel and our modified ti-st driver
+# Device created by the stock HTC kernel and expected by some HTC libs
 DEV_HTC="/dev/tihci"
 # Device created by the newer OMAP ti-st driver and also needed by the stock
-# libbt-vendor library.
+# libbt-vendor library that we use.
 DEV_STOCK="/dev/hci_tty"
 
 if [ -e "$DEV_HTC" -a -e "$DEV_STOCK" ]; then
     echo "$DEV_HTC and $DEV_STOCK already exist"
     return 0
 fi
+
+# Wait a bit to make sure uim-sysfs inserted the st_drv module
+/system/bin/sleep 2
 
 # Load the module that exists
 if [ -e "/system/lib/modules/hci_if_drv.ko" ]; then
@@ -20,31 +23,27 @@ if [ -e "/system/lib/modules/hci_if_drv.ko" ]; then
 elif [ -e "/system/lib/modules/ti_hci_drv.ko" ]; then
     # Old module name
     /system/bin/insmod /system/lib/modules/ti_hci_drv.ko
-fi
-
-# Now try to find the major device number of whatever device what created and
-# create the missing one with the same number. This provides compatibility with
-# the TI libbt-vendor library and older libraries that still use the old name.
-
-# Minor number is expected to be always 0
-MINOR=0
-
-# The device node we will create based on the existing one
-DEV_TO_CREATE=""
-
-if [ -e "$DEV_HTC" -a ! -e "$DEV_STOCK" ]; then
-    MAJOR=`/system/bin/grep tihci /proc/devices | /system/xbin/cut -d " " -f1`
-    DEV_TO_CREATE="$DEV_STOCK"
-elif [ -e "$DEV_STOCK" -a ! -e "$DEV_HTC"  ]; then
-    MAJOR=`/system/bin/grep hci_tty /proc/devices | /system/xbin/cut -d " " -f1`
-    DEV_TO_CREATE="$DEV_HTC"
 else
-    echo "Error: Neither $DEV_HTC nor $DEV_STOCK exists"
+    echo "Error: No module found"
     return 1
 fi
 
-echo "Creating $DEV_TO_CREATE with major $MAJOR, minor $MINOR"
-/system/bin/mknod "$DEV_TO_CREATE" c $MAJOR $MINOR
-/system/bin/chown bluetooth:bluetooth "$DEV_TO_CREATE"
-/system/bin/chmod 0600 "$DEV_TO_CREATE"
 
+# Symlink existing device node to not existing device node
+for TRIES in 1 2 3 4 5; do
+    if [ -e "$DEV_HTC" -a ! -e "$DEV_STOCK" ]; then
+        echo "$DEV_STOCK -> $DEV_HTC"
+        /system/bin/ln -s "$DEV_HTC" "$DEV_STOCK"
+        return 0
+    elif [ -e "$DEV_STOCK" -a ! -e "$DEV_HTC"  ]; then
+        echo "$DEV_HTC -> $DEV_STOCK"
+        /system/bin/ln -s "$DEV_STOCK" "$DEV_HTC"
+        return 0
+    else
+        echo "Waiting for device node to become available"
+        /system/bin/sleep 2
+    fi
+done
+
+echo "Error: Neither $DEV_HTC nor $DEV_STOCK appeared"
+return 1
