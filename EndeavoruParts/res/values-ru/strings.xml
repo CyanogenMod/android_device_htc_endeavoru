@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources>
+    <string name="app_name">Дополнительные настройки</string>
+
+    <string name="category_s2w_title">Sweep2Wake</string>
+    <string name="s2w_switch_title_head">Sweep2Wake</string>
+    <string name="s2w_switch_summary_head">Включить блокировку и разблокировку экрана жестом по сенсорным кнопкам</string>
+    <string name="s2w_stroke_title_head">Направление жеста</string>
+    <string name="s2w_stroke_summary_head">Выберите "Определенное", чтобы установить жест слева направо для разблокировки экрана и справа налево для блокировки экрана</string>
+    <string name="s2w_length_title_head">Минимальная длина</string>
+    <string name="s2w_length_summary_head">Установить количество кнопок для использования жеста блокировки и разблокировки экрана</string>
+
+    <string name="category_usb_title">USB</string>
+    <string name="fastcharge_title_head">Быстрая зарядка</string>
+    <string name="fastcharge_summary_head">Включить быструю зарядку используя больше мощности от USB-порта компьютера</string>
+
+    <string name="category_backlightdisable_title">Подсветка</string>
+    <string name="backlightdisable_title_head">Отключить подсветку кнопок</string>
+    <string name="backlightdisable_summary_head">Установите, если нужно отключить подсветку кнопок</string>
+    <string name="backlightnotification_title_head">Уведомления подсветкой кнопок</string>
+    <string name="backlightnotification_summary_head">При получении уведомления кнопки будут мигать</string>
+
+    <string name="category_smartdimmer_title">NVIDIA SmartDimmer</string>
+    <string name="smartdimmer_switch_title_head">NVIDIA SmartDimmer</string>
+    <string name="smartdimmer_switch_summary_head">Включение NVIDIA SmartDimmer приведет к экономии заряда аккумулятора за счет меньшей подсветки, оптимизации цветов и контраста экрана</string>
+
+</resources>
