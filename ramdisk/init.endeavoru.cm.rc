@@ -31,12 +31,6 @@ on early-init
     chown system system /sys/devices/system/cpu/cpufreq/interactive/sustain_load
     chmod 0664 /sys/devices/system/cpu/cpufreq/interactive/sustain_load
 
-# liblights
-    chown system system /sys/class/leds/button-backlight/currents
-    chmod 0664 /sys/class/leds/button-backlight/currents
-    chown system system /sys/class/leds/button-backlight/button_brightness
-    chmod 0664 /sys/class/leds/button-backlight/button_brightness
-
 # a2dp freq boost
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/platform/tegra_uart.2/a2dp_tuning
