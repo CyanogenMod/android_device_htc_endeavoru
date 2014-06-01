@@ -398,34 +398,12 @@ service chown_nvs_auto /system/bin/chown system.wifi /data/misc/wifi/wl1271-nvs-
     oneshot
 # HTC_WIFI_END
 # wifi--
-# bugreport is triggered by the VOLUME-DOWN and VOLUME-UP keys/
-service bugreport /system/bin/bugmailer.sh -v
-    class main
-    disabled
-    oneshot
-    keycodes 115 114
 
-# Make sure we startup btld before hcid
-# Set tartget address to emulator host loopback IF
-# Limit baudrate to 460800 to ensure reliable uart operation
-service btld /system/bin/btld -lpm 1 -hb 3000000 -hp /dev/ttyHS2
-    user root
-    group bluetooth net_bt_admin
-    disabled
-    onrestart restart bluetoothd
 
 #Htc Panu supports for Bluetooth Bluez
 service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
-
-# HTC PnPMgr daemon
-service pnpmgr /system/bin/pnpmgr
-    class core
-    user root
-    group root
-    disabled
-
 
 on property:init.svc.bootanim=stopped
 start adaptive
@@ -453,13 +431,6 @@ service uim /system/bin/uim-sysfs
     class core
     user root
     group media bluetooth
-    oneshot
-
-# hs_uart
-service hs_uart /system/bin/hs_uart
-    class main
-    user root
-    group system misc input
     oneshot
 
 service nav /system/bin/navl_server --android_log NAVD-p3 -nav\"-c/system/bin/pathconfigfile.txt\"
@@ -522,11 +493,6 @@ service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
 on property:init.svc.tf_daemon=restarting
     mkdir /data/tf
 
-# Discretix DRM change start
-service dx_drm_server /system/bin/DxDrmServerIpc -f -o allow_other /data/DxDrm/fuse
-    class main
-# Discretix DRM change end
-
 # create filesystems if necessary
 service setup_fs /system/bin/setup_fs \
         /dev/block/platform/sdhci-tegra.3/by-name/UDA \
@@ -537,35 +503,6 @@ service setup_fs /system/bin/setup_fs \
     group root
     oneshot
 
-service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
-    user root
-    cgroup bg
-    disabled
-    oneshot
-    ioprio idle 0
-
-service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
-    user root
-    cgroup bg
-    disabled
-    oneshot
-    ioprio idle 0
-
-on property:ro.build.tags=test-keys
-    start htc_ebdlogd
-
-on property:ro.build.tags=release-keys
-    start htc_ebdlogd_rel
-
-service cand /system/bin/cand
-    class main
-    user root
-
-service post_boot /system/bin/sh /system/etc/post_boot.sh
-    class main
-    user root
-    disabled
-    oneshot
 
 on property:ro.boot.wipeddata=0
     write /sys/kernel/debug/tegra_hotplug/max_cpus 3
@@ -588,59 +525,3 @@ on property:init.svc.bootanim=stopped
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 51000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1500000
     write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-    start post_boot
-    start pnpmgr
-
-service shutdown /system/bin/shutdown
-    user root
-    group root
-    disabled
-    oneshot
-
-service charging /system/bin/charging
-    user root
-    group root
-    disabled
-    oneshot
-
-# for USB internet sharing
-service udhcpd /system/bin/udhcpd
-    disabled
-    oneshot
-
-service netsharing_on /system/bin/netsharing net on
-    disabled
-    oneshot
-
-service netsharing_off /system/bin/netsharing net off
-    disabled
-    oneshot
-
-service netsharing_pass /system/bin/netsharing net_pass on
-    disabled
-    oneshot
-
-service zchgd_offmode /system/bin/zchgd -pseudooffmode
-    user root
-    group root graphics
-    disabled
-
-service zchgd_onmode /system/bin/zchgd -onmode
-    user root
-    group root graphics
-
-on property:dev.zcharge=true
-    start zchgd_onmode
-
-on property:dev.zcharge=false
-    stop zchgd_onmode
-
-service clockd /system/bin/clockd
-    class main
-    user root
-
-service qb_offmode_alarm /system/bin/qb_offmode_alarm
-    class main
-    user root
-    disabled
-    oneshot

@@ -39,31 +39,15 @@ mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth #BOARD_HAVE_BLUETOOTH_BLUEZ
     chown root recvy_access /data/data/recovery
     chmod 0775 /data/data/recovery
 
-#+SSD_RIL: from Qualcomm socket path
-    mkdir /dev/socket/qmux_radio 0770 radio radio
-    mkdir /dev/socket/qmux_audio 0770 audio audio
-    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
-    mkdir /dev/socket/qmux_gps 0770 gps gps
-#-SSD_RIL: from Qualcomm socket path
-
 #+SSD_AUD: soundhound dump pcm
     mkdir /data/audio 0775 media audio
     chmod 2775 /data/audio
 #-SSD_AUD: soundhound dump pcm
 
 on boot
-
-# [framework] begin:  create core file directory and set core files handler by setting core_pattern.
-# The handler will compress core files and try to limit the max set number of core files to 3.
-chmod 0755 /system/bin/dalvik_coredump.sh
-write /proc/sys/kernel/core_pattern |/system/bin/dalvik_coredump.sh\ %p\ %u\ %t
-# [framwrok] :end
-
     write /proc/sys/vm/highmem_is_dirtyable 1
-
     write /proc/sys/vm/lowmem_reserve_ratio 16\ 16
     write /proc/sys/vm/min_free_kbytes 4096
-
     chown system system /sys/class/leds/amber/brightness
     chown system system /sys/class/leds/amber/blink
     chown system system /sys/class/leds/green/blink
@@ -91,18 +75,6 @@ write /proc/sys/kernel/core_pattern |/system/bin/dalvik_coredump.sh\ %p\ %u\ %t
     chmod 0660 /dev/diag_arm9
     chmod 0660 /dev/btdiag
 
-# This will grant permission for LMI Rescue Start Server
-    chown graphics /system/bin/RescueStarter
-    chmod 755 /system/bin/RescueStarter
-    chown graphics /system/bin/RescueServer
-    chmod 755 /system/bin/RescueServer
-
-# This will start LMI Rescue Start Server
-    service RescueStarter /system/bin/RescueStarter
-    class core
-    user graphics
-    group input graphics
-
 service sfc /sbin/sfc
     class core
     oneshot
@@ -129,57 +101,12 @@ service nvm-server /system/bin/nvm_server
 #    oneshot
 ##    start gsm0710mux
 
-service modem-daemon /system/bin/modemd
-
-#Sophia-0410
-service kickstart /system/bin/qcks -1 modem_st1 -2 modem_st2 -3 mdm9k_config -i /firmware/mdm/image/ -u
-    class core
-    oneshot
-
 service hdmid /system/bin/hdmid
     socket displayd stream 0660 root system graphics
     disabled
 
 on property:ro.hdmi.enable=true
     start hdmid
-
-#BOARD_HAVE_BLUETOOTH_BLUEZ start
-service dbus /system/bin/dbus-daemon --system --nofork
-    class main
-    socket dbus stream 660 bluetooth bluetooth
-    user bluetooth
-    group bluetooth net_bt_admin
-
-service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n -d
-    class main
-    socket bluetooth stream 660 bluetooth bluetooth
-    socket dbus_bluetooth stream 660 bluetooth bluetooth
-    # init.rc does not yet support applying capabilities, so run as root and
-    # let bluetoothd drop uid to bluetooth with the right linux capabilities
-    group bluetooth net_bt_admin misc net_bt_stack
-    disabled
-#BOARD_HAVE_BLUETOOTH_BLUEZ end
-
-service flash_recovery /system/etc/install-recovery.sh
-    class main
-    oneshot
-
-service htc_dk /system/bin/dumpstate -s -k -a
-    class main
-    socket htc_dk stream 0660 shell log
-    disabled # CM: Disabled because constant calling dumpstate is stupid
-
-service htc_dlk /system/bin/dumpstate -s -l -a
-    class main
-    socket htc_dlk stream 0660 shell log
-    disabled # CM: Disabled because constant calling dumpstate is stupid
-
-# hs_uart
-service hs_uart /system/bin/hs_uart
-    class main
-    user root
-    group system misc input
-    oneshot
 
 #HTC_WIFI_START
 service L2PE /system/bin/l2_profile_exchange handset wlan1
@@ -189,12 +116,3 @@ service L2PE /system/bin/l2_profile_exchange handset wlan1
     oneshot
 #HTC_WIFI_END
 
-service priorityd /system/bin/sh /system/etc/priorityd.sh
-    user root
-    disabled
-    oneshot
-
-service reboot-monitor /system/bin/sh /system/xbin/reboot-monitor.sh
-    user root
-    disabled
-    oneshot
