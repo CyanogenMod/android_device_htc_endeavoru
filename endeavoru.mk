@@ -31,10 +31,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vold.umsdirtyratio=50
 
-# Override phone-xhdpi-1024-dalvik-heap.mk setting
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapgrowthlimit=96m
-
 # Smoother window manager experience.
 PRODUCT_PROPERTY_OVERRIDES += \
     windowsmgr.max_events_per_sec = 240 #300
