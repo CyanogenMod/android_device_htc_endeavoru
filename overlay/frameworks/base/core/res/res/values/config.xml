@@ -218,13 +218,12 @@
      <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
      <bool name="config_intrusiveBatteryLed">true</bool>
 
-    <!-- Device supports LED flashlight -->
-    <bool name="config_enableTorch">true</bool>
-
     <!-- Allow changing button backlight brightness in Settings -->
     <integer name="config_buttonBrightnessSettingDefault">140</integer>
     <bool name="config_deviceHasVariableButtonBrightness">true</bool>
 
     <!-- Software blur is too slow on this device. -->
     <bool name="config_sf_slowBlur">true</bool>
+
+    <bool name="config_ui_enableFadingMarquee">true</bool>
 </resources>
