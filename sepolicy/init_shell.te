@@ -1,0 +1,3 @@
+# Allow loading modules from shell scripts started by init.
+# Needed by the wifi-calibration.sh script.
+allow init_shell self:capability sys_module;

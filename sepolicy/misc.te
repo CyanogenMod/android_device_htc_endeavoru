@@ -1,0 +1,70 @@
+# EWTZ
+type ewtzmud, domain;
+type ewtzmud_exec, exec_type, file_type;
+
+init_daemon_domain(ewtzmud)
+
+allow ewtzmud sensors_device:chr_file rw_file_perms;
+
+
+# RXN INTAPP
+type rxn_intapp, domain;
+type rxn_intapp_exec, exec_type, file_type;
+
+init_daemon_domain(rxn_intapp)
+
+wakelock_use(rxn_intapp)
+
+allow rxn_intapp devpts:chr_file { read write };
+#allow rxn_intapp self:capability { dac_read_search dac_override };
+
+allow rxn_intapp gps_data_file:sock_file write;
+allow rxn_intapp nav:unix_stream_socket connectto;
+
+allow rxn_intapp gps_data_file:file create_file_perms;
+allow rxn_intapp gps_data_file:dir create_dir_perms;
+
+# PGPSDownloader
+allow untrusted_app rxn_intapp:unix_stream_socket connectto;
+
+
+# CPLC (GPS)
+type cplc, domain;
+type cplc_exec, exec_type, file_type;
+
+init_daemon_domain(cplc)
+
+
+# WIFI CALIBRATION
+type wifi_calib, domain;
+type wifi_calib_exec, exec_type, file_type;
+
+init_daemon_domain(wifi_calib)
+
+allow wifi_calib devpts:chr_file { open read write };
+allow wifi_calib self:capability { dac_read_search dac_override };
+allow wifi_calib shell_exec:file rx_file_perms;
+allow wifi_calib shell_exec:file read;
+# Allow executing toolbox commands (ls, mkdir, ..)
+allow wifi_calib system_file:file rx_file_perms;
+
+allow wifi_calib wifi_data_file:file create_file_perms;
+allow wifi_calib wifi_data_file:dir search;
+
+
+# LOAD BT
+type load_bt, domain;
+type load_bt_exec, exec_type, file_type;
+
+init_daemon_domain(load_bt)
+
+allow load_bt devpts:chr_file { ioctl read write };
+
+allow load_bt shell_exec:file rx_file_perms;
+# Allow executing toolbox commands (ls, mkdir, ..)
+allow load_bt system_file:file rx_file_perms;
+allow load_bt self:capability sys_module;
+# Needs to create symlinks in /dev
+allow load_bt tun_device:chr_file create_file_perms;
+allow load_bt device:dir { add_name write};
+allow load_bt device:lnk_file { create read unlink };

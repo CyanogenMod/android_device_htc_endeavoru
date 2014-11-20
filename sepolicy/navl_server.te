@@ -1,0 +1,11 @@
+# NAV
+type nav, domain;
+type nav_exec, exec_type, file_type;
+init_daemon_domain(nav)
+
+file_type_auto_trans(nav, system_data_file, gps_data_file)
+
+allow nav gps_data_file:dir rw_dir_perms;
+allow nav gps_data_file:file create_file_perms;
+allow nav gps_data_file:sock_file { create unlink};
+allow nav gps_device:chr_file rw_file_perms;

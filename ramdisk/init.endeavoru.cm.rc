@@ -49,10 +49,11 @@ on boot
 
 # Replaces HTC's upd_nvs_wlan0 solution with our own
 service wifi_calib /system/bin/wifi_calibration.sh
+    seclabel u:r:init:s0 # silence warning
     disabled
     class wifi
     user root
-    group root
+    group wifi
     oneshot
 
 # fusewrapped external sdcard daemon running as media_rw (1023)
@@ -66,6 +67,7 @@ service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk
 
 # /dev/tihci <-> /dev/hci_tty creation
 service load_bt /system/bin/logwrapper /system/bin/load-bt.sh
+    seclabel u:r:init:s0 # silence warning
     disabled
     user root
     group root

@@ -1,0 +1,14 @@
+# AKMD Sensor daemon
+type akmd, domain;
+type akmd_exec, exec_type, file_type;
+type akmd_data_file, file_type, data_file_type;
+init_daemon_domain(akmd)
+
+file_type_auto_trans(akmd, system_data_file, akmd_data_file)
+
+
+allow akmd sensors_device:chr_file rw_file_perms;
+allow akmd akmd_data_file:file create_file_perms;
+
+# Permission needed to create files in /data/misc/
+#allow akmd system_data_file:dir w_dir_perms;

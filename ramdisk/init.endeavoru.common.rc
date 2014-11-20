@@ -345,17 +345,6 @@ service hostapd_bin /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
 
 on property:wlan.driver.status=ok
     chown wifi wifi /sys/devices/platform/wl1271/bt_coex_state
-    
-service initial_regdom /system/bin/initial_regdom.sh
-     disabled
-     oneshot
-
-on property:wlan.driver.status=ok
-    chown wifi wifi /sys/devices/platform/wl1271/bt_coex_state
-    start initial_regdom
-
-on property:init.svc.hostapd_bin=running
-    start initial_regdom
 
 service upd_nvs_wlan0 /system/bin/calibrator set upd_nvs /system/etc/wifi/TQS_D_1.7.ini /proc/calibration /data/misc/wifi/wl1271-nvs-calibrated.bin
      disabled
@@ -420,14 +409,6 @@ start adaptive
 # Start FIL daemon
 #service fil-daemon /system/bin/fild -p /dev/ttyHS0 -s /dev/ttyACM0 -f /dev/ttyACM0 --with-bt3
 #    user radio
-
-service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
-    class main
-    user root
-    group root
-    oneshot
-#    start gsm0710mux
-    disabled
 
 service uim /system/bin/uim-sysfs
     class core

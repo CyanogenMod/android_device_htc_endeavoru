@@ -1,0 +1,36 @@
+/dev/tifm                         u:object_r:radio_device:s0
+/dev/tigps                        u:object_r:gps_device:s0
+/dev/tihci                        u:object_r:tun_device:s0
+/dev/hci_tty                      u:object_r:tun_device:s0
+
+/system/bin/akmd                  u:object_r:akmd_exec:s0
+/system/bin/cplc_main             u:object_r:cplc_exec:s0
+/system/bin/ewtzmud               u:object_r:ewtzmud_exec:s0
+/system/bin/navl_server           u:object_r:nav_exec:s0
+/system/bin/RXN_IntApp            u:object_r:rxn_intapp_exec:s0
+/system/bin/uim-sysfs             u:object_r:uim_sysfs_exec:s0
+
+/data/tigps(/.*)?                 u:object_r:gps_data_file:s0
+
+
+# GPS (created by uim-sysfs)
+/data/agps_status                 u:object_r:gps_data_file:s0
+/data/agps_tls_file               u:object_r:gps_data_file:s0
+/data/gps.conf                    u:object_r:gps_data_file:s0
+/data/gps_time.syn                u:object_r:gps_data_file:s0
+/data/sph.cfg                     u:object_r:gps_data_file:s0
+
+# AKMD
+/dev/akm8975_aot                  u:object_r:sensors_device:s0
+/dev/akm8975_daemon               u:object_r:sensors_device:s0
+/dev/bma150                       u:object_r:sensors_device:s0
+/data/misc/AK8975Prms.ini         u:object_r:akmd_data_file:s0
+/data/misc/AccPrmsF.ini           u:object_r:akmd_data_file:s0
+
+# EWTZMUD
+/dev/ewtzmu2                      u:object_r:sensors_device:s0
+/dev/ewtzmu2daemon                u:object_r:sensors_device:s0
+/dev/ewtzmu2hal                   u:object_r:sensors_device:s0
+
+# RXN
+/data/RXN(/.*)?                   u:object_r:gps_data_file:s0
