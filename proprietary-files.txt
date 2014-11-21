@@ -4,7 +4,6 @@ bin/uim-sysfs
 #RIL stuff
 bin/nvm_server
 bin/nvm_client
-bin/mknod
 bin/make_sec_bin
 bin/IMCdownload
 etc/Flash_Loader.conf
@@ -256,7 +255,7 @@ vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/drm/libdrmwvmplugin.so
 
 #Camera
-lib/hw/vendor-camera.tegra.so
+lib/hw/camera.vendor.tegra.so
 lib/libBeautyChat.so
 lib/libcamerapp.so
 lib/libcameraasd.so
