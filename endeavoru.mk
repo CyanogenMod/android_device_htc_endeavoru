@@ -22,11 +22,6 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/endeavoru/overlay
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb
 
-# Don't store dalvik on /cache, it gets annoying when /cache is wiped
-# by us to enable booting into recovery after flashing boot.img
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dexopt-data-only=1
-
 # Increase UMS speed
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vold.umsdirtyratio=50

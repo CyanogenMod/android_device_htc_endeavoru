@@ -2,17 +2,16 @@
 #<src>                                             <mnt_point>         <type>    <mnt_flags>                                             <fs_mgr_flags>
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
-# data partition must be located at the bottom for supporting device encryption
 
 /dev/block/platform/sdhci-tegra.3/by-name/APP      /system              ext4      ro,barrier=0                                            wait
 /dev/block/platform/sdhci-tegra.3/by-name/CAC      /cache               ext4      noatime,nosuid,nodev,noauto_da_alloc,barrier=0          wait,check
 /dev/block/platform/sdhci-tegra.3/by-name/RCA      /rca                 ext4      noatime,rw,barrier=0                                    wait
 /dev/block/platform/sdhci-tegra.3/by-name/RFS      /rfs                 ext4      noatime,rw,barrier=0                                    wait
 /dev/block/platform/sdhci-tegra.3/by-name/DLG      /devlog              ext4      nosuid,nodev,barrier=0                                  defaults
-/dev/block/platform/sdhci-tegra.3/by-name/UDA      /data                ext4      noatime,nosuid,nodev,noauto_da_alloc,barrier=0          wait,check,encryptable=/dev/block/platform/sdhci-tegra.3/by-name/DUM
+/dev/block/platform/sdhci-tegra.3/by-name/ISD      /data                ext4      noatime,nosuid,nodev,noauto_da_alloc,barrier=0          wait,check,encryptable=/dev/block/platform/sdhci-tegra.3/by-name/DUM
+/dev/block/platform/sdhci-tegra.3/by-name/UDA      /xtradata            ext4      noatime,nosuid,nodev,noauto_da_alloc,barrier=0          wait,check
 
 # vold-managed volumes ("block device" is actually a sysfs devpath)
-/devices/platform/sdhci-tegra.3/mmc_host/mmc0      auto vfat defaults      voldmanaged=sdcard0:14,nonremovable,noemulatedsd
 /devices/platform/tegra-ehci                       auto vfat defaults      voldmanaged=usbdisk:auto
 
 # recovery
