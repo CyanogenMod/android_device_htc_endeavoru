@@ -1,0 +1,2 @@
+# Write to for UMS /proc/sys/vm/dirty_ratio
+allow vold proc:file rw_file_perms;

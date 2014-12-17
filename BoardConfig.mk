@@ -129,6 +129,8 @@ BOARD_SEPOLICY_UNION += \
 	file_contexts \
 	akmd.te \
 	init_shell.te \
+	kernel.te \
 	navl_server.te \
 	uim_sysfs.te \
 	system_server.te \
+	vold.te \
