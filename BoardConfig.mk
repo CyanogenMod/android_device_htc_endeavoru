@@ -119,6 +119,8 @@ TARGET_RECOVERY_FSTAB := device/htc/endeavoru/ramdisk/fstab.endeavoru
 RECOVERY_FSTAB_VERSION := 2
 BOARD_HAS_LARGE_FILESYSTEM := true
 
+TARGET_RECOVERY_DEVICE_MODULES += chargeled
+
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/endeavoru
 
@@ -132,6 +134,7 @@ BOARD_SEPOLICY_UNION += \
 	init_shell.te \
 	kernel.te \
 	navl_server.te \
+	recovery.te \
 	uim_sysfs.te \
 	system_server.te \
 	vold.te \
