@@ -153,7 +153,7 @@
     <integer translatable="false" name="config_wifi_framework_scan_interval">0</integer>
 
     <!-- Boolean indicating whether Softap requires reloading AP firmware -->
-    <bool name="config_wifiApFirmwareReload">true</bool>
+    <bool name="config_wifiApFirmwareReload">false</bool>
 
     <!-- This string array should be overridden by the device to present a list of network
          attributes.  This is used by the connectivity manager to decide which networks can coexist
