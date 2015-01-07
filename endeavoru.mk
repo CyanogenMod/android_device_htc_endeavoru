@@ -20,7 +20,7 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/endeavoru/overlay
 
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mass_storage,adb
+    persist.sys.usb.config=mtp,adb
 
 # Don't store dalvik on /cache, it gets annoying when /cache is wiped
 # by us to enable booting into recovery after flashing boot.img
