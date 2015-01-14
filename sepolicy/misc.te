@@ -18,7 +18,7 @@ wakelock_use(rxn_intapp)
 allow rxn_intapp devpts:chr_file { read write };
 #allow rxn_intapp self:capability { dac_read_search dac_override };
 
-allow rxn_intapp gps_data_file:sock_file write;
+allow rxn_intapp gps_data_file:sock_file create_file_perms;
 allow rxn_intapp nav:unix_stream_socket connectto;
 
 allow rxn_intapp gps_data_file:file create_file_perms;

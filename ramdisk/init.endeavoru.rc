@@ -67,9 +67,8 @@ on post-fs-data
     mkdir /data/tigps/aiding 0770 system system
     mkdir /data/tigps/logs 0770 system system
     mkdir /data/tigps/etc 0770 system system
-    mkdir /data/RXN 0770 system system
-    mkdir /data/RXN/RXN 0770 system system
-    mkdir /data/RXN/RXN/pred 0770 system system
+    mkdir /data/gnss 0770 system system
+    mkdir /data/gnss/RXN 0770 system system
     chmod 0777 /dev/tihci
 
     # BB mapping symbolic name to the logging ttyACM port
@@ -299,7 +298,7 @@ service nav /system/bin/navl_server --android_log NAVD-p3 -nav\"-c/system/bin/pa
     cgroup bg
     oneshot
 
-service rxn_intapp /system/bin/RXN_IntApp /system/etc/gps/RXN/MSLConfig.txt
+service rxn_intapp /system/bin/RXN_IntApp /system/etc/gnss/RXN/MSLConfig.txt
     class main
     user system
     group system
