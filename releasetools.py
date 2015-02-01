@@ -19,18 +19,38 @@ import common
 import os
 import shutil
 
-#TARGET_DIR = os.getenv('OUT')
-#UTILITIES_DIR = os.path.join(TARGET_DIR, 'utilities')
+# CWM displays 48 chars.                     ->|
+LAYOUT_ERROR_MESSAGE = """
+Your recovery is using the new storage layout
+but the ROM you're trying to install is not.
 
-def FullOTA_Assertions(info):
-  info.script.AppendExtra(
-        ('assert('
-         'getprop("ro.bootloader") == "1.28.0000" || '
-         'getprop("ro.bootloader") == "1.31.0000" || '
-         'getprop("ro.bootloader") == "1.33.0000" || '
-         'getprop("ro.bootloader") == "1.36.0000" || '
-         'getprop("ro.bootloader") == "1.39.0000" || '
-         'getprop("ro.bootloader") == "1.72.0000" || '
-         'getprop("ro.bootloader") == "1.73.0000"'
-         ');'))
+Flash a compatible recovery and format /data and
+/sdcard or use a compatible ROM.
 
+For more information see: http://goo.gl/vvy4c7
+"""
+
+# Property is '1' if the new format is supported and '' if not
+PROPERTY='ro.build.endeavoru.newlayout'
+
+def FullOTA_Assertions(self):
+  self.script.AssertSomeBootloader("1.28.0000", "1.31.0000", "1.33.0000",
+                                   "1.36.0000", "1.39.0000", "1.72.0000",
+                                   "1.73.0000")
+
+def FullOTA_InstallBegin(self):
+  self.script.AppendExtra('package_extract_file("%s", "%s");' % ("system/build.prop",
+                                                                 "/tmp/rom.prop"))
+
+  self.script.AppendExtra('file_getprop("/tmp/rom.prop", "%s");' % PROPERTY)
+
+  rom_prop = 'file_getprop("/tmp/rom.prop", "%s")' % PROPERTY
+  recovery_prop = 'getprop("%s")' % PROPERTY
+  
+  # Check if the properties are equal
+  self.script.AppendExtra('ifelse(%s != %s,' % (rom_prop, recovery_prop))
+
+  for line in LAYOUT_ERROR_MESSAGE.split('\n'):
+    self.script.AppendExtra('ui_print("%s"); ' % line)
+
+  self.script.AppendExtra('abort("Incompatible ROM storage layout"); );')
