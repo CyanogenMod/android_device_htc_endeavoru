@@ -622,7 +622,6 @@ on property:sys.usb.config=rndis,modem
     write /sys/devices/platform/android_usb/usb_function_switch 260
     setprop sys.usb.state ${sys.usb.config}
 
-
 #used for ##3424
 on property:persist.sys.usb.diag.config=*
     setprop sys.usb.diag.config ${persist.sys.usb.diag.config}
@@ -634,24 +633,6 @@ on property:sys.usb.diag.config=diagon
 on property:sys.usb.diag.config=diagoff
     write /sys/class/android_usb/android0/f_diag/on 0
     setprop sys.usb.diag.state ${sys.usb.diag.config}
-
-#`` HTC_IPT
-# for USB IPT
-service udhcpd0 /system/bin/logwrapper /system/bin/udhcpd
-	disabled
-	oneshot
-
-service netsharing0_on /system/bin/netsharing net on
-	disabled
-	oneshot
-
-service netsharing0_off /system/bin/netsharing net off
-	disabled
-	oneshot
-
-service netsharing0_pass /system/bin/netsharing net_pass on
-	disabled
-	oneshot
 
 on property:sys.usb.projector.enable=1
     write /sys/class/android_usb/f_projector/on 1
