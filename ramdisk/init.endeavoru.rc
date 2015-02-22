@@ -258,26 +258,32 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     oneshot
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABDKL
+    class main
     disabled
     oneshot
 
 service iprenew_wlan0 /system/bin/dhcpcd -n
+    class main
     disabled
     oneshot
 
 service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class main
     disabled
     oneshot
 
 service iprenew_p2p /system/bin/dhcpcd -n
+    class main
     disabled
     oneshot
 
 service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+    class main
     disabled
     oneshot
 
 service hostapd_bin /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
+    class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
@@ -364,7 +370,7 @@ service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
     disabled
 
 service nvm-server /system/bin/nvm_server
-    class core
+    class main
     cgroup bg
     socket nvm-ctl stream 660 radio radio
     user root
@@ -372,6 +378,7 @@ service nvm-server /system/bin/nvm_server
     oneshot
 
 service hdmid /system/bin/hdmid
+    class main
     socket displayd stream 0660 root system graphics
     disabled
 
