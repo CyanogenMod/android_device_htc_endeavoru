@@ -246,4 +246,7 @@
     <bool name="config_sf_slowBlur">true</bool>
 
     <bool name="config_ui_enableFadingMarquee">true</bool>
+
+    <!-- Is the device capable of hot swapping an UICC Card -->
+    <bool name="config_hotswapCapable">true</bool>
 </resources>
