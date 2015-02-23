@@ -246,3 +246,6 @@ tf.enable=y
 
 # Indicate that we're using the incompatible data/media layout
 ro.build.endeavoru.newlayout=1
+
+# Enable USB OTG (CAF commit to Settings)
+persist.sys.isUsbOtgEnabled=true

@@ -12,7 +12,7 @@
 /dev/block/platform/sdhci-tegra.3/by-name/UDA      /xtradata            ext4      noatime,nosuid,nodev,noauto_da_alloc,barrier=0          defaults
 
 # vold-managed volumes ("block device" is actually a sysfs devpath)
-/devices/platform/tegra-ehci                       auto vfat defaults      voldmanaged=usbdisk:auto
+/devices/platform/tegra-ehci*                      auto vfat defaults      voldmanaged=usbdisk:auto
 
 # recovery
 /dev/block/platform/sdhci-tegra.3/by-name/LNX      /boot                emmc      defaults                                                recoveryonly
