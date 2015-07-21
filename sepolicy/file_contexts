@@ -34,3 +34,6 @@
 
 # RXN
 /data/gnss(/.*)?                  u:object_r:gps_data_file:s0
+
+# RIL
+/dev/socket/rild-agps             u:object_r:rild_socket:s0
