@@ -17,51 +17,15 @@
 import init.endeavoru.usb.rc
 import init.tegra3-common.rc
 
-on early-init
-    mount debugfs debugfs /sys/kernel/debug
-    write /sys/class/firmware/timeout 5
-
 on init
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
-
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-
-    # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-
-    # USB OTG
-    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
-    mkdir /storage/usbdisk 0700 root root
-    symlink /storage/usbdisk /mnt/usbdisk
-    symlink /mnt/usbdisk /usbdisk
 
     # Our old /data partition
     mkdir /xtradata
 
-    # NETWORK: NAT setting
-    # To  prevent out of WINDOW ACK from making
-    # connection tracking to treat them as INVALID packet
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
-
-    # Wifi: Disable the IPv6 of p2p0 interface
-    write /proc/sys/net/ipv6/conf/p2p0/disable_ipv6 1
-
 on fs
     mount_all /fstab.endeavoru
 
-    setprop ro.crypto.umount_sd false
-    setprop ro.crypto.fuse_sdcard true
-
 on post-fs-data
-    mkdir /data/media 0770 media_rw media_rw
-
     # GPS
     mkdir /data/tigps 0770 system system
     mkdir /data/tigps/aiding 0770 system system
@@ -87,82 +51,6 @@ on boot
     start load_bt
     insmod /system/lib/modules/uhid.ko
 
-    # Load kineto_gan.ko while booting
-    # insmod /system/lib/modules/kineto_gan.ko
-
-    # a2dp freq boost
-    chmod 0664 /sys/devices/platform/tegra_uart.2/a2dp_tuning
-
-    # for hostapd
-    chown wifi wifi /dev/rfkill
-    chmod 0660 /dev/rfkill
-    # HTC_WIFI_END
-
-    # bluetooth power up/down interface
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chmod 0660                /sys/class/rfkill/rfkill0/state
-
-    chown system /sys/module/edp/parameters/edp_ap_limit
-    chown system /sys/module/edp/parameters/edp_limits_table
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/touch_poke
-    chown system /sys/devices/system/cpu/cpu_on
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
-    chown system /sys/kernel/debug/tegra_hotplug/max_cpus
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
-    chown system /sys/devices/system/cpu/cpu1/online
-    chown system /sys/devices/system/cpu/cpu2/online
-    chown system /sys/devices/system/cpu/cpu3/online
-    chown system /sys/module/cpu_tegra3/parameters/mp_policy
-    chown system /sys/module/cpu_tegra3/parameters/NwNs
-    chown system /sys/module/cpu_tegra3/parameters/TwTs
-    chown system /sys/module/cpu_tegra/parameters/cpu_user_cap
-    chown radio radio /sys/module/cpu_tegra/parameters/ril_boost
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
-    chmod 0660 /sys/kernel/debug/tegra_hotplug/min_cpus
-    chown system /sys/htc/power_save
-    chown system /sys/kernel/debug/tegra_emc/eack_state
-
-    # for radio signal stable
-    chown radio radio /sys/class/power_supply/battery/charger_control
-    chmod 0660 /sys/class/power_supply/battery/charger_control
-    chown radio radio /sys/class/power_supply/battery/phone_call
-    chmod 0660 /sys/class/power_supply/battery/phone_call
-
-    # HTC PnPMgr sysfs file node
-    chown system system /sys/power/pnpmgr/apps/activity_trigger
-    chown system system /sys/power/pnpmgr/cpufreq/perflock_scaling_min
-    chown system system /sys/power/pnpmgr/cpufreq/perflock_scaling_max
-    chown system system /sys/power/pnpmgr/hotplug/cpu_auto_hotplug
-    chown system system /sys/power/pnpmgr/hotplug/min_on_cpus
-    chown system system /sys/power/pnpmgr/hotplug/cpu1_online
-    chown system system /sys/power/pnpmgr/hotplug/cpu2_online
-    chown system system /sys/power/pnpmgr/hotplug/cpu3_online
-    chown system system /sys/power/pnpmgr/thermal/edp_ap_limit
-    chown system system /sys/power/pnpmgr/cpufreq/ap_dvcs
-    chown system system /sys/power/launch_activity
-    chown system system /sys/power/cpunum_ceiling
-    chown system system /sys/power/cpunum_floor
-
-    write /proc/sys/vm/highmem_is_dirtyable 1
-    write /proc/sys/vm/lowmem_reserve_ratio 16\ 16
-    write /proc/sys/vm/min_free_kbytes 4096
-
-    chown system system /sys/class/leds/amber/brightness
-    chown system system /sys/class/leds/amber/blink
-    chown system system /sys/class/leds/green/blink
-    chown system system /sys/class/leds/button-backlight/blink
-    chown system system /sys/class/leds/flashlight/brightness
-    chmod 0666          /sys/class/leds/flashlight/brightness
-    chown radio  system /sys/camera_led_status/led_ril_status
-    chown system system /sys/camera_led_status/led_wimax_status
-    chown system system /sys/camera_led_status/led_hotspot_status
-
-    # Vendor camera
-    chown media media /sys/htc/media_boost_freq
-
     # bluetooth
     # UART device
     chmod 0660 /dev/ttyHS2
@@ -174,51 +62,8 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
-    # for nvidia platform specific a2dp tuning support
-    chown media media /sys/devices/platform/tegra_uart.2/a2dp_tuning
-
     # GPS
     setprop ro.gps.supl.supported true
-
-    # NFC
-    setprop ro.nfc.port "I2C"
-    chmod 0660 /dev/pn544
-    chown nfc nfc /dev/pn544
-
-    # set atmel touch permissions
-    chown system system /sys/android_touch/unlock
-
-    # set keyboard vol_wakeup permissions
-    chown system system /sys/keyboard/vol_wakeup
-
-    # backlight
-    chown system system /sys/class/backlight/tegra-pwm-bl/brightness
-
-    # didim
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/enable
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/aggressiveness
-
-    # Power management settings
-    write /sys/module/cpu_tegra3/parameters/no_lp 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_max
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/touch_poke
-    chown system /sys/htc/power_save
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min 10000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-    write /sys/module/cpuidle/parameters/lp2_in_idle 1
 
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
@@ -320,30 +165,6 @@ service cplc_main /system/bin/cplc_main
     disabled
     oneshot
 
-service htcbatt /system/bin/htcbatt
-     class core
-     oneshot
-
-# start tf_daemon service
-service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
-    class main
-    user root
-    group shell
-
-# may restart due to /data/tf not existing yet
-on property:init.svc.tf_daemon=restarting
-    mkdir /data/tf
-
-# create filesystems if necessary
-service setup_fs /system/bin/setup_fs \
-        /dev/block/platform/sdhci-tegra.3/by-name/UDA \
-        /dev/block/platform/sdhci-tegra.3/by-name/CAC \
-        /dev/block/platform/sdhci-tegra.3/by-name/MDM
-    class core
-    user root
-    group root
-    oneshot
-
 service wifi_calib /system/bin/wifi_calibration.sh
     seclabel u:r:init:s0 # silence warning
     disabled
@@ -359,33 +180,3 @@ service load_bt /system/bin/logwrapper /system/bin/load-bt.sh
     user root
     group root
     oneshot
-
-service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
-    class core
-    user radio
-    group radio cache inet misc
-    disabled
-
-service nvm-server /system/bin/nvm_server
-    class main
-    cgroup bg
-    socket nvm-ctl stream 660 radio radio
-    user root
-    group root
-    oneshot
-
-service hdmid /system/bin/hdmid
-    class main
-    socket displayd stream 0660 root system graphics
-    disabled
-
-on property:ro.hdmi.enable=true
-    start hdmid
-
-# virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -t 4 -l /data/media /mnt/shell/emulated
-    class late_start
-
-service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -t 4 -d /mnt/media_rw/usbdisk /storage/usbdisk
-    class late_start
-    disabled
